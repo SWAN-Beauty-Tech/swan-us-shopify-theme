@@ -1,0 +1,558 @@
+  <div class="left left-content-mobile medium-hide large-up-hide">
+      <h1 id="intelligence-title">{{section.settings.title}}</h1>
+     <div class="desc"> {{section.settings.desc}}</div>
+    </div>
+ 
+ <section class="intelligence-section" aria-labelledby="intelligence-title" style="background-image: url('https://swanbeauty.com/img/mirror/m-3.png');">
+    <div class="topshadow"></div>
+    
+    <div class="left">
+      <h1 id="intelligence-title">{{section.settings.title}}</h1>
+     <div class="desc"> {{section.settings.desc}}</div>
+    </div>
+
+    <div class="right">
+      <div class="marquee-viewport" aria-hidden="false">
+        <!-- interaction target (focusable) -->
+        <div id="marqueeTrack" class="marquee-track" tabindex="0" aria-label="Intelligence features marquee">
+          <div id="marqueeWrap" class="marquee-wrap" role="list">
+  
+  <!-- First loop of blocks -->
+  {% for block in section.blocks %}
+    <div class="feature-ticker-card" role="listitem">
+      <div class="feature-ticker-content">
+        <h3 class="feature-ticker-title">{{ block.settings.title }}</h3>
+        <div class="feature-ticker-desc">{{ block.settings.description }}</div>
+      </div>
+      <div class="feature-ticker-icon">
+        {{ block.settings.icon_svg }}
+      </div>
+    </div>
+  {% endfor %}
+
+  <!-- Duplicate again for infinite marquee -->
+  {% for block in section.blocks %}
+    <div class="feature-ticker-card" role="listitem">
+      <div class="feature-ticker-content">
+        <h3 class="feature-ticker-title">{{ block.settings.title }}</h3>
+        <div class="feature-ticker-desc">{{ block.settings.description }}</div>
+      </div>
+      <div class="feature-ticker-icon">
+        {{ block.settings.icon_svg }}
+      </div>
+    </div>
+  {% endfor %}
+
+  <!-- Third duplicate -->
+  {% for block in section.blocks %}
+    <div class="feature-ticker-card" role="listitem">
+      <div class="feature-ticker-content">
+        <h3 class="feature-ticker-title">{{ block.settings.title }}</h3>
+        <div class="feature-ticker-desc">{{ block.settings.description }}</div>
+      </div>
+      <div class="feature-ticker    -icon">
+        {{ block.settings.icon_svg }}
+      </div>
+    </div>
+  {% endfor %}
+
+</div>
+
+        </div>
+      </div>
+    </div>
+     <div class="bottomshadow"></div>
+  </section>
+<style>
+    .topshadow{
+        background:linear-gradient(180deg,#675042,0,#675042 25% 5%,#01010100);
+        position:absolute;
+        left:0;
+        height:15vh;
+        width:100%;
+        top:-1px;
+           display: block !important;
+           z-index:3;
+            opacity:0.7;
+        }
+  .bottomshadow{
+        background:linear-gradient(0deg,#675042,0,#675042 25% 5%,#01010100);
+        position:absolute;
+        left:0;
+        height:15vh;
+        width:100%;
+        bottom:-1px;
+            display: block !important;
+            z-index:3;
+            opacity:0.7;
+        }
+ :root{
+    --bg-color: #ff7aa8; /* primary pink */
+    --panel-bg: rgba(0,0,0,0.24);
+    --panel-blur: 30px;
+    --text-light: #ffffff;
+    --muted: #cfcfd0;
+    --radius: 20px;
+    --base-font: 16px;
+  }
+  /* Outer section similar to your component */
+  .intelligence-section-outer{
+    padding:0 24px 24px 24px;
+    height:100vh;
+}
+  .intelligence-section{
+    width:100%;
+    max-width:100%;
+    height:100%;
+    border-radius:28px;
+    overflow:hidden;
+    position:relative;
+    display:flex;
+    align-items:stretch;
+    /* placeholder */
+    background-size:cover;
+    background-position:center;
+  }
+
+  /* dark overlay */
+  .intelligence-section::before{
+    content:"";
+    position:absolute; inset:0; background:rgba(0,0,0,0.35);
+    z-index:1;
+  }
+
+  /* left column (copy) */
+  .left {
+    width:40%;
+    padding:40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    z-index:2;
+    box-sizing:border-box;
+    gap:18px;
+  }
+  .left h1{
+    font-weight:300;
+    font-size:60px;
+    font-family: 'area_normalthin';
+    margin:0; line-height:75px;
+    color:#fff;
+  }
+  .left p{ margin:0; color:#DCA1A1; font-size:24px; font-style:italic; }
+
+  /* right column holds marquee  */
+  .right {
+    width:60%;
+    padding:0 96px;
+    box-sizing:border-box;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    max-width:920px;
+    margin-left:auto;
+  }
+
+  /* marquee container */
+  .marquee-viewport{
+    width:100%;
+    height:100%;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+  }
+
+  .marquee-track{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    outline:none;
+  }
+
+  /* wrapper that will be translated Y */
+  .marquee-wrap{
+    display:flex;
+    flex-direction:column;
+    will-change:transform;
+  }
+
+  /* item */
+  .feature-ticker-card{
+    background:var(--panel-bg);
+    backdrop-filter: blur(var(--panel-blur));
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:12px;
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+  }
+
+  .feature-ticker-content{
+    flex:1;
+    min-width:0;
+  }
+  .feature-ticker-title{
+    margin:0 0 10px 0;
+    font-size:24px;
+    font-weight:500;
+    line-height:1.06;
+    font-weight:500;
+    color:#fff;
+    text-align:left;
+  }
+  .feature-ticker-desc p{
+    margin:0;
+    font-size:14px;
+    color:#e8e8e8;
+    line-height:1.5;
+    color:#fff;
+    font-weight:normal;
+    text-align:left;
+  }
+
+  .feature-ticker-icon{
+    width:32px;
+    height:32px;
+    min-width:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    background:rgba(255,255,255,0.12);
+    flex-shrink:0;
+  }
+ .feature-ticker-icon svg{ width:22px; height:22px; display:block; }
+
+  /* Responsive */
+  @media (max-width: 1600px){
+      .right{
+        max-width:743px
+      }
+    }
+    @media (max-width: 1440px){
+      .right{
+        max-width:663px
+      }
+    }
+     @media (max-width: 1280px){
+      .right{
+        max-width:542px
+      }
+      .left{
+        width:50%;
+      }
+    }
+  @media (max-width: 900px){
+    .intelligence-section{ height:auto; flex-direction:column; padding:18px; }
+    .left{ width:100%; padding:18px; order:1; align-items:center; text-align:center; justify-content:center;}
+    .left h1{ font-size:28px; }
+    .right{ width:100%; padding:12px; order:2; }
+    .marquee-viewport{ height:56vh; }
+  }
+    
+    @media (max-width: 767px){
+      .intelligence-section{
+        background-image:url("https://swanbeauty.com/img/mirror/is-1.jpg") !important;
+      }
+      .topshadow, .bottomshadow{
+        display:none !important;
+      }
+      .intelligence-section::before{
+        opacity:0;
+      }
+      .right{
+        padding:0;
+      }
+      .intelligence-section-outer {
+    padding: 0 20px 24px 20px;
+    height: auto;
+}
+.intelligence-section .left{
+ opacity:0;
+ pointer-events:none;
+}
+.feature-ticker-desc{
+  font-size:12px;
+}
+.feature-ticker-title{
+  font-size:18px;
+}
+.feature-ticker-icon{
+  width:26px;
+  height:26px;
+  min-width:26px;
+  min-height:26px;
+  border-radius:100%;
+  background-color:rgba(255, 255, 255, 0.3);
+}
+.feature-ticker-icon svg{
+  width:18px;
+  height:18px;
+}
+.left-content-mobile h1{
+  font-size:30px;
+  color:rgba(74, 74, 74, 1);
+  line-height:100%;
+}
+.left.left-content-mobile p{
+font-size:18px;
+}
+    }
+  /* focus styles for accessibility */
+  .marquee-track:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.12) inset; border-radius:8px; outline:none; }
+</style>
+<script>
+/*
+  JS marquee logic inspired by the original TSX component.
+  Uses GSAP for performant transform updates.
+*/
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Data (same features as your component)
+  {% comment %} const features = [
+    { title: "Back Stand", description: "A sturdy, adjustable stand with 60° range, built for stability and easy positioning at the perfect angle.", icon: "stand" },
+    { title: "Wi-Fi & Bluetooth", description: "Stay connected with built-in Wi-Fi and Bluetooth. SWAN updates with new features, syncs to the mobile app, and lets you stream audio or access tutorials, recommendations, and personalized insights.", icon: "wifi" },
+    { title: "Aluminum Body", description: "Made from premium aluminum with a sleek finish — lightweight, durable, and built to elevate your space every day.", icon: "aluminum" },
+    { title: "Offered in Black & White", description: "Available in black or white to suit your style and space.", icon: "colors" },
+    { title: "Stainless Steel Hinges", description: "Our stainless-steel hinges provide smooth adjustments, lasting durability, and stable elegance.", icon: "hinges" },
+    { title: "Mobile App Compatibility", description: "Seamlessly compatible with the SWAN mobile app — sync routines, access personalized insights, and stay connected from anywhere.", icon: "app" }
+  ]; {% endcomment %}
+
+  //const marqueeWrap = document.getElementById('marqueeWrap');
+  const marqueeTrack = document.getElementById('marqueeTrack');
+
+  // Helper: create an item element
+  function createItem(f){
+    const el = document.createElement('div');
+    el.className = 'feature-ticker-card';
+    el.setAttribute('role','listitem');
+    el.innerHTML = `
+      <div class="feature-ticker-content">
+        <h3 class="feature-ticker-title">${escapeHtml(f.title)}</h3>
+        <p class="feature-ticker-desc">${escapeHtml(f.description)}</p>
+      </div>
+      <div class="feature-ticker-icon" aria-hidden="true">${getIconSvg(f.icon)}</div>
+    `;
+    return el;
+  }
+
+  // escape simple HTML (safe insertion)
+  function escapeHtml(s){ return s.replace(/[&<>"']/g, (m)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+  // small inline icons (kept minimal; adapt as you like)
+  function getIconSvg(name){
+    const svgs = {
+      stand: `<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.166 8.4498H10.218C10.634 8.4758 10.972 8.8398 10.972 9.2818V18.9018L11.102 19.9938L11.57 20.2018L17.602 19.1618L15.418 1.5338L9.386 1.2998L8.97 1.6378L9.776 8.5798C9.906 8.5018 10.036 8.4498 10.166 8.4498ZM14.508 2.5218L16.536 18.2258L12.558 18.8758L10.582 2.4178L14.508 2.5218Z" fill="white"/></svg>`,
+      wifi: `<svg viewBox="0 0 17 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.8565 24.272L8.06429 21.2699L11.8565 18.2677C12.1725 17.9517 12.1725 17.3987 11.8565 17.1617L7.35326 13.6065C7.11625 13.4485 6.87924 13.3695 6.56323 13.5275C6.32622 13.6855 6.16821 13.9226 6.16821 14.1596V19.8478L4.90415 18.8208C4.58814 18.5838 4.11412 18.6628 3.87711 18.8998C3.6401 19.2158 3.7191 19.6898 3.95611 19.9268L5.69419 21.3489L3.95611 22.7709C3.6401 23.008 3.56109 23.482 3.87711 23.798C4.11412 24.114 4.58814 24.193 4.90415 23.877L6.16821 22.8499V28.5382C6.16821 28.7752 6.32622 29.0912 6.56323 29.1702C6.80024 29.3282 7.11625 29.2492 7.35326 29.0912L11.8565 25.5361C12.1725 25.141 12.2515 24.588 11.8565 24.272ZM10.2764 17.7147L7.66928 19.8478V15.6606L10.2764 17.7147ZM7.59027 22.7709L10.1974 24.904L7.59027 27.0371V22.7709Z" fill="white"/></svg>`,
+      aluminum:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.73918 3.25H23.8333V4.33333H9.75759C9.18738 4.33276 8.62264 4.44466 8.09572 4.66261C7.5688 4.88055 7.09004 5.20028 6.68683 5.60349C6.28363 6.00669 5.9639 6.48546 5.74595 7.01238C5.528 7.5393 5.41611 8.10403 5.41668 8.67425V22.75H4.33334V8.65583C4.33506 7.22265 4.90516 5.84865 5.91858 4.83523C6.93199 3.82181 8.30599 3.25172 9.73918 3.25Z" fill="white"/></svg>`,
+      colors:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 1.625C10.7502 1.625 8.551 2.29213 6.68039 3.54203C4.80978 4.79193 3.35182 6.56847 2.49088 8.64698C1.62993 10.7255 1.40467 13.0126 1.84357 15.2192C2.28248 17.4257 3.36584 19.4525 4.95667 21.0433C6.54749 22.6342 8.57432 23.7175 10.7809 24.1564C12.9874 24.5953 15.2745 24.3701 17.353 23.5091C19.4315 22.6482 21.2081 21.1902 22.458 19.3196C23.7079 17.449 24.375 15.2498 24.375 13C24.375 9.98316 23.1766 7.08989 21.0433 4.95666C18.9101 2.82343 16.0168 1.625 13 1.625Z" fill="white"/></svg>`,
+      hinges:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.4062 1.625H12.5938C12.3783 1.625 12.1716 1.7106 12.0192 1.86298C11.8669 2.01535 11.7812 2.22201 11.7812 2.4375V3.25H14.2188V2.4375C14.2188 2.22201 14.1331 2.01535 13.9808 1.86298C13.8284 1.7106 13.6217 1.625 13.4062 1.625ZM11.7812 8.53125H14.2188V12.5938H11.7812V8.53125Z" fill="white"/></svg>`,
+      app:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.4293 0.000488281H7.57066C6.61003 0.000488281 5.82846 0.782063 5.82846 1.74269V24.2573C5.82846 25.2179 6.61003 25.9995 7.57066 25.9995H18.4293C19.3899 25.9995 20.1715 25.2179 20.1715 24.2573V1.74269C20.1715 0.782113 19.3899 0.000488281 18.4293 0.000488281Z" fill="white"/></svg>`
+    };
+    return svgs[name] || '';
+  }
+
+  // Build marquee HTML: we will append features repeated 3 times (rows)
+  //const rows = [...features, ...features, ...features];
+
+  //rows.forEach(f => {
+   // marqueeWrap.appendChild(createItem(f));
+  //});
+
+  // If you want a visual "infinite" loop, duplicate all nodes again (so we can cycle Y)
+  // The original component repeated features 3 times and then uses scrollHeight/3 logic.
+  // For robustness we ensure there is extra content to prevent empty gaps.
+  // (Not required if you already repeated 3 times; kept minimal.)
+
+  // -----------------------
+  // Marquee movement logic
+  // -----------------------
+  const BASE_SPEED = 30;      // px/sec (negative moves up)
+  const MAX_SPEED = 200;
+  const SCROLL_GAIN = 1.2;
+  const DECAY = 0.12;
+  const SMOOTH = 0.18;
+
+  let currentSpeed = -BASE_SPEED;
+  let targetSpeed = -BASE_SPEED;
+  let lastDir = -1;
+  let offsetY = 0;
+  let lastT = 0;
+  let cycleH = 0;
+  let wheelTimer = null;
+  let paused = false;
+  let active = false; // set by IntersectionObserver
+
+  // GSAP quickSetter for performant transform updates
+  const setter = gsap.quickSetter(marqueeWrap, "y", "px");
+
+  function measureCycle(){
+    // cycleH should be total height / 3 (since we repeated 3x)
+    // but we can simply use marqueeWrap.scrollHeight / 3 to mimic original.
+    const H = marqueeWrap.scrollHeight / 3 || marqueeWrap.scrollHeight || 1;
+    cycleH = H;
+  }
+  measureCycle();
+
+  // observe resizes
+  const ro = new ResizeObserver(measureCycle);
+  ro.observe(marqueeWrap);
+
+  // IntersectionObserver to only animate when visible
+  const io = new IntersectionObserver((entries) => {
+    active = entries[0].isIntersecting;
+    if (!active){
+      // when out-of-view -> softly go to base
+      targetSpeed = lastDir * BASE_SPEED;
+    }
+  }, { threshold: 0.25 });
+  io.observe(document.querySelector('.intelligence-section'));
+
+  // wheel / scroll handlers
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  const toBase = () => {
+    targetSpeed = lastDir * BASE_SPEED;
+  };
+
+  function onWheel(e){
+    const dir = e.deltaY > 0 ? 1 : -1;
+    lastDir = dir;
+    targetSpeed = clamp(Math.abs(e.deltaY) * SCROLL_GAIN * dir, MAX_SPEED);
+    if (wheelTimer) clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(toBase, 160);
+  }
+
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const dy = window.scrollY - lastScrollY;
+      lastScrollY = window.scrollY;
+      if (dy !== 0){
+        const dir = dy > 0 ? 1 : -1;
+        lastDir = dir;
+        targetSpeed = clamp(Math.abs(dy) * 60 * SCROLL_GAIN * dir, MAX_SPEED);
+        if (wheelTimer) clearTimeout(wheelTimer);
+        wheelTimer = setTimeout(toBase, 160);
+      }
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('wheel', onWheel, { passive:true });
+  window.addEventListener('scroll', onScroll, { passive:true });
+
+  // Pause on hover / focus / touch
+  marqueeTrack.addEventListener('mouseenter', ()=> paused = true);
+  marqueeTrack.addEventListener('mouseleave', ()=> paused = false);
+  marqueeTrack.addEventListener('focus', ()=> paused = true);
+  marqueeTrack.addEventListener('blur', ()=> paused = false);
+  marqueeTrack.addEventListener('touchstart', ()=> paused = true, {passive:true});
+  marqueeTrack.addEventListener('touchend', ()=> paused = false, {passive:true});
+
+  // small utility functions
+  function clamp(v, m){ return Math.max(-m, Math.min(m, v)); }
+  function lerp(a,b,t){ return a + (b-a)*t; }
+
+  // main animation loop using requestAnimationFrame but setter from GSAP
+  function step(t){
+    if (!lastT) lastT = t;
+    const dt = (t - lastT)/1000;
+    lastT = t;
+
+    if (!paused && active){
+      const base = lastDir * BASE_SPEED;
+      // decay target toward base (simulates friction)
+      targetSpeed = lerp(targetSpeed, base, DECAY);
+      currentSpeed = lerp(currentSpeed, targetSpeed, SMOOTH);
+
+      offsetY += currentSpeed * dt;
+
+      // wrap-around logic: keep offsetY between -H and 0
+      const H = cycleH || 1;
+      if (offsetY <= -H) offsetY += H;
+      if (offsetY >= 0) offsetY -= H;
+
+      // apply transform via GSAP quickSetter
+      setter(offsetY);
+    } else {
+      // still update transform if paused but ensure it doesn't drift
+      setter(offsetY);
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
+
+  // measure again once fonts/images are loaded (to be safe)
+  window.addEventListener('load', measureCycle);
+
+  // cleanup on unload (for single page apps)
+  window.addEventListener('beforeunload', () => {
+    ro.disconnect();
+    io.disconnect();
+    window.removeEventListener('wheel', onWheel);
+    window.removeEventListener('scroll', onScroll);
+  });
+
+  // Accessibility: allow up/down arrow to nudge speed
+  marqueeTrack.addEventListener('keydown', (ev) => {
+    if (ev.key === 'ArrowDown'){ lastDir = 1; targetSpeed = clamp(60 * SCROLL_GAIN, MAX_SPEED); ev.preventDefault(); }
+    if (ev.key === 'ArrowUp'){ lastDir = -1; targetSpeed = clamp(60 * SCROLL_GAIN * -1, MAX_SPEED); ev.preventDefault(); }
+  });
+
+});
+</script>
+{% schema %}
+{
+  "name": "Intelligence Section",
+  "class": "intelligence-section-outer",
+  "tag": "section",
+  "settings": [
+     {
+          "type": "textarea",
+          "id": "title",
+          "label": "Name"
+        },
+        {
+          "type": "richtext",
+          "id": "desc",
+          "label": "Description"
+        }
+  ],
+      "blocks": [
+    {
+      "type": "ticker",
+      "name": "Scroll Items",
+      "settings": [
+         {
+          "type": "text",
+          "id": "title",
+          "label": "Name"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "textarea",
+          "id": "icon_svg",
+          "label": "SVG Code"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Intelligence Section"
+    }
+  ]
+}
+{% endschema %}

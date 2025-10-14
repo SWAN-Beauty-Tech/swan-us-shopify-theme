@@ -1,0 +1,80 @@
+<div class="product-overview-outer">
+    <h2>Product Information</h2>
+<div class="product-overview-wrapper">
+    <div class="title-ov">Overview</div>
+    <div class="desc-ov">{{ product.description }}</div>
+</div>
+<div class="product-overview-wrapper">
+    <div class="title-ov">SWAN Membership 
+redefines your reflection</div>
+    <div class="desc-ov">SWAN Membership elevates your daily mirror into a personalized beauty hub. With exclusive content 
+from celebrity makeup artists, high reach influencers, and more, you will get insider access to the beauty 
+world’s best. With innovative AI + AR tools from SWAN Labs, you will unlock personalized insights, 
+routines, and interactive experiences that enhance your everyday beauty rituals.<br>
+
+Become a member for $9.95/month or $94/year and experience the first 30 days on us.</div>
+</div>
+
+<div class="product-overview-wrapper no-bdr">
+    <div class="title-ov">What’s in the Box</div>
+    <div class="desc-ov">
+<p>SWAN Mirror<br>
+Power Supply<br>
+Documentation</p></div>
+</div>
+</div>
+<style>
+    .product-overview-outer, .main-product-wrap{
+    opacity:0;
+  transform:translateY(50px);
+  filter: blur(10px);
+        }
+</style>
+ <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    gsap.to(".main-product-wrap", {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 0.8,
+      ease: "easeInOut",
+      stagger: 0.2, // each line animates one after another
+      delay: 0.2 // same logic as your Framer Motion code
+    });
+     gsap.to(".product-overview-outer", {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 0.8,
+      ease: "easeInOut",
+      stagger: 0.2, // each line animates one after another
+      delay: 0.2 // same logic as your Framer Motion code
+    });
+      
+  });
+</script>
+{% schema %}
+{
+  "name": "Product Overview",
+  "class": "product-overview",
+  "tag": "section",
+  "settings": [
+    {
+          "type": "text",
+          "id": "title",
+          "label": "Name"
+        },
+        {
+          "type": "richtext",
+          "id": "desc",
+          "label": "Description"
+        }
+  ],
+
+  "presets": [
+    {
+      "name": "Product Overview"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,245 @@
+<section class="hero-mirror">
+  {% if section.settings.hero_image != blank %}
+  <link rel="preload" as="image" href="{{ section.settings.image | img_url: 'master' }}">
+{% endif %}
+  <!-- Hero Image -->
+  <img
+    id="heroImage"
+    src="{{ section.settings.image | img_url: 'master' }}"
+    alt="SWAN Smart Mirror"
+    class="hero-mirror-img"
+  />
+
+  <!-- Copy Section -->
+  <div class="hero-mirror-copy">
+    <p class="hero-mirror-tag">{{section.settings.eyebrotext}}</p>
+    <h1 class="hero-mirror-title">
+      {{section.settings.title}}
+    </h1>
+
+    <div class="hero-mirror-desc">
+      {{ section.settings.desc}}
+    </div>
+  </div>
+</section>
+
+<style>
+/* Base Hero Section */
+.hero-mirror {
+  position: relative;
+  height: calc(100dvh - 76px);
+  overflow: hidden;
+  padding: 0 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image Styling */
+.hero-mirror-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+   opacity:0;
+  transform:translateY(50px);
+  filter:blue(10px)
+}
+
+/* Copy Section */
+.hero-mirror-copy {
+  position: absolute;
+  left: 112px;
+  bottom: 4rem;
+  max-width: 872px;
+  z-index: 2;
+  color: #333;
+  
+}
+
+.hero-mirror-tag {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 15px;
+  color: #DCA1A1; /* Tailwind pink-500 */
+   opacity:0;
+  transform:translateY(50px);
+  filter: blur(10px);
+}
+
+.hero-mirror-title {
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-size: clamp(32px, 4vw, 96px);
+  margin-bottom: 1rem;
+  opacity:0;
+  transform:translateY(50px);
+  filter: blur(10px);
+  margin-top:0;
+  color:#4A4A4A;
+  font-family: 'area_normalthin';
+}
+
+.hero-mirror-title span {
+  display: block;
+}
+
+.hero-mirror-title .italic {
+  font-style: italic;
+  font-family: 'area_normalregular';
+    font-weight: 400;
+}
+
+.hero-mirror-desc {
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #4A4A4A;
+   transform:translateY(50px);
+  filter: blur(10px);
+  font-size:16px;
+}
+@media screen and (max-width: 1600px) {
+   
+  }
+  @media screen and (max-width: 1440px) {
+    .hero-mirror-copy {
+      max-width:672px;
+    }
+  }
+   @media screen and (max-width: 1366px) {
+   
+   
+  }
+/* Responsive */
+@media (max-width: 767px) {
+  .hero-mirror {
+    height: auto;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+  }
+.hero-mirror-title{
+  font-size:30px;
+}
+  .hero-mirror-img {
+    position: static;
+    height: 50%;
+  }
+
+  .hero-mirror-copy {
+    position: static;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0 1rem;
+  }
+
+  .hero-mirror-desc {
+   font-size: 12px;
+        max-width: 81%;
+        margin: 0 auto;
+  }
+
+  .hide-mobile {
+    display: none;
+  }
+}
+
+
+    </style>
+
+    <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    // Check mobile for image swap
+    const heroImage = document.getElementById("heroImage");
+    if (window.innerWidth < 768) {
+      heroImage.src = "https://swanbeauty.com/img/mirror/hero-mobile.jpg";
+    }
+
+    // Timeline animations with proper stagger like Framer Motion
+    const tl = gsap.timeline({ defaults: { ease: "power2.out", duration: 0.8 } });
+
+     gsap.to(".hero-mirror-tag", {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 0.8,
+      ease: "easeInOut",
+      stagger: 0.2, // each line animates one after another
+      delay: 0.2 // same logic as your Framer Motion code
+    });
+       gsap.to(".hero-mirror-title", {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 0.8,
+      ease: "easeInOut",
+      stagger: 0.2, // each line animates one after another
+      delay: 0.5 // same logic as your Framer Motion code
+    });
+         gsap.to(".hero-mirror-desc", {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 0.8,
+      ease: "easeInOut",
+      stagger: 0.2, // each line animates one after another
+      delay: 0.6 // same logic as your Framer Motion code
+    });
+          gsap.to(".hero-mirror-img", {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 0.8,
+      ease: "easeInOut",
+      stagger: 0.2, // each line animates one after another
+      delay: 0.6 // same logic as your Framer Motion code
+    });
+  });
+</script>
+
+    {% schema %}
+{
+  "name": "Mirror Hero",
+  "class": "mirror-hero-section",
+  "tag": "section",
+  "settings": [
+     {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mimage",
+      "label": "Mobile Image",
+      "info": "Please upload image for mobile which will be visible in place of video"
+    },
+    {
+      "type": "text",
+      "id": "eyebrotext",
+      "label": "Eyebrow Text"
+    },
+     {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "desc",
+      "label": "Description"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "Mirror Hero"
+    }
+  ]
+}
+{% endschema %}

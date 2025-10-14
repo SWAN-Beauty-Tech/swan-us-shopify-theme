@@ -1,0 +1,176 @@
+   <section class="w-full px-6 pb-6">
+        <div class="relative min-h-100 mobile-height rounded-4xl d-flex flex-col bg-primary-pink justify-content-center align-items-center pink-section">
+            <div class="pink-section-inner">
+          <div class="text-white tracking-wider">{{ section.settings.title }}</div>
+          <div class="d-flex flex-col align-items-center gap-16 mb-80">
+          <div class="donly"> {{ section.settings.value }}</div>
+          <div class="monly"><p>{{ section.settings.value | replace: '</p><p>', ' ' | replace: '<p>', '' | replace: '</p>', '' }}</p></div>
+          </div>
+          {% if section.settings.btnurl != blank %}
+          <a href="{{ section.settings.btnurl }}" class="bg-secondary-gray text-white px-8 py-4 rounded-full fw-semibold mt-80 btn-secondary" aria-label="Why SWAN">{{ section.settings.btntext }}</a>
+          {% endif %}
+          </div>
+        </div>
+      </section>
+<style>
+    .value-proposition{
+        padding:0 24px 24px 24px;
+    }
+.bg-primary-pink{
+  background-color: #DCA1A1;
+}
+.mb-80{
+    margin-bottom:80px;
+}
+.pink-section-inner{
+    text-align:center;
+}
+.monly{
+display:none;
+}
+.pink-section p{
+  font-size:60px;
+  color:#fff;
+  margin:0;
+  font-family: 'area_normalthin';
+  font-weight:300;
+  text-align:center;
+  line-height:72px;
+}
+.tracking-wider {
+     font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+    text-align: center;
+    font-weight: 600;
+}
+.gap-16{
+  gap:16px
+}
+.bg-secondary-gray {
+  background: #4a4a4a;
+}
+.px-8 {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.py-4 {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.fw-semibold{
+  font-weight:600
+}
+.mt-80{
+  margin-top:80px
+}
+.btn-secondary{
+  text-decoration:none;
+  border-radius:50px
+}
+@media screen and (max-width: 1600px) {
+   
+
+  }
+  @media screen and (max-width: 1440px) {
+   
+
+  }
+   @media screen and (max-width: 1366px) {
+    
+  }
+  @media screen and (max-width: 1024px) {
+.pink-section p{
+  font-size:44px;
+  line-height:50px;
+}
+.bg-primary-pink{
+  padding-top:40px;
+  padding-bottom:40px;
+}
+.donly{
+display:none;
+}
+.monly{
+display:block;
+}
+  }
+  @media screen and (max-width: 767px) {
+  .tracking-wider {
+    font-size: 12px;
+   margin-bottom:32px;
+}
+.pink-section p{
+  font-size: 20px;
+        line-height: 1;
+        line-height: 28px;
+        max-width: 250px;
+        font-family: 'area_normalregular';
+}
+.gap-16 {
+    gap: 5px;
+}
+.min-h-100.mobile-height{
+  min-height:50vh
+}
+.value-proposition {
+    padding: 0 20px 24px 20px;
+}
+.mb-80 {
+    margin-bottom: 48px;
+}
+}
+    </style>
+
+<script>
+ gsap.fromTo(".pink-section-inner",
+    { filter: "blur(60px)", opacity: 0 },
+    {
+      filter: "blur(0px)",
+      opacity: 1,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".pink-section-inner",
+         scrub: 1,
+         start: "top 100%",
+          end: "bottom 80%",
+      }
+    }
+  );
+</script>
+
+             {% schema %}
+{
+  "name": "Value Proposition",
+  "class": "value-proposition",
+  "tag": "section",
+  "settings": [
+     {
+          "type": "text",
+          "id": "title",
+          "label": "Tag"
+        },
+     {
+          "type": "textarea",
+          "id": "value",
+          "label": "Value"
+        },
+         {
+          "type": "text",
+          "id": "btntext",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "btnurl",
+          "label": "Button Link"
+        }
+  ],
+  "presets": [
+    {
+      "name": "Value Proposition"
+    }
+  ]
+}
+{% endschema %}

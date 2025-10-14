@@ -1,0 +1,132 @@
+ <section class="statement-section-inner {% if section.settings.fontsize %} large {% endif %}" style="background-color:{{ section.settings.color }}">
+        <div>  
+             {% for block in section.blocks %}
+                {% if block.settings.title != blank %}
+                <p style="color:{{ block.settings.color }}; {% if section.settings.case %} text-transform:uppercase {% endif %}">{{block.settings.title}}</p>
+                {% endif %}
+          
+             {% endfor %}
+        </div>  
+      </section>
+ <style>
+            .statement-section{
+               padding:24px;
+                   height: 100vh;
+            }
+             .statement-section .statement-section-inner{
+               background:#000;
+               border-radius:30px;
+               padding:50px 0;
+               text-align:center;
+                   height: 100%;
+                   display:flex;
+                   align-items:center;
+                   justify-content:center;
+            }
+           .statement-section-inner p {
+    filter: blur(40px);
+    transform: translateY(0);
+    font-size: 48px;
+    margin: 0 0 24px 0;
+    color:#fff;
+    line-height:1;
+    margin-bottom:24px;
+    font-family: 'area_normalthin';
+
+  }
+  .statement-section-inner.large p {
+    font-size: 60px;
+  }
+   .statement-section-inner p:last-child{
+    color:#DCA1A1;
+}
+@media screen and (max-width: 1024px) {
+.statement-section-inner p{
+    font-size:18px;
+  }
+  .statement-section-inner.large p {
+    font-size:24px;
+}
+}
+@media screen and (max-width: 749px) {
+    
+    .statement-section {
+    padding: 24px 20px;
+    height: 60vh;
+  }
+   .statement-section-inner p{
+    font-size:18px;
+  }
+  .statement-section-inner.large p {
+    font-size:24px;
+}
+}
+          </style>
+<script>
+            gsap.registerPlugin(ScrollTrigger);
+        
+            gsap.utils.toArray(".statement-section-inner p").forEach((para, i) => {
+              gsap.to(para, {
+              
+                scrollTrigger: {
+                  trigger: para,
+                    scrub: 1,
+                    start: "top 100%",
+                    end: "bottom 70%",
+                },
+                filter: "blur(0px)"
+              });
+            });
+          </script>
+         
+       {% schema %}
+{
+  "name": "Statement Section",
+  "class": "statement-section",
+  "tag": "section",
+  "settings": [
+    {
+          "type": "checkbox",
+          "id": "fontsize",
+          "default": false,
+          "label": "Large Font Size"
+        },
+     {
+          "type": "checkbox",
+          "id": "case",
+          "default": false,
+          "label": "Uppercase all text"
+        },
+    {
+          "type": "color",
+          "id": "color",
+          "default": "#000",
+          "label": "Background Color"
+        }
+  ],
+    "blocks": [
+    {
+      "type": "statement",
+      "name": "Statement",
+      "settings": [
+         {
+          "type": "text",
+          "id": "title",
+          "label": "Name"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "default": "#ffffff",
+          "label": "Text Color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Statement Section"
+    }
+  ]
+}
+{% endschema %}

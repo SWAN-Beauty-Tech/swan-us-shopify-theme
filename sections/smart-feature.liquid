@@ -1,0 +1,272 @@
+<section class="features">
+    <div class="section-title">
+    <h2>{{section.settings.title }}</h2>
+    <div class="description">{{section.settings.desc }}</div>
+    </div>
+  <div class="features-grid">
+      {% for block in section.blocks %}
+    <div class="feature-card">
+      <div class="feature-image">
+        <img src="{{ block.settings.image | img_url:'master' }}" alt="{{block.settings.title}}">
+      </div>
+      <div class="feature-panel">
+        <div class="fp-inner">
+        <h3>{{ block.settings.title }}</h3>
+        <div class="desc">{{ block.settings.desc }}</div>
+        <div class="feature-callout">
+          <div class="icon">  <img src="{{ block.settings.icon | img_url:'master' }}" alt="{{block.settings.title}}"></div>
+          <div class="text">{{block.settings.tag}}</div>
+        </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+</section>
+
+<style>
+.features {
+  width: 100%;
+  padding: 48px 96px 24px;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  height: 90dvh;
+}
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 30px;
+  overflow: hidden;
+  cursor: pointer;
+      gap: 15px
+}
+.feature-image,
+.feature-panel {
+  width: 100%;
+  overflow: hidden;
+}
+.feature-image {
+  flex: 1 1 100%;
+  border-radius:0 0 30px 30px;
+}
+.fp-inner{
+    padding:30px 0px;
+}
+.fp-inner .desc{
+    border-bottom:solid 1px rgba(255,255,255,0.20);
+    padding: 10px 20px 25px;
+    margin-bottom:20px;
+}
+.feature-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
+  transition:0.3s;
+}
+.feature-card:hover .feature-image img{
+     transform: scale(1);
+}
+.feature-panel {
+  flex: 0 0 0%; /* start completely hidden */
+  background: #dca1a1;
+  color: #fff;
+  padding: 0; /* remove padding so panel is invisible initially */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  border-radius:30px;
+
+}
+.feature-panel h3,
+.feature-panel p,
+.feature-callout {
+  opacity: 0;
+  transform: translateY(15px);
+  padding: 16px; /* add padding only for visible content */
+}
+.feature-panel h3{
+    font-size:24px;
+    font-weight:700;
+    color:#fff;
+       margin:0 0 8px 0;
+       padding:0 20px;
+}
+.feature-panel p{
+ margin:0;
+       padding:0;
+       line-height:21px;
+       font-size:18px;
+
+}
+
+
+.feature-callout {
+      display: flex
+;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+    margin: 10px 0 0 0;
+    padding:0 20px;
+}
+.feature-card .icon {
+  max-width: 50px;
+  flex:0 0 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon img {
+  width: 30px;
+  height: 30px;
+}
+.text {
+     font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+}
+.section-title{
+    text-align:center;
+    margin:0 auto;
+    max-width:892px;
+    margin-bottom:40px;
+}
+.section-title h2{
+    font-size: 48px;
+    font-family: 'area_normalthin';
+    text-align: center;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+.section-title p{
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 0;
+    margin: 0;
+    line-height: 1.3;
+}
+@media screen and (max-width: 767px) {
+.features {
+    width: 100%;
+    padding: 20px 20px 20px;
+}
+.section-title h2{
+  font-size:30px;
+}
+.section-title p{
+  font-size:12px;
+}
+.features-grid{
+  display:flex;
+  flex-direction:column;
+  height: auto;
+}
+.feature-image {
+    flex: 1 1 100%;
+    border-radius: 0 0 30px 30px;
+    max-height: 358px;
+    height: 358px;
+}
+.feature-panel h3, .feature-panel p, .feature-callout{
+  opacity:1 !important;
+  transform:none !important;
+}
+.text{
+  letter-spacing:0;
+  font-weight:normal;
+  font-size:14px;
+}
+}
+</style>
+
+<script>
+document.querySelectorAll(".feature-card").forEach((card) => {
+  const image = card.querySelector(".feature-image");
+  const panel = card.querySelector(".feature-panel");
+  const children = panel.querySelectorAll("h3, p, .feature-callout");
+
+  gsap.set(panel, { flexBasis: "0%" });
+  gsap.set(children, { opacity: 0, y: 15 });
+
+  const tl = gsap.timeline({ paused: true, defaults: { ease: "power2.inOut", duration: 0.35 } });
+
+  // Push panel up / shrink image with 10px subtraction
+  tl.to(image, { flexBasis: "calc(50% + 10px)" }, 0) // image grows slightly more
+    .to(panel, { flexBasis: "calc(50% - 10px)" }, 0) // panel is 10px smaller
+    .to(children, { opacity: 1, y: 0, stagger: 0.08, duration: 0.50 }, 0.10);
+
+  card.addEventListener("mouseenter", () => tl.play());
+  card.addEventListener("mouseleave", () => tl.reverse());
+});
+
+</script>
+
+
+{% schema %}
+{
+  "name": "Smart Feature",
+  "class": "smart-feature",
+  "tag": "section",
+   "max_blocks": 3,
+  "settings": [
+    {
+          "type": "text",
+          "id": "title",
+          "label": "Name"
+        },
+        {
+          "type": "richtext",
+          "id": "desc",
+          "label": "Description"
+        }
+  ],
+   "blocks": [
+    {
+      "type": "features",
+      "name": "Feature Items",
+      "settings": [
+         {
+          "type": "text",
+          "id": "title",
+          "label": "Name"
+        },
+        {
+          "type": "richtext",
+          "id": "desc",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Main Image"
+        },
+         {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Smart Feature"
+    }
+  ]
+}
+{% endschema %}

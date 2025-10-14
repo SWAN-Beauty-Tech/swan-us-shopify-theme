@@ -1,0 +1,419 @@
+ <section class="features-section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+    <h2 class="section-title">{{section.settings.title}}</h2>
+    {% endif %}
+     {% if section.settings.desc != blank %}
+    <p class="section-description">{{section.settings.desc}}</p>
+      {% endif %}
+    <div class="features">
+      <!-- Feature 1 -->
+       {% for block in section.blocks %}
+            <div class="feature-card" data-index="{{ forloop.index0 }}">
+        <div class="feature-inner">
+            <span class="overlay-title">{{block.settings.otitle}}</span>
+             <span class="overlay-tag">{{block.settings.otag}}</span>
+            <button class="close-btn">
+                    {% render 'close-icon' %}
+                </button>
+            <img class="main-img" src="{{ block.settings.image |  img_url:'master' }}" alt="AI Skin Analyzer">
+          <div class="feature-content">
+             
+             <img src="{{ block.settings.image |  img_url:'master' }}" alt="AI Skin Analyzer">
+             <div class="featured-content-inner">
+                 <div>
+             <h3 class="fade-item">{{block.settings.title}}</h3>
+             <div class="card-details">
+              {{block.settings.desc }}
+            </div>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+       {% endfor %}
+        </div>
+  </div>
+</section>
+
+
+
+  <style>
+    .overlay-tag{
+     position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #fff;
+    font-size: 16px;
+    background-color: #dca1a199;
+     backdrop-filter: blur(8px); /* blur everything behind this element */
+  -webkit-backdrop-filter: blur(8px);
+    padding: 5px 15px;
+    border-radius: 50px;
+    z-index:1;
+    transition:0.3s;
+    }
+    .overlay-title{
+        position:absolute;
+        bottom:15px;
+        left:24px;
+          font-family: 'area_normalthin';
+          font-size:20px;
+          color:#fff;
+          z-index:1;
+          transition:0.3s;
+    }
+    .close-btn{
+        position:absolute;
+        background:#DCA1A1;
+        width:48px;
+        height:48px;
+        border-radius:100%;
+        padding:0;
+        outline:none;
+        color:#fff;
+        display:inline-flex;
+        justify-content:center;
+        align-items:center;
+        transform: rotate(0);
+            transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-duration: 0.5s, 0.5s;
+    z-index:1;
+    right:15px;
+    top:15px;
+    border:none;
+    transition:0.3x;
+    }
+  .feature-card.active  .close-btn{
+    transform: rotate(45deg);
+    }
+    .feature-section{
+        padding:48px 96px;
+    }
+.features {
+  display: flex;
+  gap: 1rem;
+}
+
+.feature-card {
+  flex-basis: 33.3333%;
+  cursor: pointer;
+  border-radius: 28px;
+  overflow: hidden;
+  position:relative;
+    transition: clip-path 0.42s, -webkit-clip-path 0.42s, flex-basis 0.48s  cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+    transform: translateY(200px);
+}
+
+.feature-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  clip-path: inset(0px 0% 0px 0px round 28px);
+    transition: clip-path 0.42s;
+    overflow:hidden;
+            height: 75vh;
+            border-radius:32px;
+            position:relative;
+}
+
+.feature-card img {
+  width: 100%;
+  object-fit: cover;
+  flex: 1;
+      transition-property: transform, translate, scale, rotate;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);;
+    transition-duration: 0.5s, 0.5s;
+     border-radius:32px;
+}
+
+.feature-content {
+  flex: 1;
+  padding: 24px;
+  opacity: 0;
+  transform: translateX(50px);
+  position:absolute;
+  pointer-events: none;
+  background-color: #f4f4f4;
+  transition: opacity 0.48s cubic-bezier(0.22,1,0.36,1), transform 0.48s cubic-bezier(0.22,1,0.36,1);
+  left:0;
+  display:flex;
+
+}
+.feature-content img{
+    width:40%;
+}
+.feature-content .featured-content-inner{
+    width:100%;
+    padding:16px 32px;
+    display:flex;
+    align-items:center;
+    opacity:0;
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);;
+    transition-duration: 0.5s, 0.5s;
+}
+/* Active card content */
+.feature-card.active .feature-content {
+     opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.feature-card.active .feature-content .featured-content-inner{
+    opacity:1;
+}
+.feature-card.active .overlay-tag,
+.feature-card.active .overlay-title{
+    opacity:0;
+}
+.feature-content .featured-content-inner h3{
+    font-weight:600;
+    font-size:24px;
+    margin:0 0 20px 0;
+     color:rgba(74, 74, 74, 1);
+     
+}
+.feature-content .featured-content-inner ul{
+  margin:0;
+  padding:0 0 0 0px;
+}
+.feature-content .featured-content-inner ul li{
+    margin:0 0 16px 0;
+    line-height:24px;
+    font-size:16px;
+    color:rgba(74, 74, 74, 1);
+    line-height:140%;
+    position:relative;
+    padding-left:20px;
+    list-style:none;
+}
+.feature-content .featured-content-inner ul li:before{
+  width:11px;
+  height:11px;
+  background-color:rgba(220, 161, 161, 1);
+  position:absolute;
+  left:0;
+  content:"";
+  border-radius:100%;
+  top:3px;
+}
+.feature-content .featured-content-inner p{
+color:rgba(74, 74, 74, 1);
+line-height:140%;
+}
+.features-section .section-title{
+    font-size: 60px;
+    font-family: 'area_normalthin';
+    text-align: center;
+    margin-bottom: 0;
+    margin:0;
+    line-height: 1;
+    }
+    .section-description{
+        text-align:center;
+        margin-bottom:48px;
+    }
+
+      @media screen and (max-width: 1024px) {
+          .feature-section {
+              padding: 48px 20px 24px;
+          }
+          .features {
+   flex-wrap:wrap;
+   gap:0;
+}
+.feature-card {
+  flex-basis: 100% !important;
+    transform:none !important;
+
+    opacity: 1 !important;
+    clip-path:none !important;
+    transform: translateY(0);
+    margin-bottom:10px;
+}
+.main-img{
+  height:488px;
+}
+.feature-inner{
+  height:auto;
+  display:block;
+}
+.features-section .section-title{
+  font-size:24px;
+}
+.feature-card .feature-content{
+  position:relative;
+  display:none;
+}
+.feature-card.active .feature-content {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    position: relative;
+    display:block;
+    width: 100%;
+    height: 100%;
+    margin-top:-50px;
+}
+.feature-inner img{
+  display:block;
+  position:relative;
+  z-index:1;
+}
+.feature-inner .feature-content img{
+  display:none;
+}
+.feature-content .featured-content-inner{
+  padding:50px 0 0 0;
+}
+.feature-content .featured-content-inner ul{
+ padding:0 0 0 0px;
+}
+.featured-content-inner p{
+  font-size:12px;
+  line-height:120%;
+}
+.feature-content .featured-content-inner ul li{
+ font-size:12px;
+ line-height:120%;
+}
+.feature-content .featured-content-inner h3{
+  font-size:18px;
+}
+.section-description {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+.overlay-tag, .overlay-title, .close-btn{
+  z-index:2;
+}
+    }
+    </style>
+
+    <script>
+const cards = document.querySelectorAll('.feature-card');
+let activeIndex = null;
+
+cards.forEach((card, index) => {
+  card.addEventListener('click', () => {
+    if (activeIndex === index) {
+      // Collapse active card
+      cards.forEach(c => {
+        c.classList.remove('active');
+        c.style.flexBasis = "33.3333%";
+        c.style.clipPath = "inset(0 0% 0 0 round 28px)";
+      });
+      activeIndex = null;
+    } else {
+      // Expand clicked card
+      cards.forEach((c, i) => {
+        if (i === index) {
+          c.classList.add('active');
+          c.style.flexBasis = "100%";
+          c.style.clipPath = "inset(0 0% 0 0 round 28px)";
+        } else {
+          c.classList.remove('active');
+          c.style.flexBasis = "0%";
+          c.style.clipPath = "inset(0 100% 0 0 round 28px)";
+        }
+      });
+      activeIndex = index;
+    }
+  });
+});
+gsap.registerPlugin(ScrollTrigger);
+
+const cardss = gsap.utils.toArray(".feature-card");
+
+// Set initial state with incremental vertical offset and opacity 0.5
+cardss.forEach((card, i) => {
+  gsap.set(card, { 
+    opacity: 0.5, 
+    y: 100 + i * 150 // incremental vertical offset
+  });
+});
+
+// Animate all cards together
+gsap.to(cardss, {
+  y: 0,
+  opacity: 1,       // final opacity
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".features",
+    start: "top 80%",
+    end: "bottom 60%",
+    scrub: true      // smooth scroll-linked animation
+  }
+});
+
+
+
+        </script>
+
+            
+             {% schema %}
+{
+  "name": "Feature Section",
+  "class": "feature-section",
+  "tag": "section",
+  "max_blocks": 3,
+  "settings": [
+     {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+     {
+          "type": "text",
+          "id": "desc",
+          "label": "Description"
+        }
+  ],
+      "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+         {
+          "type": "text",
+          "id": "title",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "otitle",
+          "label": "Overlay title"
+        },
+         {
+          "type": "text",
+          "id": "otag",
+          "label": "Overlay Tag"
+        },
+         {
+          "type": "richtext",
+          "id": "desc",
+          "label": "Description"
+        },
+         {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Section"
+    }
+  ]
+}
+{% endschema %}

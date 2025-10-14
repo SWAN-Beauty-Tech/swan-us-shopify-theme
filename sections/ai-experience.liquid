@@ -1,0 +1,180 @@
+<section class="ai-section">
+  <div class="ai-container">
+    <!-- Background main image -->
+    <div class="ai-image-wrap">
+      <img src="{{ section.settings.image |  img_url:'master' }}" class="ai-main" alt="Lifestyle image" />
+
+      <!-- Floating overlay image -->
+      <img src="{{ section.settings.oimage |  img_url:'master' }}"  class="ai-overlayyy"  alt="AI overlay" />
+    </div>
+
+    <!-- Text -->
+    <div class="ai-text">
+      <h2>{{section.settings.title}}</h2>
+      <div class="desc">{{section.settings.desc }}</div>
+    </div>
+  </div>
+</section>
+
+<style>
+    .ai-section {
+  min-height: 60vh;
+  padding: 40px 20px;
+  background: #fff;
+}
+.ai-container {
+  max-width: 1280px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.ai-image-wrap {
+  position: relative;
+}
+.ai-main {
+  width: auto;
+  max-height: 550px;
+  border-radius: 24px;
+  display: block;
+}
+.ai-overlayyy {
+  position: absolute;
+  bottom: -40px;
+  right: -25%;
+  width: 50%;
+  border-radius: 20px;
+}
+.ai-text {
+  max-width: 635px;
+  padding-left:160px;
+}
+.ai-text p{
+  color:rgba(74, 74, 74, 1);
+}
+.ai-text h2{
+  font-size:60px;
+  font-family: 'area_normalthin';
+  line-height:84px;
+  margin:0;
+}
+@media screen and (max-width: 767px) {
+  .ai-container {
+    flex-direction:column;
+  }
+  .ai-text{
+    text-align:center;
+    padding-left:0;
+    margin-top: 71px;
+  }
+  .ai-text h2{
+    font-size:30px;
+    line-height: 100%;
+  }
+  .ai-overlayyy {
+    position: absolute;
+    bottom: -46px;
+    right: 43px;
+    width: 37%;
+    border-radius: 20px;
+    transform: none !important;
+    max-width: 104px;
+}
+.ai-section {
+    min-height: 60vh;
+    padding: 24px 20px;
+    background: #fff;
+}
+.ai-main {
+    width: 100%;
+    max-height: 550px;
+    border-radius: 24px;
+    display: block;
+} 
+}
+  </style>
+<script>
+ gsap.registerPlugin(ScrollTrigger);
+
+function initAIOverlayScroll() {
+  // Kill old one if exists
+  ScrollTrigger.getById("ai-overlay-scroll")?.kill();
+  gsap.killTweensOf(".ai-overlayyy");
+
+  // Make sure elements exist before creating ScrollTrigger
+  const overlay = document.querySelector(".ai-overlayyy");
+  const section = document.querySelector(".ai-experience-section");
+  if (!overlay || !section) {
+    console.warn("GSAP: .ai-experience-section or .ai-overlayyy not found.");
+    return;
+  }
+
+  // Create a fresh ScrollTrigger animation
+  gsap.fromTo(overlay,
+    { y: 100 },
+    {
+      y: -100,
+      ease: "none",
+      scrollTrigger: {
+        id: "ai-overlay-scroll",
+        trigger: section,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        onEnter: () => console.log("✅ ScrollTrigger initialized"),
+      }
+    }
+  );
+
+  // Refresh ScrollTrigger after creating
+  ScrollTrigger.refresh();
+}
+
+// Run once when DOM is ready
+document.addEventListener("DOMContentLoaded", initAIOverlayScroll);
+
+// If you use Shopify, AJAX, or dynamic reloads:
+document.addEventListener("shopify:section:load", initAIOverlayScroll);
+document.addEventListener("shopify:section:unload", () => {
+  ScrollTrigger.getById("ai-overlay-scroll")?.kill();
+});
+
+</script>
+
+
+
+{% schema %}
+{
+  "name": "Ai Section",
+  "class": "ai-experience-section",
+  "tag": "section",
+  "settings": [
+     {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+     {
+          "type": "richtext",
+          "id": "desc",
+          "label": "Description"
+        },
+         {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+         {
+          "type": "image_picker",
+          "id": "oimage",
+          "label": "Overlay Image"
+        }
+  ],
+  "presets": [
+    {
+      "name": "Ai Section"
+    }
+  ]
+}
+{% endschema %}

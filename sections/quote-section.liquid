@@ -1,0 +1,162 @@
+<div class="quote-wrapper">
+    <div class="slot-machine" id="slotMachine">
+      <div class="slot-track" id="slotTrack">
+         {% for block in section.blocks %}
+              <div class="quote">
+          <div class="quote-title">{{ block.settings.title }}</div>
+          {%if block.settings.title != blank %}
+          <div class="quote-content">{{   block.settings.author}}</div>
+              {% endif %}
+        </div>
+         {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+<style>
+    
+    .quote-section {
+      width: 100%;
+      height: 80vh;
+      padding: 0 24px 24px;
+    }
+
+    .quote-wrapper {
+      width: 100%;
+      height: 100%;
+      background: #DCA1A1;
+      border-radius: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slot-machine {
+      position: relative;
+      height: 400px;
+      width: 100%;
+      max-width: 1400px;
+      overflow: hidden;
+      filter: blur(20px);
+      mask-image: linear-gradient(transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(transparent 0%, black 15%, black 85%, transparent 100%);
+    }
+
+    .slot-track {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .quote {
+      height: 400px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .quote-title {
+      font-size: 48px;
+      font-weight: 300;
+      color: #fff;
+      line-height: 60px;
+      text-align: center;
+      padding: 0 24px;
+      font-family: 'area_normalthin';
+    }
+
+    .quote-content {
+      margin-top: 12px;
+      font-size: 22px;
+      font-weight: 300;
+      color: #fff;
+      text-align: center;
+    }
+    @media screen and (max-width: 767px) {
+      .quote-title {
+      font-size: 24px;
+      font-weight: 300;
+      color: #fff;
+      line-height: 30px;
+     
+    }
+    .quote-section{
+      height:50vh;
+    }
+    }
+  </style>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  const slotTrack = document.querySelector("#slotTrack");
+  const quotes = document.querySelectorAll(".quote");
+  const quoteHeight = 400;
+  const totalQuotes = quotes.length;
+
+  let index = 0;
+
+  function showNextQuote() {
+    index++;
+    if (index >= totalQuotes) {
+      index = 0; // reset
+    }
+
+    gsap.to(slotTrack, {
+      y: -(quoteHeight * index),
+      duration: 1,                 // smoother (was 0.6)
+      ease: "expo.inOut"           // smoother easing
+    });
+
+    // repeat every 4s (1s anim + 3s pause)
+    setTimeout(showNextQuote, 4000);
+  }
+
+  // start loop
+  setTimeout(showNextQuote, 3000);
+
+  // Blur clears on scroll
+  gsap.to("#slotMachine", {
+    filter: "blur(0px)",
+    scrollTrigger: {
+      trigger: "#slotMachine",
+      scrub: 1,
+      start: "top 100%",
+      end: "bottom 80%",
+      // markers: true
+    }
+  });
+</script>
+
+    {% schema %}
+{
+  "name": "Quote Section",
+  "class": "quote-section",
+  "tag": "section",
+  "settings": [],
+        "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+         {
+          "type": "text",
+          "id": "title",
+          "label": "Quote"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote Section"
+    }
+  ]
+}
+{% endschema %}
