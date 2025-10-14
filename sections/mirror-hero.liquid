@@ -157,7 +157,7 @@
     // Check mobile for image swap
     const heroImage = document.getElementById("heroImage");
     if (window.innerWidth < 768) {
-      heroImage.src = "https://swanbeauty.com/img/mirror/hero-mobile.jpg";
+      heroImage.src = "{{ 'img/mirror/hero-mobile.jpg' | asset_url }}";
     }
 
     // Timeline animations with proper stagger like Framer Motion
