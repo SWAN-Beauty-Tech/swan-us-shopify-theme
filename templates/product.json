@@ -1,1 +1,107 @@
-{"sections":{"main":{"type":"main-product","blocks":{"title":{"type":"title","settings":{}},"custom_liquid_xL73WD":{"type":"custom_liquid","settings":{"custom_liquid":"<div class=\"pre-order-text\">From scans to routines — precision care in one mirror.\n<\/div>"}},"price":{"type":"price","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"picker_type":"button","swatch_shape":"circle"}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":false,"show_gift_card_recipient":false}},"custom_liquid_6gz8dJ":{"type":"custom_liquid","settings":{"custom_liquid":"<div class=\"pre-order-text-bottom\">\nPre-order now for delivery on Saturday, November 1st.\n<\/div>"}}},"block_order":["title","custom_liquid_xL73WD","price","variant_picker","buy_buttons","custom_liquid_6gz8dJ"],"settings":{"enable_sticky_info":false,"color_scheme":"scheme-1","media_size":"large","constrain_to_viewport":true,"media_fit":"cover","gallery_layout":"thumbnail_slider","mobile_thumbnails":"show","media_position":"left","image_zoom":"none","hide_variants":true,"enable_video_looping":false,"padding_top":0,"padding_bottom":12}},"related-products":{"type":"related-products","disabled":true,"settings":{"heading":"You may also like","heading_size":"h2","products_to_show":4,"columns_desktop":4,"columns_mobile":"2","color_scheme":"scheme-1","image_ratio":"square","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"padding_top":36,"padding_bottom":28}},"product_overview_Gdz77A":{"type":"product-overview","name":"Product Overview","settings":{"title":"","desc":""}}},"order":["main","related-products","product_overview_Gdz77A"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "custom_liquid_xL73WD": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"pre-order-text\">From scans to routines — precision care in one mirror.\n</div>"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "custom_liquid_6gz8dJ": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"pre-order-text-bottom\">\nPre-order now for delivery Winter 2026.\n</div>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "custom_liquid_xL73WD",
+        "price",
+        "variant_picker",
+        "buy_buttons",
+        "custom_liquid_6gz8dJ"
+      ],
+      "settings": {
+        "enable_sticky_info": false,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "none",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 0,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "product_overview_Gdz77A": {
+      "type": "product-overview",
+      "name": "Product Overview",
+      "settings": {
+        "title": "",
+        "desc": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "product_overview_Gdz77A"
+  ]
+}
