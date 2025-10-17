@@ -6,10 +6,44 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
+
     {% assign current_path = request.path %}
-    <link rel="alternate" hreflang="en" href="https://swanbeauty.com{{ current_path }}" />
-    <link rel="alternate" hreflang="de" href="https://de.swanbeauty.com{{ current_path }}" />
-    <link rel="alternate" hreflang="x-default" href="https://swanbeauty.com{{ current_path }}" />
+    {% assign current_host = request.host %}
+    {% assign de_paths = "/,/pages/mirror,/products/swan-mirror,/pages/contact" | split: "," %}
+    {% assign en_paths = "/,/pages/mirror,/products/swan-mirror,/pages/contact" | split: "," %}
+
+    {% assign path_match = false %}
+    {% assign mapped_path = "" %}
+
+    {%- for de_path in de_paths -%}
+      {% assign index = forloop.index0 %}
+      {% assign en_path = en_paths[index] %}
+      {% if current_path == de_path %}
+        {% assign path_match = true %}
+        {% assign mapped_path = en_path %}
+      {% endif %}
+    {%- endfor -%}
+
+    {%- if current_host contains "de.swanbeauty.com" -%}
+      {%- if path_match -%}
+        <link rel="alternate" hreflang="de" href="https://de.swanbeauty.com{{ mapped_path }}" />
+        <link rel="alternate" hreflang="en" href="https://swanbeauty.com{{ mapped_path }}" />
+        <link rel="alternate" hreflang="x-default" href="https://swanbeauty.com{{ mapped_path }}" />
+      {%- else -%}
+        <link rel="alternate" hreflang="de" href="{{ canonical_url }}" />
+        <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}" />
+      {%- endif -%}
+
+    {%- elsif current_host == "swanbeauty.com" -%}
+      {%- if path_match -%}
+        <link rel="alternate" hreflang="en" href="https://swanbeauty.com{{ mapped_path }}" />
+        <link rel="alternate" hreflang="de" href="https://de.swanbeauty.com{{ mapped_path }}" />
+        <link rel="alternate" hreflang="x-default" href="https://swanbeauty.com{{ mapped_path }}" />
+      {%- else -%}
+        <link rel="alternate" hreflang="en" href="{{ canonical_url }}" />
+        <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}" />
+      {%- endif -%}
+    {%- endif -%}
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
