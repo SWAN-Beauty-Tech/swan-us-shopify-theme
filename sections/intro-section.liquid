@@ -1,14 +1,13 @@
 <link rel="preload" as="video" href="{{section.settings.vurl}}" type="video/mp4">
-<link rel="preload" as="video" href="{{section.settings.vmurl}}" type="video/mp4">
 <div class="rel-mode">
   <div class="intro-wrap" id="introWrap">
     {% if section.settings.vurl != blank %}
-    <video class="" id="introVideo" playsinline autoplay muted class="dvideo">
+    <video class="" id="introVideoD" playsinline autoplay muted class="dvideo">
       <source src="{{section.settings.vurl}}" type="video/mp4">
     </video>
     {%endif %}
     {% if section.settings.vmurl != blank %}
-    <video class="" id="introVideo" playsinline autoplay muted class="mvideo">
+    <video class="" id="introVideoM" playsinline autoplay muted class="mvideo">
       <source src="{{section.settings.vmurl}}" type="video/mp4">
     </video>
     {%endif %}
@@ -32,12 +31,10 @@
   }
 
   .intro-wrap {
-    width: 100vw;
-    height: 100vh;
     pointer-events: none;
   }
 
-  .dvideo {
+  .intro-wrap .dvideo {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -46,7 +43,7 @@
     pointer-events: none;
   }
 
-  .mvideo {
+  .intro-wrap .mvideo {
     display: none !important;
   }
 
@@ -234,7 +231,8 @@
 <script>
   const introWrap = document.getElementById('introWrap');
   const hero = document.getElementById('hero');
-  const video = document.getElementById('introVideo');
+  const videoD = document.getElementById('introVideoD');
+  const videoM = document.getElementById('introVideoM');
 
   let heroShown = false;
 
@@ -286,12 +284,12 @@
     showHero();
   } else {
     // Desktop / Tablet – wait until 10s before video ends
-    video.addEventListener('loadedmetadata', function () {
-      const videoDuration = video.duration;
+    videoD.addEventListener('loadedmetadata', function () {
+      const videoDuration = videoD.duration;
       const showTime = Math.max(0, videoDuration - 10.0);
 
-      video.addEventListener('timeupdate', () => {
-        if (video.currentTime >= showTime && !heroShown) {
+      videoD.addEventListener('timeupdate', () => {
+        if (videoD.currentTime >= showTime && !heroShown) {
           showHero();
         }
       });
@@ -300,7 +298,7 @@
 
 
   // On video end → hide video bg if needed
-  video.addEventListener('ended', () => {
+  videoD.addEventListener('ended', () => {
     gsap.to(introWrap, {
       duration: 1,
       onComplete: () => {
