@@ -2,12 +2,12 @@
 <div class="rel-mode">
   <div class="intro-wrap" id="introWrap">
     {% if section.settings.vurl != blank %}
-    <video class="" id="introVideoD" playsinline autoplay muted class="dvideo">
+    <video class="dvideo" id="introVideoD" playsinline autoplay muted>
       <source src="{{section.settings.vurl}}" type="video/mp4">
     </video>
     {%endif %}
     {% if section.settings.vmurl != blank %}
-    <video class="" id="introVideoM" playsinline autoplay muted class="mvideo">
+    <video class="mvideo" id="introVideoM" playsinline autoplay muted>
       <source src="{{section.settings.vmurl}}" type="video/mp4">
     </video>
     {%endif %}
