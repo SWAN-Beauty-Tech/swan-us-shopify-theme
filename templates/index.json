@@ -1,1 +1,350 @@
-{"sections":{"intro_section_tEQkpX":{"type":"intro-section","name":"Intro","settings":{"vurl":"https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/105f25e4be5a4e809cb68ecb541cda79.mp4","mimage":"shopify:\/\/shop_images\/hero_a2cd8716-fd19-4bca-b81e-ef521ff75b79.jpg","eyebrotext":"MEET THE SWAN MIRROR","title":"<span>Where beauty<\/span>\n            <span class=\"second-line\">meets <em>brilliance<\/em><\/span>","btntext":"DISCOVER SWAN","btnurl":"shopify:\/\/pages\/mirror"}},"statement_section_FzNr4w":{"type":"statement-section","blocks":{"statement_YDwFAK":{"type":"statement","settings":{"title":"Part immersive hub,","color":"#ffffff"}},"statement_b9eqQK":{"type":"statement","settings":{"title":"part social salon,","color":"#ffffff"}},"statement_7X6kKM":{"type":"statement","settings":{"title":"part curated marketplace.","color":"#ffffff"}},"statement_hxdcNM":{"type":"statement","settings":{"title":"All powered by one,","color":"#ffffff"}},"statement_JQUhQR":{"type":"statement","settings":{"title":"beautifully designed device.","color":"#ffffff"}},"statement_a4KFDt":{"type":"statement","settings":{"title":"All beauty, no boundaries.","color":"#ffffff"}},"statement_8bRbUw":{"type":"statement","settings":{"title":"See yourself, reimagined.","color":"#dca1a1"}}},"block_order":["statement_YDwFAK","statement_b9eqQK","statement_7X6kKM","statement_hxdcNM","statement_JQUhQR","statement_a4KFDt","statement_8bRbUw"],"name":"Statement Section","settings":{"fontsize":false,"case":false,"color":"#000000"}},"product_showcase_tre4Xc":{"type":"product-showcase","blocks":{"showcase_4gMn93":{"type":"showcase","settings":{"title":"Real-Time AI Skin Analysis","color":"#ffffff"}},"showcase_x8PA7U":{"type":"showcase","settings":{"title":"Step-by-Step Guided Routines","color":"#ffffff"}},"showcase_6yhe6R":{"type":"showcase","settings":{"title":"Tailored Content & Branded Campaigns","color":"#ffffff"}},"showcase_gWyVk7":{"type":"showcase","settings":{"title":"Interactive Promotional Spaces","color":"#ffffff"}},"showcase_NaF9fP":{"type":"showcase","settings":{"title":"Integrated Social & Influencer Tools","color":"#ffffff"}},"showcase_CqbHRD":{"type":"showcase","settings":{"title":"Curated Beauty Marketplace","color":"#ffffff"}},"showcase_P6AaT3":{"type":"showcase","settings":{"title":"Educational Modules","color":"#ffffff"}},"showcase_PBf6J9":{"type":"showcase","settings":{"title":"Seamless App Syncing with Swan Mirror","color":"#ffffff"}}},"block_order":["showcase_4gMn93","showcase_x8PA7U","showcase_6yhe6R","showcase_gWyVk7","showcase_NaF9fP","showcase_CqbHRD","showcase_P6AaT3","showcase_PBf6J9"],"name":"Product Showcase","settings":{"video":"https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/a3f0787f03024147ab9a0499cba711de.mp4","videom":"https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/7ade4aefbfef419097969c9d51645dc4.mp4"}},"value_proposition_D9VAHd":{"type":"value-proposition","name":"Value Proposition","settings":{"title":"BEAUTY + TECHNOLOGY","value":"<p>A next-generation smart mirror<\/p>\n            <p>redefining how-and where<\/p>\n            <p>you engage with beauty.<\/p>","btntext":"Why SWAN","btnurl":"shopify:\/\/pages\/experience"}},"feature_section_6WgA7G":{"type":"feature-section","blocks":{"feature_Wh9FXF":{"type":"feature","settings":{"title":"AI Skin Analyzer","otitle":"AI Skin Analyzer","otag":"Trackable Skincare","desc":"<p>The AI Skin Analyzer reveals your complexion’s story with a dermatologist-backed scan that scores and tracks 7 key skin concerns. Instantly, it unlocks personalized insights and tailored routines, turning the Mirror into your most trusted beauty confidant.<\/p><ul><li>Uses machine learning to evaluate 7 skin concerns: Wrinkles, pigmentation, texture, oiliness, redness, acne, and UV spots.<\/li><li>Scores each parameter from 0 to 100, and generates a composite skin health score<\/li><li>Delivers dermatologist-backed insights, personalized tips, and scan history<\/li><li>Powers downstream personalization across routines, products, and content<\/li><li>Provides a visual, trackable, and trust-building experience only possible on the Mirror<\/li><\/ul>","image":"shopify:\/\/shop_images\/f-1.jpg"}},"feature_HtbNWm":{"type":"feature","settings":{"title":"Routine Builder","otitle":"Routine Builder","otag":"Skin Rituals","desc":"<ul><li>A smarter, more beautiful way to follow your skincare ritual—step by step. Cleanse. Treat. Moisturize. Protect.<\/li><li>Whether you're adding your own products or choosing from curated recommendations, the Routine Builder brings structure and intention to your regimen.<\/li><li>Designed to work seamlessly on the mirror, it transforms your daily routine into a guided, interactive experience—keeping you consistent, accountable, and effortlessly on track.<\/li><\/ul>","image":"shopify:\/\/shop_images\/f-2.jpg"}},"feature_BRBUqW":{"type":"feature","settings":{"title":"Smart Makeup Artist","otitle":"Smart Makeup Artist","otag":"AR Face Mapping","desc":"<p>Our SmARt Makeup Artist tool uses real-time recognition and dynamic overlays to guide precise application, adapting to each unique face shape. With expert-inspired maps, product recommendations, and influencer features, it transforms the Mirror into an active beauty coach beyond a simple reflection.<\/p><ul><li>Real-time facial recognition and overlays to guide application<\/li><li>Adapts dynamically to face shape and projects face maps onto the face<\/li><li>Enables precision and personalization that can’t be replicated by mobile alone<\/li><li>Elevates the mirror experience beyond passive reflection to active coaching<\/li><li>Will have tool and product recommendations<\/li><li>Working with real MUA to create face maps and opportunities for other famous influencers or MUAs to be featured in many ways<\/li><\/ul>","image":"shopify:\/\/shop_images\/f-3.jpg"}}},"block_order":["feature_Wh9FXF","feature_HtbNWm","feature_BRBUqW"],"name":"Feature Section","settings":{"title":"AI that knows your skin","desc":"From scans to routines – precision care in one mirror."}},"swap_app_P6jLHc":{"type":"swap-app","blocks":{"appfeature_aXnPYG":{"type":"appfeature","settings":{"title":"SWAN Social Community","desc":"<p>A beauty space where smarter scrolling meets meaningful connection, with content tailored to your unique preferences.<\/p>","image":"shopify:\/\/shop_images\/ps-5.jpg"}},"appfeature_GYWTAN":{"type":"appfeature","settings":{"title":"Curated Marketplace","desc":"<p>A curated shop of cult favorites, timeless icons, and trending discoveries—always just a click away.<\/p>","image":"shopify:\/\/shop_images\/ps-1.jpg"}},"appfeature_txr8tf":{"type":"appfeature","settings":{"title":"Content Recording","desc":"<p>Effortlessly capture, edit, and share your looks with seamless  app-to-mirror integration and intuitive product tagging.<\/p>","image":"shopify:\/\/shop_images\/ps-2.jpg"}},"appfeature_Tyek8V":{"type":"appfeature","settings":{"title":"SWAN Labs","desc":"<p>Where mirror meets mobile to track progress, refine routines, and celebrate beauty milestones.<\/p>","image":"shopify:\/\/shop_images\/ps-4.jpg"}},"appfeature_z8BrjX":{"type":"appfeature","settings":{"title":"Shoppable Video","desc":"<p>Transform inspiration into action by shopping products directly from videos created by brands and trusted voices.<\/p>","image":"shopify:\/\/shop_images\/ps-3.jpg"}}},"block_order":["appfeature_aXnPYG","appfeature_GYWTAN","appfeature_txr8tf","appfeature_Tyek8V","appfeature_z8BrjX"],"name":"Swan App","settings":{"title":"The <em>SWAN<\/em> app"}},"ai_experience_aK8hCq":{"type":"ai-experience","name":"Ai Section","settings":{"title":"Powered by AI. Personalized for You.","desc":"<p>With advanced AI and dermatologist-driven data, the SWAN Skin Analyzer translates complex skin metrics into simple, actionable guidance. Skincare decisions, made smarter.<\/p>","image":"shopify:\/\/shop_images\/ai-exp.jpg","oimage":"shopify:\/\/shop_images\/ia-overlay.png"}},"quote_section_bYfxx4":{"type":"quote-section","blocks":{"quote_QnipX4":{"type":"quote","settings":{"title":"\"Happiness is the secret to all beauty. There is no beauty without happiness.\"","author":"- Christian Dior"}},"quote_weTEjc":{"type":"quote","settings":{"title":"\"Beauty begins the moment you decide to be yourself.\"","author":"- Coco Chanel"}},"quote_4NtAJD":{"type":"quote","settings":{"title":"\"True beauty in a woman is reflected in her soul. It is the caring that she lovingly gives, the passion that she shows.\"","author":"- Audrey Hepburn"}},"quote_4xKDiq":{"type":"quote","settings":{"title":"\"Glow from the inside out...Confidence is your best makeup.\"","author":""}},"quote_EjHQE4":{"type":"quote","settings":{"title":"\"There is nothing more beautiful than being unapologetically yourself.\"","author":""}}},"block_order":["quote_QnipX4","quote_weTEjc","quote_4NtAJD","quote_4xKDiq","quote_EjHQE4"],"name":"Quote Section","settings":{}}},"order":["intro_section_tEQkpX","statement_section_FzNr4w","product_showcase_tre4Xc","value_proposition_D9VAHd","feature_section_6WgA7G","swap_app_P6jLHc","ai_experience_aK8hCq","quote_section_bYfxx4"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "intro_section_tEQkpX": {
+      "type": "intro-section",
+      "name": "Intro",
+      "settings": {
+        "vurl": "https://cdn.shopify.com/videos/c/o/v/105f25e4be5a4e809cb68ecb541cda79.mp4",
+        "mimage": "shopify://shop_images/hero_a2cd8716-fd19-4bca-b81e-ef521ff75b79.jpg",
+        "eyebrotext": "MEET THE SWAN MIRROR",
+        "title": "<span>Where beauty</span>\n            <span class=\"second-line\">meets <em>brilliance</em></span>",
+        "btntext": "DISCOVER SWAN",
+        "btnurl": "shopify://pages/mirror"
+      }
+    },
+    "statement_section_FzNr4w": {
+      "type": "statement-section",
+      "blocks": {
+        "statement_YDwFAK": {
+          "type": "statement",
+          "settings": {
+            "title": "Part immersive hub,",
+            "color": "#ffffff"
+          }
+        },
+        "statement_b9eqQK": {
+          "type": "statement",
+          "settings": {
+            "title": "part social salon,",
+            "color": "#ffffff"
+          }
+        },
+        "statement_7X6kKM": {
+          "type": "statement",
+          "settings": {
+            "title": "part curated marketplace.",
+            "color": "#ffffff"
+          }
+        },
+        "statement_hxdcNM": {
+          "type": "statement",
+          "settings": {
+            "title": "All powered by one,",
+            "color": "#ffffff"
+          }
+        },
+        "statement_JQUhQR": {
+          "type": "statement",
+          "settings": {
+            "title": "beautifully designed device.",
+            "color": "#ffffff"
+          }
+        },
+        "statement_a4KFDt": {
+          "type": "statement",
+          "settings": {
+            "title": "All beauty, no boundaries.",
+            "color": "#ffffff"
+          }
+        },
+        "statement_8bRbUw": {
+          "type": "statement",
+          "settings": {
+            "title": "See yourself, reimagined.",
+            "color": "#dca1a1"
+          }
+        }
+      },
+      "block_order": [
+        "statement_YDwFAK",
+        "statement_b9eqQK",
+        "statement_7X6kKM",
+        "statement_hxdcNM",
+        "statement_JQUhQR",
+        "statement_a4KFDt",
+        "statement_8bRbUw"
+      ],
+      "name": "Statement Section",
+      "settings": {
+        "fontsize": false,
+        "case": false,
+        "color": "#000000"
+      }
+    },
+    "product_showcase_tre4Xc": {
+      "type": "product-showcase",
+      "blocks": {
+        "showcase_4gMn93": {
+          "type": "showcase",
+          "settings": {
+            "title": "Real-Time AI Skin Analysis",
+            "color": "#ffffff"
+          }
+        },
+        "showcase_x8PA7U": {
+          "type": "showcase",
+          "settings": {
+            "title": "Step-by-Step Guided Routines",
+            "color": "#ffffff"
+          }
+        },
+        "showcase_6yhe6R": {
+          "type": "showcase",
+          "settings": {
+            "title": "Tailored Content & Branded Campaigns",
+            "color": "#ffffff"
+          }
+        },
+        "showcase_gWyVk7": {
+          "type": "showcase",
+          "settings": {
+            "title": "Interactive Promotional Spaces",
+            "color": "#ffffff"
+          }
+        },
+        "showcase_NaF9fP": {
+          "type": "showcase",
+          "settings": {
+            "title": "Integrated Social & Influencer Tools",
+            "color": "#ffffff"
+          }
+        },
+        "showcase_CqbHRD": {
+          "type": "showcase",
+          "settings": {
+            "title": "Curated Beauty Marketplace",
+            "color": "#ffffff"
+          }
+        },
+        "showcase_P6AaT3": {
+          "type": "showcase",
+          "settings": {
+            "title": "Educational Modules",
+            "color": "#ffffff"
+          }
+        },
+        "showcase_PBf6J9": {
+          "type": "showcase",
+          "settings": {
+            "title": "Seamless App Syncing with Swan Mirror",
+            "color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "showcase_4gMn93",
+        "showcase_x8PA7U",
+        "showcase_6yhe6R",
+        "showcase_gWyVk7",
+        "showcase_NaF9fP",
+        "showcase_CqbHRD",
+        "showcase_P6AaT3",
+        "showcase_PBf6J9"
+      ],
+      "name": "Product Showcase",
+      "settings": {
+        "video": "https://cdn.shopify.com/videos/c/o/v/a745016e097c4887989bd3fa456bf41c.mp4",
+        "videom": "https://cdn.shopify.com/videos/c/o/v/4ad3e8e3adb943c9a9310358f08f355f.mp4"
+      }
+    },
+    "value_proposition_D9VAHd": {
+      "type": "value-proposition",
+      "name": "Value Proposition",
+      "settings": {
+        "title": "BEAUTY + TECHNOLOGY",
+        "value": "<p>A next-generation smart mirror</p>\n            <p>redefining how-and where</p>\n            <p>you engage with beauty.</p>",
+        "btntext": "Why SWAN",
+        "btnurl": "shopify://pages/experience"
+      }
+    },
+    "feature_section_6WgA7G": {
+      "type": "feature-section",
+      "blocks": {
+        "feature_Wh9FXF": {
+          "type": "feature",
+          "settings": {
+            "title": "AI Skin Analyzer",
+            "otitle": "AI Skin Analyzer",
+            "otag": "Trackable Skincare",
+            "desc": "<p>The AI Skin Analyzer reveals your complexion’s story with a dermatologist-backed scan that scores and tracks 7 key skin concerns. Instantly, it unlocks personalized insights and tailored routines, turning the Mirror into your most trusted beauty confidant.</p><ul><li>Uses machine learning to evaluate 7 skin concerns: Wrinkles, pigmentation, texture, oiliness, redness, acne, and UV spots.</li><li>Scores each parameter from 0 to 100, and generates a composite skin health score</li><li>Delivers dermatologist-backed insights, personalized tips, and scan history</li><li>Powers downstream personalization across routines, products, and content</li><li>Provides a visual, trackable, and trust-building experience only possible on the Mirror</li></ul>",
+            "image": "shopify://shop_images/f-1.jpg"
+          }
+        },
+        "feature_HtbNWm": {
+          "type": "feature",
+          "settings": {
+            "title": "Routine Builder",
+            "otitle": "Routine Builder",
+            "otag": "Skin Rituals",
+            "desc": "<ul><li>A smarter, more beautiful way to follow your skincare ritual—step by step. Cleanse. Treat. Moisturize. Protect.</li><li>Whether you're adding your own products or choosing from curated recommendations, the Routine Builder brings structure and intention to your regimen.</li><li>Designed to work seamlessly on the mirror, it transforms your daily routine into a guided, interactive experience—keeping you consistent, accountable, and effortlessly on track.</li></ul>",
+            "image": "shopify://shop_images/f-2.jpg"
+          }
+        },
+        "feature_BRBUqW": {
+          "type": "feature",
+          "settings": {
+            "title": "Smart Makeup Artist",
+            "otitle": "Smart Makeup Artist",
+            "otag": "AR Face Mapping",
+            "desc": "<p>Our SmARt Makeup Artist tool uses real-time recognition and dynamic overlays to guide precise application, adapting to each unique face shape. With expert-inspired maps, product recommendations, and influencer features, it transforms the Mirror into an active beauty coach beyond a simple reflection.</p><ul><li>Real-time facial recognition and overlays to guide application</li><li>Adapts dynamically to face shape and projects face maps onto the face</li><li>Enables precision and personalization that can’t be replicated by mobile alone</li><li>Elevates the mirror experience beyond passive reflection to active coaching</li><li>Will have tool and product recommendations</li><li>Working with real MUA to create face maps and opportunities for other famous influencers or MUAs to be featured in many ways</li></ul>",
+            "image": "shopify://shop_images/f-3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "feature_Wh9FXF",
+        "feature_HtbNWm",
+        "feature_BRBUqW"
+      ],
+      "name": "Feature Section",
+      "settings": {
+        "title": "AI that knows your skin",
+        "desc": "From scans to routines – precision care in one mirror."
+      }
+    },
+    "swap_app_P6jLHc": {
+      "type": "swap-app",
+      "blocks": {
+        "appfeature_aXnPYG": {
+          "type": "appfeature",
+          "settings": {
+            "title": "SWAN Social Community",
+            "desc": "<p>A beauty space where smarter scrolling meets meaningful connection, with content tailored to your unique preferences.</p>",
+            "image": "shopify://shop_images/ps-5.jpg"
+          }
+        },
+        "appfeature_GYWTAN": {
+          "type": "appfeature",
+          "settings": {
+            "title": "Curated Marketplace",
+            "desc": "<p>A curated shop of cult favorites, timeless icons, and trending discoveries—always just a click away.</p>",
+            "image": "shopify://shop_images/ps-1.jpg"
+          }
+        },
+        "appfeature_txr8tf": {
+          "type": "appfeature",
+          "settings": {
+            "title": "Content Recording",
+            "desc": "<p>Effortlessly capture, edit, and share your looks with seamless  app-to-mirror integration and intuitive product tagging.</p>",
+            "image": "shopify://shop_images/ps-2.jpg"
+          }
+        },
+        "appfeature_Tyek8V": {
+          "type": "appfeature",
+          "settings": {
+            "title": "SWAN Labs",
+            "desc": "<p>Where mirror meets mobile to track progress, refine routines, and celebrate beauty milestones.</p>",
+            "image": "shopify://shop_images/ps-4.jpg"
+          }
+        },
+        "appfeature_z8BrjX": {
+          "type": "appfeature",
+          "settings": {
+            "title": "Shoppable Video",
+            "desc": "<p>Transform inspiration into action by shopping products directly from videos created by brands and trusted voices.</p>",
+            "image": "shopify://shop_images/ps-3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "appfeature_aXnPYG",
+        "appfeature_GYWTAN",
+        "appfeature_txr8tf",
+        "appfeature_Tyek8V",
+        "appfeature_z8BrjX"
+      ],
+      "name": "Swan App",
+      "settings": {
+        "title": "The <em>SWAN</em> app"
+      }
+    },
+    "ai_experience_aK8hCq": {
+      "type": "ai-experience",
+      "name": "Ai Section",
+      "settings": {
+        "title": "Powered by AI. Personalized for You.",
+        "desc": "<p>With advanced AI and dermatologist-driven data, the SWAN Skin Analyzer translates complex skin metrics into simple, actionable guidance. Skincare decisions, made smarter.</p>",
+        "image": "shopify://shop_images/ai-exp.jpg",
+        "oimage": "shopify://shop_images/ia-overlay.png"
+      }
+    },
+    "quote_section_bYfxx4": {
+      "type": "quote-section",
+      "blocks": {
+        "quote_QnipX4": {
+          "type": "quote",
+          "settings": {
+            "title": "\"Happiness is the secret to all beauty. There is no beauty without happiness.\"",
+            "author": "- Christian Dior"
+          }
+        },
+        "quote_weTEjc": {
+          "type": "quote",
+          "settings": {
+            "title": "\"Beauty begins the moment you decide to be yourself.\"",
+            "author": "- Coco Chanel"
+          }
+        },
+        "quote_4NtAJD": {
+          "type": "quote",
+          "settings": {
+            "title": "\"True beauty in a woman is reflected in her soul. It is the caring that she lovingly gives, the passion that she shows.\"",
+            "author": "- Audrey Hepburn"
+          }
+        },
+        "quote_4xKDiq": {
+          "type": "quote",
+          "settings": {
+            "title": "\"Glow from the inside out...Confidence is your best makeup.\"",
+            "author": ""
+          }
+        },
+        "quote_EjHQE4": {
+          "type": "quote",
+          "settings": {
+            "title": "\"There is nothing more beautiful than being unapologetically yourself.\"",
+            "author": ""
+          }
+        }
+      },
+      "block_order": [
+        "quote_QnipX4",
+        "quote_weTEjc",
+        "quote_4NtAJD",
+        "quote_4xKDiq",
+        "quote_EjHQE4"
+      ],
+      "name": "Quote Section",
+      "settings": {}
+    }
+  },
+  "order": [
+    "intro_section_tEQkpX",
+    "statement_section_FzNr4w",
+    "product_showcase_tre4Xc",
+    "value_proposition_D9VAHd",
+    "feature_section_6WgA7G",
+    "swap_app_P6jLHc",
+    "ai_experience_aK8hCq",
+    "quote_section_bYfxx4"
+  ]
+}
