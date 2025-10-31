@@ -186,7 +186,6 @@
     }
 
     .hero {
-
       padding-block-end: 0;
       padding-block-start: 0px;
       padding-bottom: 0;
@@ -279,26 +278,39 @@
   }
 
 
-  if (window.innerWidth <= 1024) {
-    // Mobile – video is hidden, show immediately
-    showHero();
-  } else {
-    // Desktop / Tablet – wait until 10s before video ends
-    videoD.addEventListener('loadedmetadata', function () {
-      const videoDuration = videoD.duration;
-      const showTime = Math.max(0, videoDuration - 10.0);
+  videoD.addEventListener('loadedmetadata', function () {
+    const videoDuration = videoD.duration;
+    const showTime = Math.max(0, videoDuration - 10.0);
 
-      videoD.addEventListener('timeupdate', () => {
-        if (videoD.currentTime >= showTime && !heroShown) {
-          showHero();
-        }
-      });
+    videoD.addEventListener('timeupdate', () => {
+      if (videoD.currentTime >= showTime && !heroShown) {
+        showHero();
+      }
     });
-  }
+  });
+  videoM.addEventListener('loadedmetadata', function () {
+    const videoDuration = videoM.duration;
+    const showTime = Math.max(0, videoDuration - 10.0);
+
+    videoM.addEventListener('timeupdate', () => {
+      if (videoM.currentTime >= showTime && !heroShown) {
+        showHero();
+      }
+    });
+  })
 
 
   // On video end → hide video bg if needed
   videoD.addEventListener('ended', () => {
+    gsap.to(introWrap, {
+      duration: 1,
+      onComplete: () => {
+        introWrap.style.display = "block";
+      }
+    });
+  });
+
+  videoM.addEventListener('ended', () => {
     gsap.to(introWrap, {
       duration: 1,
       onComplete: () => {
