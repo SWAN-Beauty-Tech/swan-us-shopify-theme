@@ -297,12 +297,12 @@ document.addEventListener("DOMContentLoaded", () => {
     position: "absolute",
     inset: 0,
     display: "block",
-    WebkitClipPath: "inset(50% round 0.75em)",
-    clipPath: "inset(50% round 0.75em)"
+    WebkitClipPath: "inset(100% 0 0 0)",
+    clipPath: "inset(100% 0 0 0)"
   });
   gsap.set(visualWraps[0], {
-    WebkitClipPath: "inset(0% round 0.75em)",
-    clipPath: "inset(0% round 0.75em)"
+    WebkitClipPath: "inset(0% 0 0 0)",
+    clipPath: "inset(0% 0 0 0)"
   });
 
   gsap.set(items, { autoAlpha: 0 });
@@ -341,15 +341,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (fromIndex < toIndex) {
       tl.to(visualWraps[toIndex], {
-        WebkitClipPath: "inset(0% round 0.75em)",
-        clipPath: "inset(0% round 0.75em)",
+        WebkitClipPath: "inset(0% 0 0 0)",
+        clipPath: "inset(0% 0 0 0)",
         duration: DURATION,
         ease: EASE
       }, 0);
     } else {
       tl.to(visualWraps[fromIndex], {
-        WebkitClipPath: "inset(50% round 0.75em)",
-        clipPath: "inset(50% round 0.75em)",
+        WebkitClipPath: "inset(100% 0 0 0)",
+        clipPath: "inset(100% 0 0 0)",
         duration: DURATION,
         ease: EASE
       }, 0);
