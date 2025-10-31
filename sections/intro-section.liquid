@@ -1,56 +1,45 @@
-<link rel="preload" as="video" href="{{section.settings.vurl}}" type="video/mp4">
-<div class="rel-mode">
-  <div class="intro-wrap" id="introWrap">
-    {% if section.settings.vurl != blank %}
-    <video class="" id="introVideo" playsinline autoplay muted class="dvideo">
-      <source src="{{section.settings.vurl}}" type="video/mp4">
-    </video>
-    {%endif %}
-    {% if section.settings.vmurl != blank %}
-    <video class="" id="introVideo" playsinline autoplay muted class="mvideo">
-      <source src="{{section.settings.vmurl}}" type="video/mp4">
-    </video>
-    {%endif %}
-  </div>
-  <section class="hero" id="hero">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <div class="eyebrow">{{ section.settings.eyebrotext }}</div>
-        <h1>{{ section.settings.title }}</h1>
-        <a href="{{section.settings.btnurl}}" class="cta">{{section.settings.btntext}}</a>
+     <link rel="preload" as="video" href="{{section.settings.vurl}}" type="video/mp4">
+   <div class="rel-mode">
+    <div class="intro-wrap" id="introWrap">
+        <video class="" id="introVideo" playsinline autoplay muted>
+          <source src="{{section.settings.vurl}}" type="video/mp4">
+        </video>
+       
       </div>
+       {% if section.settings.mimage != blank %}
+        <img class="hero-image " src="{{ section.settings.mimage | img_url:'master' }}" alt="hero">
+        {%endif %}
+      <section class="hero" id="hero">
+        <div class="hero-inner">
+          <div class="hero-left">
+            <div class="eyebrow">{{ section.settings.eyebrotext }}</div>
+            <h1>{{ section.settings.title }}</h1>
+            <a href="{{section.settings.btnurl}}" class="cta">{{section.settings.btntext}}</a>
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
-</div>
 
-<style>
-  .rel-mode {
+    <style>
+        .rel-mode {
     position: relative;
     height: 100vh;
     overflow: hidden;
   }
-
-  .intro-wrap {
-    pointer-events: none;
-  }
-
-  .intro-wrap .dvideo {
+  .intro-wrap{
+pointer-events:none;
+    }
+  .intro-wrap video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    position: absolute;
-    pointer-events: none;
+    position:absolute;
+    pointer-events:none;
   }
-
-  .intro-wrap .mvideo {
-    display: none !important;
-  }
-
-  .hero-inner {
-    padding-bottom: 80px;
-  }
-
+  .hero-inner{
+    padding-bottom:80px;
+}
   .hero {
     position: absolute;
     top: 0;
@@ -61,49 +50,45 @@
     justify-content: flex-start;
     align-items: center;
     background: transparent;
-    opacity: 1;
-    padding-block-end: 64px;
-    padding-block-start: 64px;
-    padding-bottom: 64px;
-    padding-inline-end: 128px;
-    padding-inline-start: 128px;
-    padding-left: 128px;
-    padding-right: 128px;
-    padding-top: 64px;
-
+    opacity: 1; 
+    padding-block-end:64px;
+    padding-block-start:64px;
+    padding-bottom:64px;
+    padding-inline-end:128px;
+    padding-inline-start:128px;
+    padding-left:128px;
+    padding-right:128px;
+    padding-top:64px;
+   
   }
-
   .hero-inner h1 {
     font-size: 75px;
     font-family: 'area_normalthin';
-    font-weight: 300;
-    margin: 0 0 20px 0;
-    line-height: 82px;
-    color: #4A4A4A;
-  }
-
-  .hero-inner h1 span {
-    display: block;
-    opacity: 0;
+    font-weight:300;
+     margin:0 0 20px 0;
+     line-height:82px;
+     color:#4A4A4A;
+}
+  .hero-inner h1 span{
+    display:block;
+    opacity:0;
     filter: blur(10px);
-    transform: translateY(50px);
-  }
-
-  .hero-inner h1 span em {
+     transform: translateY(50px);
+}
+.hero-inner h1 span em{
     font-family: 'area_normalregular';
-    font-weight: 400;
-  }
-
+    font-weight:400;
+}
   .eyebrow {
     color: #DCA1A1;
     font-size: 18px;
     margin-bottom: 10px;
     letter-spacing: 1px;
-    transform: translateY(50px);
-    filter: blur(10px);
-    opacity: 0;
-    font-weight: bold;
-    margin-bottom: 24px;
+     transform: translateY(50px);
+  filter: blur(10px);
+  opacity:0;
+  font-weight:bold;
+  margin-bottom:24px;
   }
 
 
@@ -117,127 +102,127 @@
     font-size: 16px;
     transition: background 0.3s;
     transform: translateY(50px);
-    filter: blur(10px);
-    opacity: 0;
+  filter: blur(10px);
+  opacity:0;
   }
 
   .cta:hover {
     background: #f6339a;
   }
-
+  .hero-image{
+    display:none;
+  }
   @media screen and (max-width: 1600px) {
-    .hero-inner h1 {
-      font-size: 64px;
-      line-height: 69px;
-      margin-bottom: 15px;
+    .hero-inner h1{
+        font-size:64px;
+        line-height:69px;
+        margin-bottom:15px;
     }
-
-    .eyebrow {
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
+.eyebrow {
+    font-size: 14px;
+    margin-bottom: 10px;
   }
 
+  }
   @media screen and (max-width: 1440px) {
-    .hero-inner h1 {
-      font-size: 58px;
-      line-height: 62px;
-      margin-bottom: 15px;
-
+    .hero-inner h1{
+        font-size:58px;
+        line-height:62px;
+        margin-bottom:15px;
+      
     }
-
-    .eyebrow {
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
+.eyebrow {
+    font-size: 14px;
+    margin-bottom: 10px;
   }
 
-  @media screen and (max-width: 1366px) {
-    .hero-inner h1 {
-      font-size: 54px;
-      line-height: 59px;
-      margin-bottom: 15px;
-    }
-
-    .eyebrow {
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
-    .cta {
-      font-size: 14px;
-    }
   }
-
+   @media screen and (max-width: 1366px) {
+    .hero-inner h1{
+        font-size:54px;
+        line-height:59px;
+        margin-bottom:15px;
+    }
+.eyebrow {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+ .cta{
+    font-size:14px;
+}
+  }
   @media screen and (max-width: 1024px) {
-    .intro-wrap .dvideo {
-      display: none !important;
+    .intro-wrap video {
+      opacity:0;
     }
-
-    .intro-wrap .mvideo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      position: absolute;
-      pointer-events: none;
+       .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: bottom;
+        position: absolute;
+        top: 0;
     }
-
-    .hero {
-
-      padding-block-end: 0;
-      padding-block-start: 0px;
-      padding-bottom: 0;
-      padding-inline-end: 0;
-      padding-inline-start: 0;
-      padding-left: 0;
-      padding-right: 0;
-      padding-top: 140px;
-      text-align: center;
-      display: block;
-    }
-
-    .hero-inner h1 {
-      font-size: 32px;
-      font-family: 'area_normalregular';
-      font-weight: 400;
-      margin: 0;
-      line-height: 100%;
-      margin-bottom: 15px
-    }
-
-    .eyebrow {
-      color: #000;
-      font-size: 12px;
-    }
-
-    .rel-mode {
+  .hero {
+   
+    padding-block-end: 0;
+        padding-block-start: 0px;
+        padding-bottom: 0;
+        padding-inline-end: 0;
+        padding-inline-start: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 140px;
+        text-align: center;
+        display: block;
+  }
+  .hero-inner h1 {
+    font-size: 32px;
+     font-family: 'area_normalregular';
+        font-weight:400;
+     margin:0;
+     line-height:100%;
+     margin-bottom:15px
+}
+.eyebrow{
+  color:#000;
+  font-size:12px;
+}
+ .hero-image{
+    display:block;
+  }
+  .rel-mode{
       background: #b9bfc4;
-    }
   }
-
+}
   @media screen and (max-width: 400px) {
-    .hero {
-      padding-top: 100px;
+.hero {
+  padding-top:100px;
+}
+    .hero-image {
+        width: 100%;
+        height: 90%;
+        object-fit: cover;
+        object-position: bottom;
+        position: absolute;
+        bottom: 0;
+        top:auto;
     }
-
-    .cta {
-      margin-top: 10px;
+    .cta{
+      margin-top:10px;
     }
   }
-</style>
+    </style>
 <script>
-  const introWrap = document.getElementById('introWrap');
-  const hero = document.getElementById('hero');
-  const video = document.getElementById('introVideo');
+        const introWrap = document.getElementById('introWrap');
+        const hero = document.getElementById('hero');
+        const video = document.getElementById('introVideo');
+      
+        let heroShown = false;
 
-  let heroShown = false;
-
-  function showHero() {
-    if (heroShown) return;
-    heroShown = true;
+    function showHero(){
+      if (heroShown) return;
+      heroShown = true;
 
     gsap.to(".hero-inner .eyebrow", {
       opacity: 1,
@@ -248,7 +233,7 @@
       stagger: 0.2, // each line animates one after another
       delay: 0.2 // same logic as your Framer Motion code
     });
-    gsap.to(".hero-inner h1 span", {
+       gsap.to(".hero-inner h1 span", {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
@@ -257,7 +242,7 @@
       stagger: 0.2, // each line animates one after another
       delay: 0.5 // same logic as your Framer Motion code
     });
-    gsap.to(".hero-inner h1 span.second-line", {
+         gsap.to(".hero-inner h1 span.second-line", {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
@@ -266,7 +251,7 @@
       stagger: 0.2, // each line animates one after another
       delay: 0.6 // same logic as your Framer Motion code
     });
-    gsap.to(".hero-inner .cta", {
+        gsap.to(".hero-inner .cta", {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
@@ -276,79 +261,79 @@
       delay: 0.7 // same logic as your Framer Motion code
     });
   }
+ 
 
+if (window.innerWidth <= 1024) {
+  // Mobile – video is hidden, show immediately
+  showHero();
+} else {
+  // Desktop / Tablet – wait until 10s before video ends
+  video.addEventListener('loadedmetadata', function() {
+    const videoDuration = video.duration;
+    const showTime = Math.max(0, videoDuration - 10.0);
 
-  if (window.innerWidth <= 1024) {
-    // Mobile – video is hidden, show immediately
-    showHero();
-  } else {
-    // Desktop / Tablet – wait until 10s before video ends
-    video.addEventListener('loadedmetadata', function () {
-      const videoDuration = video.duration;
-      const showTime = Math.max(0, videoDuration - 10.0);
-
-      video.addEventListener('timeupdate', () => {
-        if (video.currentTime >= showTime && !heroShown) {
-          showHero();
-        }
-      });
-    });
-  }
-
-
-  // On video end → hide video bg if needed
-  video.addEventListener('ended', () => {
-    gsap.to(introWrap, {
-      duration: 1,
-      onComplete: () => {
-        introWrap.style.display = "block";
+    video.addEventListener('timeupdate', () => {
+      if (video.currentTime >= showTime && !heroShown) {
+        showHero();
       }
     });
   });
-</script>
-{% schema %}
-{
-"name": "Intro",
-"class": "video-intro",
-"tag": "section",
-"settings": [
-{
-"type": "url",
-"id": "vurl",
-"label": "Video Url",
-"info": "Please upload video on file section and copy url from there."
-},
-{
-"type": "url",
-"id": "vmurl",
-"label": "Mobile Video Url",
-"info": "Please upload video for mobile which will be visible in place of video"
-},
-{
-"type": "text",
-"id": "eyebrotext",
-"label": "Eyebrow Text"
-},
-{
-"type": "textarea",
-"id": "title",
-"label": "Title"
-},
-{
-"type": "text",
-"id": "btntext",
-"label": "Button Text"
-},
-{
-"type": "url",
-"id": "btnurl",
-"label": "Button Url"
 }
-],
-"presets": [
+
+
+    // On video end → hide video bg if needed
+    video.addEventListener('ended', () => {
+      gsap.to(introWrap, {
+        duration: 1,
+        onComplete: () => {
+          introWrap.style.display = "block";
+        }
+      });
+    });
+      </script>
+    {% schema %}
 {
-"name": "Intro"
-}
-]
+  "name": "Intro",
+  "class": "video-intro",
+  "tag": "section",
+  "settings": [
+     {
+      "type": "url",
+      "id": "vurl",
+      "label": "Video Url",
+      "info": "Please upload video on file section and copy url from there."
+    },
+    {
+      "type": "image_picker",
+      "id": "mimage",
+      "label": "Mobile Image",
+      "info": "Please upload image for mobile which will be visible in place of video"
+    },
+    {
+      "type": "text",
+      "id": "eyebrotext",
+      "label": "Eyebrow Text"
+    },
+     {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "btntext",
+      "label": "Button Text"
+    },
+     {
+      "type": "url",
+      "id": "btnurl",
+      "label": "Button Url"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Intro"
+    }
+  ]
 }
 {% endschema %}
