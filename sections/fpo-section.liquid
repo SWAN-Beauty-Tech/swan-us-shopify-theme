@@ -1,0 +1,180 @@
+<div class="fpo-section-wrapper">
+  <section class="fpo-section">
+    <!-- Mobile only text content -->
+    <div class="fpo-mobile-content">
+      <div>
+        <h2 class="fpo-title">
+          {{ section.settings.title_line_1 }}
+          <br />
+          {{ section.settings.title_line_2 }}
+        </h2>
+        <p class="fpo-subtitle">{{ section.settings.subtitle }}</p>
+      </div>
+    </div>
+
+    <!-- Main content with image -->
+    <div class="fpo-content">
+      <div class="fpo-image-wrapper">
+        {% if section.settings.image != blank %}
+          <img 
+            src="{{ section.settings.image | image_url: width: 2000 }}"
+            alt="{{ section.settings.image.alt | default: section.settings.title_line_1 }}"
+            class="fpo-image"
+            loading="lazy"
+          />
+        {% else %}
+          <img 
+            src="{{ 'placeholder.svg' | asset_url }}"
+            alt="Placeholder"
+            class="fpo-image"
+          />
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .fpo-section-wrapper {
+    width: 100%;
+    height: 100dvh;
+    padding: 0 24px;
+    margin-top: 24px;
+  }
+
+  .fpo-section {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  /* Mobile only text content */
+  .fpo-mobile-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 16px 24px 24px;
+    position: relative;
+    z-index: 50;
+  }
+
+  .fpo-title {
+    font-size: 1.875rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    color: #6b7280;
+    text-align: center;
+  }
+
+  .fpo-subtitle {
+    font-size: 1.25rem;
+    color: #6b7280;
+    font-style: italic;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  /* Main content */
+  .fpo-content {
+    width: 100%;
+    height: 80vh;
+    text-align: center;
+    background-color: {{ section.settings.background_color }};
+    border-radius: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fpo-image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  .fpo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Desktop styles */
+  @media (min-width: 768px) {
+    .fpo-section-wrapper {
+      height: 100dvh;
+      padding-bottom: 24px;
+    }
+
+    .fpo-mobile-content {
+      display: none;
+    }
+
+    .fpo-content {
+      height: 100%;
+    }
+
+    .fpo-title {
+      font-size: 3rem;
+    }
+
+    .fpo-subtitle {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .fpo-title {
+      font-size: 3.75rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "FPO Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_line_1",
+      "label": "Title Line 1",
+      "default": "Intelligence in its"
+    },
+    {
+      "type": "text",
+      "id": "title_line_2",
+      "label": "Title Line 2",
+      "default": "best light"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Smart never looked so good"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ec4899"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FPO Section"
+    }
+  ]
+}
+{% endschema %}
