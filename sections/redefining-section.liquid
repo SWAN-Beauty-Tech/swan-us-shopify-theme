@@ -1,0 +1,183 @@
+<style>
+  .redefining-section {
+    width: 100%;
+    height: 60vh;
+    padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .redefining-section {
+      padding-top: 0;
+    }
+  }
+
+  .redefining-container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: {{ section.settings.background_color }};
+    border-radius: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .redefining-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .redefining-title {
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 100;
+    line-height: 1;
+    filter: blur(32px);
+  }
+
+  @media (max-width: 768px) {
+    .redefining-title {
+      font-size: 1.125rem;
+    }
+  }
+
+  .redefining-description {
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.5;
+    filter: blur(32px);
+  }
+
+  .redefining-description br {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .redefining-description br {
+      display: none;
+    }
+  }
+
+  .redefining-cta {
+    filter: blur(32px);
+  }
+
+  .redefining-button {
+    display: inline-block;
+    padding: 1rem 1.75rem;
+    border-radius: 9999px;
+    background-color: {{ section.settings.button_color }};
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .redefining-button:hover {
+    background-color: {{ section.settings.button_color }}99;
+  }
+</style>
+
+<section class="redefining-section">
+  <div class="redefining-container">
+    <div class="redefining-content">
+      <h1 class="redefining-title" data-redefining-title>
+        {{ section.settings.title }}
+      </h1>
+      <p class="redefining-description" data-redefining-description>
+        {{ section.settings.description | newline_to_br }}
+      </p>
+      <div class="redefining-cta" data-redefining-cta>
+        <a 
+          href="{{ section.settings.button_link }}" 
+          class="redefining-button"
+          aria-label="{{ section.settings.button_text }}"
+        >
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    const title = document.querySelector('[data-redefining-title]');
+    const description = document.querySelector('[data-redefining-description]');
+    const cta = document.querySelector('[data-redefining-cta]');
+    
+    if (title && description && cta) {
+      gsap.to([title, description, cta], {
+        scrollTrigger: {
+          trigger: title,
+          scrub: 1,
+          start: "top 100%",
+          end: "bottom 70%",
+        },
+        filter: "blur(0px)",
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Redefining Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Redefining how beauty connects."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "SWAN unites creators, brands, and retailers through an AI-powered smart mirror\nand community platform—transforming personalized beauty experiences\nand offering tools to grow reach, engagement, and impact."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Let's Connect"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#434043"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Color",
+      "default": "#ec4899"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Redefining Section"
+    }
+  ]
+}
+{% endschema %}
