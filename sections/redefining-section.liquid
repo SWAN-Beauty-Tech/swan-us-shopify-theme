@@ -1,7 +1,7 @@
 <section class="redefining-section" id="redefiningSection">
   <div class="redefining-container">
     <div class="redefining-content">
-      <h1 class="redefining-title">{{ section.settings.title }}</h1>
+      <h1 class="redefining-title">{{ section.settings.title_line_1 }}<br class="redefining-title-br" />{{ section.settings.title_line_2 }}</h1>
       <p class="redefining-description">{{ section.settings.description }}</p>
       <div class="redefining-cta-wrap">
         <a href="{{ section.settings.cta_link }}" class="redefining-cta">{{ section.settings.cta_text }}</a>
@@ -91,6 +91,10 @@
     .redefining-title {
       font-size: 48px;
     }
+
+    .redefining-title-br {
+      display: inline;
+    }
   }
 
   /* Mobile styles */
@@ -100,6 +104,10 @@
     }
 
     .redefining-description br {
+      display: none;
+    }
+
+    .redefining-title-br {
       display: none;
     }
   }
@@ -146,9 +154,15 @@
   "settings": [
     {
       "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Redefining how beauty connects."
+      "id": "title_line_1",
+      "label": "Title Line 1",
+      "default": "Redefining"
+    },
+    {
+      "type": "text",
+      "id": "title_line_2",
+      "label": "Title Line 2",
+      "default": "Elegance"
     },
     {
       "type": "textarea",
