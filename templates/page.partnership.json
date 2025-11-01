@@ -38,13 +38,28 @@
         "title_line_2": "best light",
         "subtitle": "Smart never looked so good",
         "image": "shopify://shop_images/p-2.jpg",
+        "video": "",
+        "show_video": false,
         "background_color": "#ec4899"
+      }
+    },
+    "redefining_section_x8wPRT": {
+      "type": "redefining-section",
+      "name": "Redefining Section",
+      "settings": {
+        "title": "Redefining how beauty connects.",
+        "description": "SWAN unites creators, brands, and retailers through an AI-powered smart mirror\nand community platform—transforming personalized beauty experiences\nand offering tools to grow reach, engagement, and impact.",
+        "button_text": "Let's Connect",
+        "button_link": "/",
+        "background_color": "#434043",
+        "button_color": "#ec4899"
       }
     }
   },
   "order": [
     "main",
     "partnership_hero_BkXRiU",
-    "fpo_section_nTpeJb"
+    "fpo_section_nTpeJb",
+    "redefining_section_x8wPRT"
   ]
 }
