@@ -1,0 +1,147 @@
+{% comment %}
+  Hero Section - Partnership
+  Converted from React to Shopify Liquid
+{% endcomment %}
+
+<style>
+  .hero-animate {
+    animation: fadeInUp 0.8s ease-in-out forwards;
+    opacity: 0;
+  }
+  
+  .hero-animate-delay-1 {
+    animation-delay: 0.4s;
+  }
+  
+  .hero-animate-delay-2 {
+    animation-delay: 0.6s;
+  }
+  
+  .hero-animate-delay-3 {
+    animation-delay: 1.0s;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+      filter: blur(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+  
+  .hero-cta-button {
+    transition: background-color 0.3s ease;
+  }
+  
+  .hero-cta-button:hover {
+    background-color: rgba(var(--primary-pink-rgb), 0.6);
+  }
+</style>
+
+<section class="relative h-[150dvh] max-md:h-[80vh] overflow-hidden px-0 md:px-28 max-md:flex max-md:flex-col max-md:items-center max-md:justify-center max-md:pt-6">
+  {% comment %} Hero Image {% endcomment %}
+  {% if section.settings.hero_image %}
+    <img
+      class="hero-animate pointer-events-none md:absolute md:inset-y-0 right-0 h-full w-full object-cover max-md:bottom-0 max-md:h-[50%] max-md:object-cover"
+      src="{{ section.settings.hero_image | image_url: width: 2000 }}"
+      alt="{{ section.settings.hero_image.alt | default: section.settings.image_alt }}"
+      loading="eager"
+      width="{{ section.settings.hero_image.width }}"
+      height="{{ section.settings.hero_image.height }}"
+    >
+  {% endif %}
+
+  {% comment %} Content Section {% endcomment %}
+  <div class="md:absolute left-6 md:left-1/2 md:-translate-x-1/2 max-md:top-24 md:top-36 z-20 flex flex-col items-center justify-center max-md:px-6 max-md:mt-6">
+    {% comment %} Heading {% endcomment %}
+    {% if section.settings.heading_line_1 or section.settings.heading_line_2 %}
+      <h1 class="hero-animate hero-animate-delay-1 font-thin text-white leading-[1.2] tracking-[-0.01em] max-w-[16ch] text-[clamp(32px,4vw,96px)] text-center">
+        {% if section.settings.heading_line_1 != blank %}
+          <span class="block">{{ section.settings.heading_line_1 }}</span>
+        {% endif %}
+        {% if section.settings.heading_line_2 != blank %}
+          <span class="block italic font-normal">{{ section.settings.heading_line_2 }}</span>
+        {% endif %}
+      </h1>
+    {% endif %}
+
+    {% comment %} Description {% endcomment %}
+    {% if section.settings.description != blank %}
+      <p class="hero-animate hero-animate-delay-2 mt-4 text-white leading-[1.45] text-xs md:text-lg text-center">
+        {{ section.settings.description }}
+      </p>
+    {% endif %}
+
+    {% comment %} CTA Button {% endcomment %}
+    {% if section.settings.cta_text != blank %}
+      <div class="hero-animate hero-animate-delay-3 mt-6">
+        <a 
+          href="{{ section.settings.cta_link }}"
+          class="hero-cta-button inline-block py-4 px-7 rounded-full bg-primary-pink text-white text-sm font-medium tracking-wide uppercase"
+          aria-label="{{ section.settings.cta_text }}"
+        >
+          {{ section.settings.cta_text }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Partnership",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text",
+      "default": "SWAN Smart Mirror"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading Line 1",
+      "default": "Powering the Future of"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading Line 2 (Italic)",
+      "default": "Beauty, Together."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Join the ecosystem where creators, brands, and retailers connect through intelligent beauty technology."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "BECOME A PARTNER"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link",
+      "default": "/"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Partnership"
+    }
+  ]
+}
+{% endschema %}
