@@ -1,4 +1,4 @@
-{{ 'section-hero.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-page.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -12,198 +12,32 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-
-  .hero-section-{{ section.id }} {
-    position: relative;
-    height: 150vh;
-    overflow: hidden;
-    padding: 0 7rem;
-  }
-
-  @media screen and (max-width: 749px) {
-    .hero-section-{{ section.id }} {
-      height: 80vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem 1rem 0;
-    }
-  }
-
-  .hero-image-{{ section.id }} {
-    position: absolute;
-    inset: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    pointer-events: none;
-  }
-
-  @media screen and (max-width: 749px) {
-    .hero-image-{{ section.id }} {
-      bottom: 0;
-      height: 50%;
-      object-fit: cover;
-    }
-  }
-
-  .hero-content-{{ section.id }} {
-    position: absolute;
-    left: 50%;
-    top: 9rem;
-    transform: translateX(-50%);
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @media screen and (max-width: 749px) {
-    .hero-content-{{ section.id }} {
-      top: 6rem;
-      padding: 0 1.5rem;
-      margin-top: 1.5rem;
-    }
-  }
-
-  .hero-title-{{ section.id }} {
-    font-weight: 300;
-    color: white;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    max-width: 16ch;
-    font-size: clamp(32px, 4vw, 96px);
-    text-align: center;
-  }
-
-  .hero-title-{{ section.id }} .italic {
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  .hero-description-{{ section.id }} {
-    margin-top: 1rem;
-    color: white;
-    line-height: 1.45;
-    font-size: 1.125rem;
-    text-align: center;
-  }
-
-  @media screen and (max-width: 749px) {
-    .hero-description-{{ section.id }} {
-      font-size: 0.75rem;
-    }
-  }
-
-  .hero-cta-{{ section.id }} {
-    margin-top: 1.5rem;
-  }
-
-  .hero-button-{{ section.id }} {
-    padding: 1rem 1.75rem;
-    border-radius: 9999px;
-    background-color: {{ section.settings.button_color }};
-    color: white;
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease;
-  }
-
-  .hero-button-{{ section.id }}:hover {
-    background-color: {{ section.settings.button_color | color_darken: 10 }};
-  }
-
-  /* Animaciones CSS simples */
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-image-{{ section.id }},
-    .hero-title-{{ section.id }},
-    .hero-description-{{ section.id }},
-    .hero-cta-{{ section.id }} {
-      animation: fadeInUp 0.8s ease-out forwards;
-      opacity: 0;
-    }
-
-    .hero-title-{{ section.id }} {
-      animation-delay: 0.4s;
-    }
-
-    .hero-description-{{ section.id }} {
-      animation-delay: 0.6s;
-    }
-
-    .hero-cta-{{ section.id }} {
-      animation-delay: 1s;
-    }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 {%- endstyle -%}
 
-<section class="hero-section-{{ section.id }} color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding">
-  {%- if section.settings.image != blank -%}
-    <img
-      src="{{ section.settings.image | image_url: width: 2000 }}"
-      srcset="{{ section.settings.image | image_url: width: 750 }} 750w,
-              {{ section.settings.image | image_url: width: 1500 }} 1500w,
-              {{ section.settings.image | image_url: width: 2000 }} 2000w"
-      sizes="100vw"
-      alt="{{ section.settings.image.alt | escape }}"
-      class="hero-image-{{ section.id }}"
-      loading="eager"
-      width="{{ section.settings.image.width }}"
-      height="{{ section.settings.image.height }}"
-    >
-  {%- else -%}
-    <div class="hero-image-{{ section.id }}" style="background-color: #cccccc;"></div>
-  {%- endif -%}
-
-  <div class="hero-content-{{ section.id }}">
-    {%- if section.settings.heading != blank -%}
-      <h1 class="hero-title-{{ section.id }}">
-        <span class="block">{{ section.settings.heading_line_1 }}</span>
-        <span class="block italic">{{ section.settings.heading_line_2 }}</span>
-      </h1>
-    {%- endif -%}
-
-    {%- if section.settings.description != blank -%}
-      <p class="hero-description-{{ section.id }}">
-        {{ section.settings.description }}
-      </p>
-    {%- endif -%}
-
-    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
-      <div class="hero-cta-{{ section.id }}">
-        <a 
-          href="{{ section.settings.button_link }}" 
-          class="hero-button-{{ section.id }}"
-          aria-label="{{ section.settings.button_label | escape }}"
-        >
-          {{ section.settings.button_label }}
-        </a>
-      </div>
-    {%- endif -%}
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width page-width--narrow section-{{ section.id }}-padding">
+    <h2 class="page-title {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {%- if section.settings.page.title != blank -%}
+        {{ section.settings.page.title | escape }}
+      {%- else -%}
+        {{ 'sections.page.title' | t }}
+      {%- endif -%}
+    </h2>
+    <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {%- if section.settings.page.content != blank -%}
+        {{ section.settings.page.content }}
+      {%- else -%}
+        <div class="page-placeholder-wrapper placeholder">
+          {{ 'page' | placeholder_svg_tag: 'page-placeholder' }}
+        </div>
+      {%- endif -%}
+    </div>
   </div>
-</section>
+</div>
 
 {% schema %}
 {
-  "name": "Hero Section",
+  "name": "t:sections.page.name",
   "tag": "section",
   "class": "section",
   "disabled_on": {
@@ -211,54 +45,47 @@
   },
   "settings": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Hero Image"
+      "type": "page",
+      "id": "page",
+      "label": "t:sections.page.settings.page.label"
     },
     {
-      "type": "text",
-      "id": "heading_line_1",
-      "label": "Heading Line 1",
-      "default": "Powering the Future of"
-    },
-    {
-      "type": "text",
-      "id": "heading_line_2",
-      "label": "Heading Line 2 (Italic)",
-      "default": "Beauty, Together."
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Join the ecosystem where creators, brands, and retailers connect through intelligent beauty technology."
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button Label",
-      "default": "BECOME A PARTNER"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button Link"
-    },
-    {
-      "type": "color",
-      "id": "button_color",
-      "label": "Button Color",
-      "default": "#FF1493"
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color Scheme",
+      "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     },
     {
       "type": "header",
-      "content": "Section Padding"
+      "content": "t:sections.all.padding.section_padding_heading"
     },
     {
       "type": "range",
@@ -267,8 +94,8 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Padding Top",
-      "default": 0
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
     },
     {
       "type": "range",
@@ -277,13 +104,13 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Padding Bottom",
-      "default": 0
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
     }
   ],
   "presets": [
     {
-      "name": "Hero Section"
+      "name": "t:sections.page.presets.name"
     }
   ]
 }
