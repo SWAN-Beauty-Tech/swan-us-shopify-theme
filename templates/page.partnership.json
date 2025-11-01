@@ -17,7 +17,7 @@
         "padding_bottom": 28
       }
     },
-    "partnership_hero_F8HzCN": {
+    "partnership_hero_BkXRiU": {
       "type": "partnership-hero",
       "name": "Hero Partnership",
       "settings": {
@@ -32,6 +32,6 @@
   },
   "order": [
     "main",
-    "partnership_hero_F8HzCN"
+    "partnership_hero_BkXRiU"
   ]
 }
