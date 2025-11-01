@@ -29,10 +29,22 @@
         "cta_text": "BECOME A PARTNER",
         "cta_link": "/"
       }
+    },
+    "fpo_section_nTpeJb": {
+      "type": "fpo-section",
+      "name": "FPO Section",
+      "settings": {
+        "title_line_1": "Intelligence in its",
+        "title_line_2": "best light",
+        "subtitle": "Smart never looked so good",
+        "image": "shopify://shop_images/p-2.jpg",
+        "background_color": "#ec4899"
+      }
     }
   },
   "order": [
     "main",
-    "partnership_hero_BkXRiU"
+    "partnership_hero_BkXRiU",
+    "fpo_section_nTpeJb"
   ]
 }
