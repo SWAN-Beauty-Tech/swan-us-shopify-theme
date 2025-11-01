@@ -8,18 +8,30 @@
  * ------------------------------------------------------------
  */
 {
-    "sections": {
-      "main": {
-        "type": "main-page",
-        "disabled": true,
-        "settings": {
-          "padding_top": 28,
-          "padding_bottom": 28
-        }
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
       }
     },
-    "order": [
-      "main"
-    ]
-  }
-  
+    "partnership_hero_F8HzCN": {
+      "type": "partnership-hero",
+      "name": "Hero Partnership",
+      "settings": {
+        "image_alt": "SWAN Smart Mirror",
+        "heading_line_1": "Powering the Future of",
+        "heading_line_2": "Beauty, Together.",
+        "description": "Join the ecosystem where creators, brands, and retailers connect through intelligent beauty technology.",
+        "cta_text": "BECOME A PARTNER",
+        "cta_link": "/"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "partnership_hero_F8HzCN"
+  ]
+}
