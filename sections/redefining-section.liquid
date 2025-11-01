@@ -1,24 +1,30 @@
+<section class="redefining-section" id="redefiningSection">
+  <div class="redefining-container">
+    <div class="redefining-content">
+      <h1 class="redefining-title">{{ section.settings.title }}</h1>
+      <p class="redefining-description">{{ section.settings.description }}</p>
+      <div class="redefining-cta-wrap">
+        <a href="{{ section.settings.cta_link }}" class="redefining-cta">{{ section.settings.cta_text }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <style>
   .redefining-section {
     width: 100%;
     height: 60vh;
-    padding-bottom: 1.5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  @media (max-width: 768px) {
-    .redefining-section {
-      padding-top: 0;
-    }
+    padding-bottom: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .redefining-container {
     width: 100%;
     height: 100%;
     text-align: center;
-    background-color: {{ section.settings.background_color }};
-    border-radius: 2.5rem;
+    background-color: #434043;
+    border-radius: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,98 +35,87 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 32px;
+    padding: 0 24px;
   }
 
   .redefining-title {
     color: #ffffff;
-    font-size: 3rem;
+    font-size: 18px;
     font-weight: 100;
     line-height: 1;
+    margin: 0;
     filter: blur(32px);
-  }
-
-  @media (max-width: 768px) {
-    .redefining-title {
-      font-size: 1.125rem;
-    }
+    opacity: 0;
   }
 
   .redefining-description {
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 16px;
     line-height: 1.5;
+    margin: 0;
     filter: blur(32px);
+    opacity: 0;
   }
 
   .redefining-description br {
     display: block;
   }
 
-  @media (max-width: 768px) {
+  .redefining-cta-wrap {
+    filter: blur(32px);
+    opacity: 0;
+  }
+
+  /* CTA button matching hero section style */
+  .redefining-cta {
+    display: inline-block;
+    background: #e7aeb1;
+    padding: 16px 28px;
+    border-radius: 9999px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+  }
+
+  .redefining-cta:hover {
+    background: rgba(231, 174, 177, 0.6);
+  }
+
+  /* Desktop styles */
+  @media screen and (min-width: 769px) {
+    .redefining-title {
+      font-size: 48px;
+    }
+  }
+
+  /* Mobile styles */
+  @media screen and (max-width: 768px) {
+    .redefining-section {
+      padding-top: 0;
+    }
+
     .redefining-description br {
       display: none;
     }
   }
-
-  .redefining-cta {
-    filter: blur(32px);
-  }
-
-  .redefining-button {
-    display: inline-block;
-    padding: 1rem 1.75rem;
-    border-radius: 9999px;
-    background-color: {{ section.settings.button_color }};
-    color: #ffffff;
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-
-  .redefining-button:hover {
-    background-color: {{ section.settings.button_color }}99;
-  }
 </style>
-
-<section class="redefining-section">
-  <div class="redefining-container">
-    <div class="redefining-content">
-      <h1 class="redefining-title" data-redefining-title>
-        {{ section.settings.title }}
-      </h1>
-      <p class="redefining-description" data-redefining-description>
-        {{ section.settings.description | newline_to_br }}
-      </p>
-      <div class="redefining-cta" data-redefining-cta>
-        <a 
-          href="{{ section.settings.button_link }}" 
-          class="redefining-button"
-          aria-label="{{ section.settings.button_text }}"
-        >
-          {{ section.settings.button_text }}
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    gsap.registerPlugin(ScrollTrigger);
-    
-    const title = document.querySelector('[data-redefining-title]');
-    const description = document.querySelector('[data-redefining-description]');
-    const cta = document.querySelector('[data-redefining-cta]');
-    
-    if (title && description && cta) {
-      gsap.to([title, description, cta], {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const title = document.querySelector('.redefining-title');
+      const description = document.querySelector('.redefining-description');
+      const ctaWrap = document.querySelector('.redefining-cta-wrap');
+
+      // Animate all elements together with ScrollTrigger
+      gsap.to([title, description, ctaWrap], {
         scrollTrigger: {
           trigger: title,
           scrub: 1,
@@ -128,6 +123,16 @@
           end: "bottom 70%",
         },
         filter: "blur(0px)",
+        opacity: 1,
+        duration: 1,
+        ease: "none"
+      });
+    } else {
+      // Fallback if GSAP is not loaded
+      const elements = document.querySelectorAll('.redefining-title, .redefining-description, .redefining-cta-wrap');
+      elements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.filter = 'blur(0)';
       });
     }
   });
@@ -136,6 +141,8 @@
 {% schema %}
 {
   "name": "Redefining Section",
+  "class": "redefining-section-wrapper",
+  "tag": "section",
   "settings": [
     {
       "type": "text",
@@ -147,31 +154,19 @@
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "SWAN unites creators, brands, and retailers through an AI-powered smart mirror\nand community platform—transforming personalized beauty experiences\nand offering tools to grow reach, engagement, and impact."
+      "default": "SWAN unites creators, brands, and retailers through an AI-powered smart mirror and community platform—transforming personalized beauty experiences and offering tools to grow reach, engagement, and impact."
     },
     {
       "type": "text",
-      "id": "button_text",
+      "id": "cta_text",
       "label": "Button Text",
       "default": "Let's Connect"
     },
     {
       "type": "url",
-      "id": "button_link",
-      "label": "Button Link",
+      "id": "cta_link",
+      "label": "Button URL",
       "default": "/"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#434043"
-    },
-    {
-      "type": "color",
-      "id": "button_color",
-      "label": "Button Color",
-      "default": "#ec4899"
     }
   ],
   "presets": [
