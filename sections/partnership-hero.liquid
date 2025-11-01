@@ -11,31 +11,33 @@
     {% endif %}
   </div>
   <section class="hero-partnership" id="heroPartnership">
-    <div class="hero-partnership-inner">
-      <div class="hero-partnership-content">
-        <h1>
-          <span class="first-line">{{ section.settings.heading_line_1 }}</span>
-          <span class="second-line"><em>{{ section.settings.heading_line_2 }}</em></span>
-        </h1>
-        <p class="hero-description">{{ section.settings.description }}</p>
-        <a href="{{ section.settings.cta_link }}" class="hero-cta">{{ section.settings.cta_text }}</a>
-      </div>
+    <div class="hero-partnership-content">
+      <h1>
+        <span class="first-line">{{ section.settings.heading_line_1 }}</span>
+        <span class="second-line"><em>{{ section.settings.heading_line_2 }}</em></span>
+      </h1>
+      <p class="hero-description">{{ section.settings.description }}</p>
+      <a href="{{ section.settings.cta_link }}" class="hero-cta">{{ section.settings.cta_text }}</a>
     </div>
   </section>
 </div>
 
 <style>
+  /* Updated container to match React code height and overflow */
   .rel-mode {
     position: relative;
     height: 150vh;
     overflow: hidden;
+    padding: 0;
   }
 
+  /* Image positioning to match React: absolute, full height, right side */
   .hero-image-wrap {
     pointer-events: none;
     position: absolute;
     top: 0;
     right: 0;
+    bottom: 0;
     width: 100%;
     height: 100%;
   }
@@ -49,50 +51,46 @@
     pointer-events: none;
   }
 
+  /* Section positioning to allow absolute content positioning */
   .hero-partnership {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    opacity: 1;
-    padding: 64px 128px;
+    padding: 0 112px;
   }
 
-  .hero-partnership-inner {
-    max-width: 1400px;
-    width: 100%;
-  }
-
+  /* Content positioning: absolute, centered horizontally, top-36 (144px) */
   .hero-partnership-content {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 144px;
+    z-index: 20;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    justify-content: center;
   }
 
-  .hero-partnership-inner h1 {
-    font-size: 96px;
+  .hero-partnership h1 {
+    font-size: clamp(32px, 4vw, 96px);
     font-weight: 300;
-    margin: 0 0 20px 0;
+    margin: 0 0 16px 0;
     line-height: 1.2;
     color: #ffffff;
     letter-spacing: -0.01em;
     max-width: 16ch;
+    text-align: center;
   }
 
-  .hero-partnership-inner h1 span {
+  .hero-partnership h1 span {
     display: block;
     opacity: 0;
     filter: blur(10px);
     transform: translateY(50px);
   }
 
-  .hero-partnership-inner h1 span.second-line em {
+  .hero-partnership h1 span.second-line em {
     font-style: italic;
     font-weight: 400;
   }
@@ -100,12 +98,17 @@
   .hero-description {
     color: #ffffff;
     font-size: 18px;
+    margin-top: 16px;
     margin-bottom: 24px;
     line-height: 1.45;
     transform: translateY(50px);
     filter: blur(10px);
     opacity: 0;
-    max-width: 600px;
+    text-align: center;
+  }
+
+  .hero-description br {
+    display: block;
   }
 
   .hero-cta {
@@ -123,77 +126,62 @@
     transform: translateY(50px);
     filter: blur(10px);
     opacity: 0;
+    margin-top: 24px;
   }
 
   .hero-cta:hover {
     background: rgba(231, 174, 177, 0.6);
   }
 
-  @media screen and (max-width: 1600px) {
-    .hero-partnership-inner h1 {
-      font-size: 80px;
-    }
-
-    .hero-description {
-      font-size: 16px;
-    }
-  }
-
-  @media screen and (max-width: 1440px) {
-    .hero-partnership-inner h1 {
-      font-size: 72px;
-    }
-
-    .hero-partnership {
-      padding: 64px 96px;
-    }
-  }
-
-  @media screen and (max-width: 1366px) {
-    .hero-partnership-inner h1 {
-      font-size: 64px;
-    }
-
-    .hero-description {
-      font-size: 16px;
-    }
-  }
-
-  @media screen and (max-width: 1024px) {
+  /* Mobile styles: 80vh height, content at top-24 (96px), image at bottom 50% height */
+  @media screen and (max-width: 768px) {
     .rel-mode {
       height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 24px;
     }
 
     .hero-partnership {
-      padding: 140px 24px 64px;
-      text-align: center;
+      padding: 0 24px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
     }
 
-    .hero-partnership-inner h1 {
-      font-size: 48px;
-      line-height: 1.2;
+    .hero-partnership-content {
+      position: relative;
+      left: auto;
+      transform: none;
+      top: 96px;
+      padding: 0 24px;
+      margin-top: 24px;
     }
 
-    .hero-description {
-      font-size: 14px;
-      margin-bottom: 20px;
+    .hero-image-wrap {
+      bottom: 0;
+      top: auto;
+      height: 50%;
     }
 
     .hero-image-wrap .hero-image {
-      object-position: center;
+      object-fit: cover;
+      height: 100%;
     }
-  }
 
-  @media screen and (max-width: 768px) {
-    .hero-partnership-inner h1 {
+    .hero-partnership h1 {
       font-size: 32px;
     }
 
     .hero-description {
       font-size: 12px;
+    }
+
+    .hero-description br {
+      display: none;
     }
 
     .hero-cta {
@@ -202,9 +190,17 @@
     }
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
     .hero-partnership {
-      padding-top: 100px;
+      padding: 0 64px;
+    }
+
+    .hero-partnership h1 {
+      font-size: 64px;
+    }
+
+    .hero-description {
+      font-size: 16px;
     }
   }
 </style>
@@ -215,7 +211,7 @@
     
     if (typeof gsap !== 'undefined') {
       // Animate heading first line
-      gsap.to(".hero-partnership-inner h1 span.first-line", {
+      gsap.to(".hero-partnership-content h1 span.first-line", {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
@@ -225,7 +221,7 @@
       });
 
       // Animate heading second line
-      gsap.to(".hero-partnership-inner h1 span.second-line", {
+      gsap.to(".hero-partnership-content h1 span.second-line", {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
@@ -235,7 +231,7 @@
       });
 
       // Animate description
-      gsap.to(".hero-partnership-inner .hero-description", {
+      gsap.to(".hero-partnership-content .hero-description", {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
@@ -245,7 +241,7 @@
       });
 
       // Animate CTA button
-      gsap.to(".hero-partnership-inner .hero-cta", {
+      gsap.to(".hero-partnership-content .hero-cta", {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
@@ -255,7 +251,7 @@
       });
     } else {
       // Fallback if GSAP is not loaded
-      const elements = document.querySelectorAll('.hero-partnership-inner h1 span, .hero-description, .hero-cta');
+      const elements = document.querySelectorAll('.hero-partnership-content h1 span, .hero-description, .hero-cta');
       elements.forEach(el => {
         el.style.opacity = '1';
         el.style.transform = 'translateY(0)';
