@@ -21,6 +21,7 @@
       "type": "partnership-hero",
       "name": "Hero Partnership",
       "settings": {
+        "hero_image": "shopify://shop_images/p-1.jpg",
         "image_alt": "SWAN Smart Mirror",
         "heading_line_1": "Powering the Future of",
         "heading_line_2": "Beauty, Together.",
