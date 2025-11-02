@@ -1,0 +1,109 @@
+<div id="future-section-{{ section.id }}" style="width: 100%; height: 60vh; padding-bottom: 24px; padding-left: 24px; padding-right: 24px;">
+  <div style="width: 100%; height: 100%; text-align: center; background-color: #e7aeb1; border-radius: 48px; display: flex; justify-content: center; align-items: center;">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;">
+      
+      <!-- Title -->
+      <h1 id="future-title-{{ section.id }}" style="color: white; font-size: 60px; font-weight: 100; line-height: 1; filter: blur(40px);">
+        {{ section.settings.title }}
+      </h1>
+      
+      <!-- Description -->
+      <p id="future-description-{{ section.id }}" style="font-size: 16px; color: white; line-height: 1.5; filter: blur(40px);">
+        {{ section.settings.description }}
+      </p>
+      
+      <!-- CTA Button -->
+      <div id="future-cta-{{ section.id }}" style="filter: blur(40px);">
+        <a 
+          href="{{ section.settings.cta_link }}" 
+          aria-label="{{ section.settings.cta_text }}"
+          id="future-cta-button-{{ section.id }}"
+          style="display: inline-block; padding: 16px 28px; border-radius: 9999px; background-color: #434043; color: white; font-size: 14px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; transition: background-color 0.3s ease;"
+        >
+          {{ section.settings.cta_text }}
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Responsive styles for mobile */
+  @media (max-width: 768px) {
+    #future-section-{{ section.id }} {
+      padding-top: 0;
+    }
+    
+    #future-title-{{ section.id }} {
+      font-size: 18px;
+    }
+  }
+  
+  /* Button hover effect */
+  #future-cta-button-{{ section.id }}:hover {
+    background-color: rgba(67, 64, 67, 0.6);
+  }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    const titleElement = document.getElementById('future-title-{{ section.id }}');
+    const descriptionElement = document.getElementById('future-description-{{ section.id }}');
+    const ctaElement = document.getElementById('future-cta-{{ section.id }}');
+    
+    if (titleElement && descriptionElement && ctaElement) {
+      gsap.to([titleElement, descriptionElement, ctaElement], {
+        scrollTrigger: {
+          trigger: titleElement,
+          scrub: 1,
+          start: "top 100%",
+          end: "bottom 70%",
+        },
+        filter: "blur(0px)",
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Future Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Let's Shape the Future of Beauty—Together."
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Partner with SWAN to innovate, grow, and connect."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Let's SWAN"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link",
+      "default": "/"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Future Section"
+    }
+  ]
+}
+{% endschema %}
