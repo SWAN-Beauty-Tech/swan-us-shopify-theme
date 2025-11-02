@@ -49,10 +49,59 @@
       "settings": {
         "title": "Redefining how beauty connects.",
         "description": "SWAN unites creators, brands, and retailers through an AI-powered smart mirror\nand community platform—transforming personalized beauty experiences\nand offering tools to grow reach, engagement, and impact.",
-        "button_text": "Let's Connect",
-        "button_link": "/",
-        "background_color": "#434043",
-        "button_color": "#ec4899"
+        "cta_text": "Let's Connect",
+        "cta_link": "/"
+      }
+    },
+    "partnership_benefits_section_tmWFqC": {
+      "type": "partnership-benefits-section",
+      "blocks": {
+        "benefit_ngtpyk": {
+          "type": "benefit",
+          "settings": {
+            "icon": "technology",
+            "text": "Seamless integration with AI beauty technology"
+          }
+        },
+        "benefit_7ptJ7y": {
+          "type": "benefit",
+          "settings": {
+            "icon": "analytics",
+            "text": "Access to audience insights & data analytics"
+          }
+        },
+        "benefit_BH38WV": {
+          "type": "benefit",
+          "settings": {
+            "icon": "marketing",
+            "text": "Co-marketing opportunities with SWAN"
+          }
+        },
+        "benefit_MbaNCz": {
+          "type": "benefit",
+          "settings": {
+            "icon": "affiliate",
+            "text": "Affiliate & revenue programs"
+          }
+        },
+        "benefit_Emkzp3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "features",
+            "text": "Exclusive early access to new features"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_ngtpyk",
+        "benefit_7ptJ7y",
+        "benefit_BH38WV",
+        "benefit_MbaNCz",
+        "benefit_Emkzp3"
+      ],
+      "name": "Partnership Benefits",
+      "settings": {
+        "title": "Partnership Benefits"
       }
     }
   },
@@ -60,6 +109,7 @@
     "main",
     "partnership_hero_BkXRiU",
     "fpo_section_nTpeJb",
-    "redefining_section_x8wPRT"
+    "redefining_section_x8wPRT",
+    "partnership_benefits_section_tmWFqC"
   ]
 }
