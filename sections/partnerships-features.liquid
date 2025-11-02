@@ -1,0 +1,496 @@
+{% comment %}
+  Partnerships Features Section
+  Displays feature cards that toggle between image and text content
+{% endcomment %}
+
+<div class="partnerships-features-section" data-section-id="{{ section.id }}">
+  <div class="partnerships-container">
+    {% if section.settings.heading != blank %}
+      <h2 class="partnerships-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="partnerships-grid">
+      {% for block in section.blocks %}
+        <div class="feature-card" data-card-id="{{ block.id }}">
+          {%- comment -%} Badge {%- endcomment -%}
+          <div class="feature-badge" style="background-color: {{ block.settings.badge_bg_color }};">
+            {{ block.settings.badge_text }}
+          </div>
+
+          {%- comment -%} Toggle Button {%- endcomment -%}
+          <button 
+            class="feature-toggle-btn" 
+            aria-label="Toggle feature details"
+            data-toggle-btn="{{ block.id }}"
+            style="background-color: {{ block.settings.button_bg_color }};"
+          >
+            <svg class="toggle-icon toggle-icon-plus" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 4V16M4 10H16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <svg class="toggle-icon toggle-icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 6L14 14M6 14L14 6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+
+          {%- comment -%} Image Content (default view) {%- endcomment -%}
+          <div class="feature-image-content" data-image-content="{{ block.id }}">
+            {% if block.settings.image != blank %}
+              <img 
+                src="{{ block.settings.image | image_url: width: 800 }}"
+                alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                loading="lazy"
+                class="feature-image"
+              >
+            {% else %}
+              <div class="feature-image-placeholder">
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="100" height="100" fill="#E5E7EB"/>
+                  <path d="M50 30V70M30 50H70" stroke="#9CA3AF" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+              </div>
+            {% endif %}
+            
+            {% if block.settings.image_caption != blank %}
+              <div class="feature-image-caption">
+                {{ block.settings.image_caption }}
+              </div>
+            {% endif %}
+          </div>
+
+          {%- comment -%} Text Content (expanded view) {%- endcomment -%}
+          <div class="feature-text-content" data-text-content="{{ block.id }}">
+            <div class="feature-text-inner">
+              {% if block.settings.title != blank %}
+                <h3 class="feature-title">{{ block.settings.title }}</h3>
+              {% endif %}
+
+              {% if block.settings.description != blank %}
+                <p class="feature-description">{{ block.settings.description }}</p>
+              {% endif %}
+
+              {% if block.settings.button_text != blank %}
+                <a 
+                  href="{{ block.settings.button_link | default: '#' }}" 
+                  class="feature-cta-button"
+                  style="background-color: {{ block.settings.cta_bg_color }}; color: {{ block.settings.cta_text_color }};"
+                >
+                  {{ block.settings.button_text }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .partnerships-features-section {
+    width: 100%;
+    padding: 60px 20px;
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  .partnerships-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .partnerships-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 48px;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .partnerships-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .feature-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    aspect-ratio: 3 / 4;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .feature-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    z-index: 10;
+  }
+
+  .feature-toggle-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: transform 0.2s ease;
+  }
+
+  .feature-toggle-btn:hover {
+    transform: scale(1.1);
+  }
+
+  .toggle-icon {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .toggle-icon-plus {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  .toggle-icon-close {
+    opacity: 0;
+    transform: rotate(90deg);
+  }
+
+  .feature-card.active .toggle-icon-plus {
+    opacity: 0;
+    transform: rotate(90deg);
+  }
+
+  .feature-card.active .toggle-icon-close {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  .feature-image-content {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    pointer-events: auto;
+  }
+
+  .feature-card.active .feature-image-content {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .feature-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feature-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F3F4F6;
+  }
+
+  .feature-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .feature-text-content {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    background-color: #F9FAFB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+
+  .feature-card.active .feature-text-content {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .feature-text-inner {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .feature-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #111827;
+  }
+
+  .feature-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #6B7280;
+    margin-bottom: 24px;
+  }
+
+  .feature-cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .feature-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .partnerships-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .partnerships-heading {
+      font-size: 2rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .partnerships-features-section {
+      padding: 40px 16px;
+    }
+
+    .partnerships-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .partnerships-heading {
+      font-size: 1.75rem;
+      margin-bottom: 32px;
+    }
+
+    .feature-card {
+      aspect-ratio: 4 / 5;
+    }
+
+    .feature-text-content {
+      padding: 24px;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+    }
+
+    .feature-description {
+      font-size: 0.875rem;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    
+    if (!section) return;
+
+    const cards = section.querySelectorAll('.feature-card');
+    
+    cards.forEach(card => {
+      const toggleBtn = card.querySelector('[data-toggle-btn]');
+      
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Toggle active state
+          card.classList.toggle('active');
+        });
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Partnerships Features",
+  "tag": "section",
+  "class": "section-partnerships-features",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Partner With Us"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge Text",
+          "default": "Creator"
+        },
+        {
+          "type": "color",
+          "id": "badge_bg_color",
+          "label": "Badge Background Color",
+          "default": "#EC4899"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color",
+          "label": "Toggle Button Color",
+          "default": "#EC4899"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature Image"
+        },
+        {
+          "type": "text",
+          "id": "image_caption",
+          "label": "Image Caption",
+          "default": "Create Inspiring Content"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Join as a Creator"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Partner with SWAN to showcase your expertise through tutorials, product demos, and personalized beauty content. Monetize your influence and connect directly with audiences who match your aesthetic and skincare profiles."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "JOIN AS A CREATOR"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "color",
+          "id": "cta_bg_color",
+          "label": "Button Background Color",
+          "default": "#EC4899"
+        },
+        {
+          "type": "color",
+          "id": "cta_text_color",
+          "label": "Button Text Color",
+          "default": "#FFFFFF"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Partnerships Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "badge_text": "Creator",
+            "badge_bg_color": "#EC4899",
+            "button_bg_color": "#EC4899",
+            "image_caption": "Create Inspiring Content",
+            "title": "Join as a Creator",
+            "description": "Partner with SWAN to showcase your expertise through tutorials, product demos, and personalized beauty content. Monetize your influence and connect directly with audiences who match your aesthetic and skincare profiles.",
+            "button_text": "JOIN AS A CREATOR",
+            "cta_bg_color": "#EC4899",
+            "cta_text_color": "#FFFFFF"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "badge_text": "Brand Partner",
+            "badge_bg_color": "#F472B6",
+            "button_bg_color": "#F472B6",
+            "image_caption": "Reach Consumers in a Smarter Way",
+            "title": "Become a Brand Partner",
+            "description": "SWAN gives beauty brands a powerful new channel for discovery and conversion. Showcase products within the Mirror experience and app, reach highly targeted consumers, and turn personalized recommendations into real-time sales.",
+            "button_text": "BECOME A BRAND PARTNER",
+            "cta_bg_color": "#F472B6",
+            "cta_text_color": "#FFFFFF"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "badge_text": "Business Solutions",
+            "badge_bg_color": "#FB923C",
+            "button_bg_color": "#FB923C",
+            "image_caption": "Bring Intelligent Beauty In-Store",
+            "title": "Explore Business Solutions",
+            "description": "From salons and spas to aesthetics studios, the SWAN Mirror transforms your client experience with interactive consultations, AI analysis, and product integration. Enhance service offerings and retail opportunities with cutting-edge beauty tech.",
+            "button_text": "EXPLORE BUSINESS SOLUTIONS",
+            "cta_bg_color": "#FB923C",
+            "cta_text_color": "#FFFFFF"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
