@@ -103,6 +103,16 @@
       "settings": {
         "title": "Partnership Benefits"
       }
+    },
+    "cosbar_section_wimGKa": {
+      "type": "cosbar-section",
+      "name": "Cosbar Section",
+      "settings": {
+        "title_color": "#e7aeb1",
+        "title": "SWAN + COS BAR",
+        "description_1": "SWAN and Cos Bar have come together to blend luxury retail with intelligent personalization. <br class=\"cosbar-section-br-desktop\"> Through our e-commerce partnership, Cos Bar's prestige beauty brands are featured in the SWAN <br class=\"cosbar-section-br-desktop\"> Marketplace — including Sisley, Augustinus Bader, Clé de Peau Beauté, Dr. Barbara Sturm, <br class=\"cosbar-section-br-desktop\"> 111SKIN, Chantecaille, La Prairie. Charlotte Tilbury and other modern luxury beauty.",
+        "description_2": "In-store, the SWAN Bar creates a one-of-a-kind experience, where the SWAN Skin Analyzer provides <br class=\"cosbar-section-br-desktop\"> personalized insights, transforming every Cos Bar visit into a tailored beauty consultation."
+      }
     }
   },
   "order": [
@@ -110,6 +120,7 @@
     "partnership_hero_BkXRiU",
     "fpo_section_nTpeJb",
     "redefining_section_x8wPRT",
-    "partnership_benefits_section_tmWFqC"
+    "partnership_benefits_section_tmWFqC",
+    "cosbar_section_wimGKa"
   ]
 }
