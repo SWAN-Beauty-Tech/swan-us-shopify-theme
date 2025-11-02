@@ -53,6 +53,70 @@
         "cta_link": "/"
       }
     },
+    "partnerships_features_3aEQTH": {
+      "type": "partnerships-features",
+      "blocks": {
+        "feature_LbL68K": {
+          "type": "feature",
+          "settings": {
+            "badge_text": "Creator",
+            "badge_bg_color": "#dca1a1",
+            "button_bg_color": "#dca1a1",
+            "image": "shopify://shop_images/temp-1.jpg",
+            "image_caption": "Create Inspiring Content",
+            "title": "Join as a Creator",
+            "description": "Partner with SWAN to showcase your expertise through tutorials, product demos, and personalized beauty content. Monetize your influence and connect directly with audiences who match your aesthetic and skincare profiles.",
+            "button_text": "JOIN AS A CREATOR",
+            "button_link": "",
+            "cta_bg_color": "#ec4899",
+            "cta_text_color": "#ffffff"
+          }
+        },
+        "feature_6R7yfA": {
+          "type": "feature",
+          "settings": {
+            "badge_text": "Brand Partner",
+            "badge_bg_color": "#dca1a1",
+            "button_bg_color": "#dca1a1",
+            "image": "shopify://shop_images/ps-3_bbb88bad-4ebd-4a4d-8a3f-945beda6e917.jpg",
+            "image_caption": "Reach Consumers in a Smarter Way",
+            "title": "Become a Brand Partner",
+            "description": "SWAN gives beauty brands a powerful new channel for discovery and conversion. Showcase products within the Mirror experience and app, reach highly targeted consumers, and turn personalized recommendations into real-time sales.",
+            "button_text": "BECOME A BRAND PARTNER",
+            "button_link": "",
+            "cta_bg_color": "#f472b6",
+            "cta_text_color": "#ffffff"
+          }
+        },
+        "feature_3GFDQ7": {
+          "type": "feature",
+          "settings": {
+            "badge_text": "Business Solutions",
+            "badge_bg_color": "#dca1a1",
+            "button_bg_color": "#dca1a1",
+            "image": "shopify://shop_images/temp-2.jpg",
+            "image_caption": "Bring Intelligent Beauty In-Store",
+            "title": "Explore Business Solutions",
+            "description": "From salons and spas to aesthetics studios, the SWAN Mirror transforms your client experience with interactive consultations, AI analysis, and product integration. Enhance service offerings and retail opportunities with cutting-edge beauty tech.",
+            "button_text": "EXPLORE BUSINESS SOLUTIONS",
+            "button_link": "",
+            "cta_bg_color": "#fb923c",
+            "cta_text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "feature_LbL68K",
+        "feature_6R7yfA",
+        "feature_3GFDQ7"
+      ],
+      "name": "Partnerships Features",
+      "settings": {
+        "heading": "Partner With Us",
+        "heading_color": "#000000",
+        "section_bg_color": "#FFFFFF"
+      }
+    },
     "partnership_benefits_section_tmWFqC": {
       "type": "partnership-benefits-section",
       "blocks": {
@@ -130,6 +194,7 @@
     "partnership_hero_BkXRiU",
     "fpo_section_nTpeJb",
     "redefining_section_x8wPRT",
+    "partnerships_features_3aEQTH",
     "partnership_benefits_section_tmWFqC",
     "cosbar_section_wimGKa",
     "future_section_GNDipz"
