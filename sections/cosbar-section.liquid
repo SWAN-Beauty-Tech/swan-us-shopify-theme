@@ -1,0 +1,139 @@
+<style>
+  .cosbar-section-container {
+    width: 100%;
+    height: 60vh;
+    padding-bottom: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .cosbar-section-inner {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: #434043;
+    border-radius: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cosbar-section-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  .cosbar-section-title {
+    color: {{ section.settings.title_color }};
+    font-size: 48px;
+    font-weight: 100;
+    line-height: 1;
+    filter: blur(40px);
+  }
+
+  .cosbar-section-description {
+    font-size: 16px;
+    color: white;
+    line-height: 1.5;
+    filter: blur(40px);
+  }
+
+  .cosbar-section-br-desktop {
+    display: inline;
+  }
+
+  @media (max-width: 768px) {
+    .cosbar-section-container {
+      padding-top: 0;
+    }
+
+    .cosbar-section-title {
+      font-size: 18px;
+    }
+
+    .cosbar-section-br-desktop {
+      display: none;
+    }
+  }
+</style>
+
+<section class="cosbar-section-container">
+  <div class="cosbar-section-inner">
+    <div class="cosbar-section-content">
+      <h1 class="cosbar-section-title" data-cosbar-title>
+        {{ section.settings.title }}
+      </h1>
+      <p class="cosbar-section-description" data-cosbar-description>
+        {{ section.settings.description_1 }}
+      </p>
+      <p class="cosbar-section-description" data-cosbar-description2>
+        {{ section.settings.description_2 }}
+      </p>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    const title = document.querySelector('[data-cosbar-title]');
+    const description = document.querySelector('[data-cosbar-description]');
+    const description2 = document.querySelector('[data-cosbar-description2]');
+    
+    if (title && description && description2) {
+      gsap.to([title, description, description2], {
+        scrollTrigger: {
+          trigger: title,
+          scrub: 1,
+          start: "top 100%",
+          end: "bottom 70%",
+        },
+        filter: "blur(0px)",
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Cosbar Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#e7aeb1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "SWAN + COS BAR"
+    },
+    {
+      "type": "textarea",
+      "id": "description_1",
+      "label": "Description 1",
+      "default": "SWAN and Cos Bar have come together to blend luxury retail with intelligent personalization. <br class='cosbar-section-br-desktop' /> Through our e-commerce partnership, Cos Bar's prestige beauty brands are featured in the SWAN <br class='cosbar-section-br-desktop' /> Marketplace — including Sisley, Augustinus Bader, Clé de Peau Beauté, Dr. Barbara Sturm, <br class='cosbar-section-br-desktop' /> 111SKIN, Chantecaille, La Prairie. Charlotte Tilbury and other modern luxury beauty."
+    },
+    {
+      "type": "textarea",
+      "id": "description_2",
+      "label": "Description 2",
+      "default": "In-store, the SWAN Bar creates a one-of-a-kind experience, where the SWAN Skin Analyzer provides <br class='cosbar-section-br-desktop' /> personalized insights, transforming every Cos Bar visit into a tailored beauty consultation."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cosbar Section"
+    }
+  ]
+}
+{% endschema %}
