@@ -5,9 +5,9 @@
 
 <div class="partnerships-features-section" data-section-id="{{ section.id }}">
   <div class="partnerships-container">
-    {% if section.settings.heading != blank %}
+    {% comment %} {% if section.settings.heading != blank %}
       <h2 class="partnerships-heading">{{ section.settings.heading }}</h2>
-    {% endif %}
+    {% endif %} {% endcomment %}
 
     <div class="partnerships-grid">
       {% for block in section.blocks %}
