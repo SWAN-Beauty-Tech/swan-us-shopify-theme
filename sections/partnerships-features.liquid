@@ -5,24 +5,19 @@
 
 <div class="partnerships-features-section" data-section-id="{{ section.id }}">
   <div class="partnerships-container">
-    {% comment %} {% if section.settings.heading != blank %}
-      <h2 class="partnerships-heading">{{ section.settings.heading }}</h2>
-    {% endif %} {% endcomment %}
-
     <div class="partnerships-grid">
       {% for block in section.blocks %}
         <div class="feature-card" data-card-id="{{ block.id }}">
-          {%- comment -%} Badge {%- endcomment -%}
-          <div class="feature-badge" style="background-color: {{ block.settings.badge_bg_color }};">
+          {%- comment -%} Badge - desaparece cuando está activa {%- endcomment -%}
+          <div class="feature-badge" data-badge="{{ block.id }}">
             {{ block.settings.badge_text }}
           </div>
 
-          {%- comment -%} Toggle Button {%- endcomment -%}
+          {%- comment -%} Toggle Button - color #DCA1A1 {%- endcomment -%}
           <button 
             class="feature-toggle-btn" 
             aria-label="Toggle feature details"
             data-toggle-btn="{{ block.id }}"
-            style="background-color: {{ block.settings.button_bg_color }};"
           >
             <svg class="toggle-icon toggle-icon-plus" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10 4V16M4 10H16" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -57,22 +52,17 @@
             {% endif %}
           </div>
 
-          {%- comment -%} Text Content (expanded view) {%- endcomment -%}
+          {%- comment -%} Text Content (expanded view) - solo párrafo y botón {%- endcomment -%}
           <div class="feature-text-content" data-text-content="{{ block.id }}">
             <div class="feature-text-inner">
-              {% if block.settings.title != blank %}
-                <h3 class="feature-title">{{ block.settings.title }}</h3>
-              {% endif %}
-
               {% if block.settings.description != blank %}
-                <p class="feature-description" style="font-size: {{ block.settings.description_font_size }};">{{ block.settings.description }}</p>
+                <p class="feature-description">{{ block.settings.description }}</p>
               {% endif %}
 
               {% if block.settings.button_text != blank %}
                 <a 
                   href="{{ block.settings.button_link | default: '#' }}" 
                   class="feature-cta-button"
-                  style="background-color: {{ block.settings.cta_bg_color }}; color: {{ block.settings.cta_text_color }};"
                 >
                   {{ block.settings.button_text }}
                 </a>
@@ -97,14 +87,6 @@
     margin: 0 auto;
   }
 
-  .partnerships-heading {
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 48px;
-    color: {{ section.settings.heading_color }};
-  }
-
   .partnerships-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -126,6 +108,7 @@
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
   }
 
+  /* Badge con color #DCA1A1 y desaparece cuando está activa */
   .feature-badge {
     position: absolute;
     top: 16px;
@@ -135,9 +118,16 @@
     font-size: 0.875rem;
     font-weight: 600;
     color: white;
+    background-color: #DCA1A1;
     z-index: 10;
+    transition: opacity 0.3s ease;
   }
 
+  .feature-card.active .feature-badge {
+    opacity: 0;
+  }
+
+  /* Botón de toggle con color #DCA1A1 */
   .feature-toggle-btn {
     position: absolute;
     top: 16px;
@@ -151,11 +141,13 @@
     align-items: center;
     justify-content: center;
     z-index: 10;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    background-color: #DCA1A1;
   }
 
   .feature-toggle-btn:hover {
     transform: scale(1.1);
+    background-color: #c98f8f;
   }
 
   .toggle-icon {
@@ -223,13 +215,14 @@
     font-weight: 600;
   }
 
+  /* Fondo #C5C5C5 para el contenido de texto */
   .feature-text-content {
     position: absolute;
     inset: 0;
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
-    background-color: #F9FAFB;
+    background-color: #C5C5C5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -246,33 +239,32 @@
     max-width: 100%;
   }
 
-  .feature-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: #111827;
-  }
-
+  /* Texto del párrafo a 18px */
   .feature-description {
-    font-size: 0.95rem;
+    font-size: 18px;
     line-height: 1.6;
-    color: #6B7280;
+    color: #374151;
     margin-bottom: 24px;
   }
 
+  /* Botón con color #DCA1A1 */
   .feature-cta-button {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 12px 32px;
     border-radius: 24px;
     font-size: 0.875rem;
     font-weight: 600;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #DCA1A1;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease, background-color 0.2s ease;
   }
 
   .feature-cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #c98f8f;
   }
 
   /* Tablet */
@@ -280,10 +272,6 @@
     .partnerships-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-    }
-
-    .partnerships-heading {
-      font-size: 2rem;
     }
   }
 
@@ -298,11 +286,6 @@
       gap: 16px;
     }
 
-    .partnerships-heading {
-      font-size: 1.75rem;
-      margin-bottom: 32px;
-    }
-
     .feature-card {
       aspect-ratio: 4 / 5;
     }
@@ -311,12 +294,8 @@
       padding: 24px;
     }
 
-    .feature-title {
-      font-size: 1.25rem;
-    }
-
     .feature-description {
-      font-size: 0.875rem;
+      font-size: 16px;
     }
   }
 </style>
@@ -353,18 +332,6 @@
   "class": "section-partnerships-features",
   "settings": [
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Section Heading",
-      "default": "Partner With Us"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#000000"
-    },
-    {
       "type": "color",
       "id": "section_bg_color",
       "label": "Section Background Color",
@@ -383,18 +350,6 @@
           "default": "Creator"
         },
         {
-          "type": "color",
-          "id": "badge_bg_color",
-          "label": "Badge Background Color",
-          "default": "#EC4899"
-        },
-        {
-          "type": "color",
-          "id": "button_bg_color",
-          "label": "Toggle Button Color",
-          "default": "#EC4899"
-        },
-        {
           "type": "image_picker",
           "id": "image",
           "label": "Feature Image"
@@ -404,12 +359,6 @@
           "id": "image_caption",
           "label": "Image Caption",
           "default": "Create Inspiring Content"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Join as a Creator"
         },
         {
           "type": "textarea",
@@ -427,24 +376,6 @@
           "type": "url",
           "id": "button_link",
           "label": "Button Link"
-        },
-        {
-          "type": "color",
-          "id": "cta_bg_color",
-          "label": "Button Background Color",
-          "default": "#EC4899"
-        },
-        {
-          "type": "color",
-          "id": "cta_text_color",
-          "label": "Button Text Color",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "text",
-          "id": "description_font_size",
-          "label": "Description Font Size",
-          "default": "16px"
         }
       ]
     }
@@ -457,45 +388,27 @@
           "type": "feature",
           "settings": {
             "badge_text": "Creator",
-            "badge_bg_color": "#EC4899",
-            "button_bg_color": "#EC4899",
             "image_caption": "Create Inspiring Content",
-            "title": "Join as a Creator",
             "description": "Partner with SWAN to showcase your expertise through tutorials, product demos, and personalized beauty content. Monetize your influence and connect directly with audiences who match your aesthetic and skincare profiles.",
-            "button_text": "JOIN AS A CREATOR",
-            "cta_bg_color": "#EC4899",
-            "cta_text_color": "#FFFFFF",
-            "description_font_size": "16px"
+            "button_text": "JOIN AS A CREATOR"
           }
         },
         {
           "type": "feature",
           "settings": {
             "badge_text": "Brand Partner",
-            "badge_bg_color": "#F472B6",
-            "button_bg_color": "#F472B6",
             "image_caption": "Reach Consumers in a Smarter Way",
-            "title": "Become a Brand Partner",
             "description": "SWAN gives beauty brands a powerful new channel for discovery and conversion. Showcase products within the Mirror experience and app, reach highly targeted consumers, and turn personalized recommendations into real-time sales.",
-            "button_text": "BECOME A BRAND PARTNER",
-            "cta_bg_color": "#F472B6",
-            "cta_text_color": "#FFFFFF",
-            "description_font_size": "16px"
+            "button_text": "BECOME A BRAND PARTNER"
           }
         },
         {
           "type": "feature",
           "settings": {
             "badge_text": "Business Solutions",
-            "badge_bg_color": "#FB923C",
-            "button_bg_color": "#FB923C",
             "image_caption": "Bring Intelligent Beauty In-Store",
-            "title": "Explore Business Solutions",
             "description": "From salons and spas to aesthetics studios, the SWAN Mirror transforms your client experience with interactive consultations, AI analysis, and product integration. Enhance service offerings and retail opportunities with cutting-edge beauty tech.",
-            "button_text": "EXPLORE BUSINESS SOLUTIONS",
-            "cta_bg_color": "#FB923C",
-            "cta_text_color": "#FFFFFF",
-            "description_font_size": "16px"
+            "button_text": "EXPLORE BUSINESS SOLUTIONS"
           }
         }
       ]
