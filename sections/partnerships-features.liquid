@@ -215,18 +215,28 @@
     font-weight: 600;
   }
 
-  /* Fondo #C5C5C5 para el contenido de texto */
+  /* Fondo blanco con blur del color #DCA1A1 para el contenido de texto */
   .feature-text-content {
     position: absolute;
     inset: 0;
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
-    background-color: #C5C5C5;
+    /* Fondo blanco con overlay semi-transparente del color #DCA1A1 */
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 32px;
+  }
+
+  /* Overlay con color #DCA1A1 semi-transparente sobre fondo blanco */
+  .feature-text-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(220, 161, 161, 0.15);
+    pointer-events: none;
   }
 
   .feature-card.active .feature-text-content {
@@ -237,6 +247,8 @@
   .feature-text-inner {
     text-align: center;
     max-width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   /* Texto del párrafo a 18px */
