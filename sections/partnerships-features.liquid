@@ -65,7 +65,7 @@
               {% endif %}
 
               {% if block.settings.description != blank %}
-                <p class="feature-description">{{ block.settings.description }}</p>
+                <p class="feature-description" style="font-size: {{ block.settings.description_font_size }};">{{ block.settings.description }}</p>
               {% endif %}
 
               {% if block.settings.button_text != blank %}
@@ -439,6 +439,12 @@
           "id": "cta_text_color",
           "label": "Button Text Color",
           "default": "#FFFFFF"
+        },
+        {
+          "type": "text",
+          "id": "description_font_size",
+          "label": "Description Font Size",
+          "default": "16px"
         }
       ]
     }
@@ -458,7 +464,8 @@
             "description": "Partner with SWAN to showcase your expertise through tutorials, product demos, and personalized beauty content. Monetize your influence and connect directly with audiences who match your aesthetic and skincare profiles.",
             "button_text": "JOIN AS A CREATOR",
             "cta_bg_color": "#EC4899",
-            "cta_text_color": "#FFFFFF"
+            "cta_text_color": "#FFFFFF",
+            "description_font_size": "16px"
           }
         },
         {
@@ -472,7 +479,8 @@
             "description": "SWAN gives beauty brands a powerful new channel for discovery and conversion. Showcase products within the Mirror experience and app, reach highly targeted consumers, and turn personalized recommendations into real-time sales.",
             "button_text": "BECOME A BRAND PARTNER",
             "cta_bg_color": "#F472B6",
-            "cta_text_color": "#FFFFFF"
+            "cta_text_color": "#FFFFFF",
+            "description_font_size": "16px"
           }
         },
         {
@@ -486,7 +494,8 @@
             "description": "From salons and spas to aesthetics studios, the SWAN Mirror transforms your client experience with interactive consultations, AI analysis, and product integration. Enhance service offerings and retail opportunities with cutting-edge beauty tech.",
             "button_text": "EXPLORE BUSINESS SOLUTIONS",
             "cta_bg_color": "#FB923C",
-            "cta_text_color": "#FFFFFF"
+            "cta_text_color": "#FFFFFF",
+            "description_font_size": "16px"
           }
         }
       ]
