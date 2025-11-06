@@ -1,12 +1,12 @@
 <section class="w-full px-6 pb-6">
         <div class="relative min-h-100 rounded-4xl overflow-hidden  z-30 ">
               {% if section.settings.video != blank %}
-          <video  class="absolute inset-0 w-full h-full object-cover object-right dvideo" playsinline autoplay muted>
+          <video class="absolute inset-0 w-full h-full object-cover object-right dvideo" playsinline autoplay muted>
             <source src="{{ section.settings.video }}" type="video/mp4">
           </video>
             {%endif %}
             {% if section.settings.videom != blank %}
-          <video  class=" inset-0 w-full h-full object-cover object-right mvideo" playsinline autoplay muted>
+          <video class=" inset-0 w-full h-full object-cover object-right mvideo" playsinline autoplay muted>
             <source src="{{ section.settings.videom }}" type="video/mp4">
           </video>
            {%endif %}
@@ -190,6 +190,16 @@
   }
 </style>
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const videos = document.querySelectorAll('.dvideo, .mvideo');
+    videos.forEach(video => {
+      video.loop = false; // Explicitly disable looping
+      video.addEventListener('ended', function() {
+        this.pause(); // Pause when video ends
+      });
+    });
+  });
+
    gsap.from(".feature-text", {
     scrollTrigger: {
       trigger: ".feature-text",
