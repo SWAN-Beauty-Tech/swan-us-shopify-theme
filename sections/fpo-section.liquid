@@ -39,6 +39,12 @@
           />
         {% endif %}
       </div>
+      
+      <!-- Added text overlay for video/image -->
+      <div class="fpo-text-overlay">
+        <h2 class="fpo-overlay-title">{{ section.settings.overlay_title }}</h2>
+        <p class="fpo-overlay-description">{{ section.settings.overlay_description }}</p>
+      </div>
     </div>
   </section>
 </div>
@@ -115,6 +121,32 @@
     object-fit: cover;
   }
 
+  /* Text overlay styles */
+  .fpo-text-overlay {
+    position: absolute;
+    z-index: 20;
+    text-align: center;
+    padding: 32px;
+    max-width: 90%;
+    color: {{ section.settings.overlay_text_color }};
+  }
+
+  .fpo-overlay-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .fpo-overlay-description {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6;
+    font-style: italic;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
   /* Desktop styles */
   @media (min-width: 768px) {
     .fpo-section-wrapper {
@@ -137,11 +169,35 @@
     .fpo-subtitle {
       font-size: 1.5rem;
     }
+
+    /* Larger text overlay for desktop */
+    .fpo-text-overlay {
+      max-width: 800px;
+      padding: 48px;
+    }
+
+    .fpo-overlay-title {
+      font-size: 2.5rem;
+      margin-bottom: 24px;
+    }
+
+    .fpo-overlay-description {
+      font-size: 1.25rem;
+    }
   }
 
   @media (min-width: 1024px) {
     .fpo-title {
       font-size: 3.75rem;
+    }
+
+    /* Even larger text for large screens */
+    .fpo-overlay-title {
+      font-size: 3rem;
+    }
+
+    .fpo-overlay-description {
+      font-size: 1.5rem;
     }
   }
 </style>
@@ -191,6 +247,24 @@
       "id": "background_color",
       "label": "Background Color",
       "default": "#ec4899"
+    },
+    {
+      "type": "textarea",
+      "id": "overlay_title",
+      "label": "Overlay Title",
+      "default": "Introducing SWAN in Black and White — two timeless finishes, one transformative experience."
+    },
+    {
+      "type": "textarea",
+      "id": "overlay_description",
+      "label": "Overlay Description",
+      "default": "Designed for creators. Built for beauty. Ready for every partnership ahead."
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Overlay Text Color",
+      "default": "#ffffff"
     }
   ],
   "presets": [
