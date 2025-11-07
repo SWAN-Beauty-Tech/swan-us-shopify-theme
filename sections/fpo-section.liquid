@@ -15,7 +15,6 @@
     <!-- Main content with video -->
     <div class="fpo-content">
       <div class="fpo-image-wrapper">
-        <!-- Removed conditional and image, only showing video -->
         {% if section.settings.video != blank %}
           <video 
             src="{{ section.settings.video }}"
@@ -27,10 +26,9 @@
         {% endif %}
       </div>
       
-      <!-- Added text overlay for video -->
+      <!-- Updated text overlay to use single paragraph with line breaks and uppercase -->
       <div class="fpo-text-overlay">
-        <h2 class="fpo-overlay-title">{{ section.settings.overlay_title }}</h2>
-        <p class="fpo-overlay-description">{{ section.settings.overlay_description }}</p>
+        <p class="fpo-overlay-text">{{ section.settings.overlay_text }}</p>
       </div>
     </div>
   </section>
@@ -108,30 +106,23 @@
     object-fit: cover;
   }
 
-  /* Text overlay styles */
+  /* Updated text overlay to use white color and single paragraph style */
   .fpo-text-overlay {
     position: absolute;
     z-index: 20;
     text-align: center;
     padding: 32px;
     max-width: 90%;
-    color: {{ section.settings.overlay_text_color }};
   }
 
-  .fpo-overlay-title {
+  .fpo-overlay-text {
     font-size: 1.5rem;
     font-weight: 300;
-    line-height: 1.4;
-    margin-bottom: 16px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .fpo-overlay-description {
-    font-size: 1rem;
-    font-weight: 300;
     line-height: 1.6;
-    font-style: italic;
+    color: {{ section.settings.overlay_text_color }};
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    white-space: pre-line;
   }
 
   /* Desktop styles */
@@ -157,19 +148,13 @@
       font-size: 1.5rem;
     }
 
-    /* Larger text overlay for desktop */
     .fpo-text-overlay {
       max-width: 800px;
       padding: 48px;
     }
 
-    .fpo-overlay-title {
+    .fpo-overlay-text {
       font-size: 2.5rem;
-      margin-bottom: 24px;
-    }
-
-    .fpo-overlay-description {
-      font-size: 1.25rem;
     }
   }
 
@@ -178,13 +163,8 @@
       font-size: 3.75rem;
     }
 
-    /* Even larger text for large screens */
-    .fpo-overlay-title {
+    .fpo-overlay-text {
       font-size: 3rem;
-    }
-
-    .fpo-overlay-description {
-      font-size: 1.5rem;
     }
   }
 </style>
@@ -218,7 +198,7 @@
           }
         });
       }, {
-        threshold: 0.3 // Play when 30% of video is visible
+        threshold: 0.3
       });
       
       observer.observe(video);
@@ -262,15 +242,10 @@
     },
     {
       "type": "textarea",
-      "id": "overlay_title",
-      "label": "Overlay Title",
-      "default": "Introducing SWAN in Black and White — two timeless finishes, one transformative experience."
-    },
-    {
-      "type": "textarea",
-      "id": "overlay_description",
-      "label": "Overlay Description",
-      "default": "Designed for creators. Built for beauty. Ready for every partnership ahead."
+      "id": "overlay_text",
+      "label": "Overlay Text",
+      "default": "Introducing SWAN in Black and White — two timeless finishes, one transformative experience.\n\nDesigned for creators. Built for beauty. Ready for every partnership ahead.",
+      "info": "Use line breaks to separate paragraphs. Text will be displayed in uppercase."
     },
     {
       "type": "color",
