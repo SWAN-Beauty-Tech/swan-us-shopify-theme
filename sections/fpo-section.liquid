@@ -12,27 +12,22 @@
       </div>
     </div>
 
-    <!-- Main content with image or video -->
+    <!-- Main content with video -->
     <div class="fpo-content">
       <div class="fpo-image-wrapper">
-        {% if section.settings.show_video and section.settings.video != blank %}
+        <!-- Removed conditional and image, only showing video -->
+        {% if section.settings.video != blank %}
           <video 
             src="{{ section.settings.video }}"
             class="fpo-image fpo-video"
             muted
             playsinline
+            autoplay
           ></video>
-        {% elsif section.settings.image != blank %}
-          <img 
-            src="{{ section.settings.image | image_url: width: 2000 }}"
-            alt="{{ section.settings.image.alt | default: section.settings.title_line_1 }}"
-            class="fpo-image"
-            loading="lazy"
-          />
         {% endif %}
       </div>
       
-      <!-- Added text overlay for video/image -->
+      <!-- Added text overlay for video -->
       <div class="fpo-text-overlay">
         <h2 class="fpo-overlay-title">{{ section.settings.overlay_title }}</h2>
         <p class="fpo-overlay-description">{{ section.settings.overlay_description }}</p>
@@ -194,7 +189,7 @@
   }
 </style>
 
-<!-- Added Intersection Observer script for video autoplay on scroll -->
+<!-- Improved Intersection Observer script for video autoplay -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const videos = document.querySelectorAll('.fpo-video');
@@ -212,13 +207,18 @@
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            video.play().catch(err => console.log('Video autoplay failed:', err));
+            // Force play when visible
+            video.play().catch(err => {
+              console.log('[v0] Video autoplay blocked by browser:', err);
+              // Try again after user interaction
+              document.addEventListener('click', () => video.play(), { once: true });
+            });
           } else {
             video.pause();
           }
         });
       }, {
-        threshold: 0.5 // Play when 50% of video is visible
+        threshold: 0.3 // Play when 30% of video is visible
       });
       
       observer.observe(video);
@@ -249,22 +249,10 @@
       "default": "Smart never looked so good"
     },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Background Image"
-    },
-    {
       "type": "url",
       "id": "video",
       "label": "Video URL",
-      "info": "Upload video to Files in Shopify admin, then paste the URL here"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_video",
-      "label": "Show Video Instead of Image",
-      "default": false,
-      "info": "Toggle this on to display the video instead of the image"
+      "info": "Upload video to Files in Shopify admin, then paste the URL here. Video will autoplay when section is visible."
     },
     {
       "type": "color",
