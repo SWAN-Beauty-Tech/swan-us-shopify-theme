@@ -44,6 +44,13 @@
             "color": "#ffffff"
           }
         },
+        "statement_MRUzPk": {
+          "type": "statement",
+          "settings": {
+            "title": "",
+            "color": "#ffffff"
+          }
+        },
         "statement_afCV6C": {
           "type": "statement",
           "settings": {
@@ -83,6 +90,7 @@
       "block_order": [
         "statement_9TYBY8",
         "statement_gXkehn",
+        "statement_MRUzPk",
         "statement_afCV6C",
         "statement_WnNRNB",
         "statement_twxyF4",
