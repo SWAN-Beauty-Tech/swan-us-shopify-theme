@@ -26,7 +26,7 @@
         {% endif %}
       </div>
       
-      <!-- Updated text overlay to use single paragraph with line breaks and uppercase -->
+      <!-- Updated text overlay to use single paragraph with line breaks -->
       <div class="fpo-text-overlay">
         <p class="fpo-overlay-text">{{ section.settings.overlay_text }}</p>
       </div>
@@ -106,7 +106,7 @@
     object-fit: cover;
   }
 
-  /* Updated text overlay to use white color and single paragraph style */
+  /* Updated text overlay to match design - sentence case, not uppercase */
   .fpo-text-overlay {
     position: absolute;
     z-index: 20;
@@ -118,10 +118,9 @@
   .fpo-overlay-text {
     font-size: 1.5rem;
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.4;
     color: {{ section.settings.overlay_text_color }};
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    text-transform: uppercase;
     white-space: pre-line;
   }
 
@@ -154,7 +153,7 @@
     }
 
     .fpo-overlay-text {
-      font-size: 2.5rem;
+      font-size: 2.25rem;
     }
   }
 
@@ -164,7 +163,7 @@
     }
 
     .fpo-overlay-text {
-      font-size: 3rem;
+      font-size: 2.75rem;
     }
   }
 </style>
@@ -244,8 +243,8 @@
       "type": "textarea",
       "id": "overlay_text",
       "label": "Overlay Text",
-      "default": "Introducing SWAN in Black and White — two timeless finishes, one transformative experience.\n\nDesigned for creators. Built for beauty. Ready for every partnership ahead.",
-      "info": "Use line breaks to separate paragraphs. Text will be displayed in uppercase."
+      "default": "Introducing\nSWAN in Black and White —\ntwo timeless finishes,\none transformative experience.\nDesigned for creators.\nBuilt for beauty. Ready for\nevery partnership ahead.",
+      "info": "Use line breaks to separate lines. Text will maintain the case you enter."
     },
     {
       "type": "color",
