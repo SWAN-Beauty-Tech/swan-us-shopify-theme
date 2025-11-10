@@ -14,13 +14,24 @@
         {% endif %}
       </div>
       
-      <!-- Updated to use blocks for each line instead of single text field -->
+      <!-- Added console log for debugging and improved text rendering -->
       <div class="fpo-text-overlay">
-        {% for block in section.blocks %}
-          {% if block.settings.text_line != blank %}
-            <p class="fpo-overlay-text">{{ block.settings.text_line }}</p>
-          {% endif %}
-        {% endfor %}
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            {% if block.settings.text_line != blank %}
+              <p class="fpo-overlay-text">{{ block.settings.text_line }}</p>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <!-- Fallback text if no blocks are added -->
+          <p class="fpo-overlay-text">Introducing</p>
+          <p class="fpo-overlay-text">SWAN in Black and White —</p>
+          <p class="fpo-overlay-text">two timeless finishes,</p>
+          <p class="fpo-overlay-text">one transformative experience.</p>
+          <p class="fpo-overlay-text">Designed for creators.</p>
+          <p class="fpo-overlay-text">Built for beauty. Ready for</p>
+          <p class="fpo-overlay-text">every partnership ahead.</p>
+        {% endif %}
       </div>
     </div>
   </section>
@@ -68,9 +79,10 @@
     object-fit: cover;
   }
 
+  /* Improved text overlay visibility and contrast */
   .fpo-text-overlay {
     position: relative;
-    z-index: 2;
+    z-index: 10;
     text-align: center;
     padding: 32px;
     max-width: 90%;
@@ -81,9 +93,10 @@
     font-size: 24px;
     font-weight: 300;
     line-height: 1.4;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 4px 24px rgba(0, 0, 0, 0.3);
     margin: 0;
-    color: {{ section.settings.overlay_text_color }};
+    color: {{ section.settings.overlay_text_color | default: '#ffffff' }};
+    opacity: 1;
   }
 
   @media (min-width: 768px) {
@@ -111,6 +124,8 @@
   document.addEventListener('DOMContentLoaded', function() {
     const videos = document.querySelectorAll('.fpo-video');
     
+    console.log('[v0] FPO section loaded, found videos:', videos.length);
+    
     videos.forEach(video => {
       video.loop = false;
       
@@ -121,6 +136,7 @@
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
+            console.log('[v0] Video is visible, attempting to play');
             video.play().catch(err => {
               console.log('[v0] Video autoplay blocked by browser:', err);
               document.addEventListener('click', () => video.play(), { once: true });
@@ -135,6 +151,11 @@
       
       observer.observe(video);
     });
+    
+    const textOverlay = document.querySelector('.fpo-text-overlay');
+    const textLines = document.querySelectorAll('.fpo-overlay-text');
+    console.log('[v0] Text overlay found:', !!textOverlay);
+    console.log('[v0] Text lines found:', textLines.length);
   });
 </script>
 
