@@ -111,15 +111,17 @@
     position: absolute;
     z-index: 20;
     text-align: center;
-    max-width: 100%;
+    padding: 32px;
+    max-width: 90%;
   }
 
   .fpo-overlay-text {
-    font-size: 60px !important;
+    font-size: 24px;
     font-weight: 300;
     line-height: 1.4;
     color: {{ section.settings.overlay_text_color }};
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    white-space: pre-line;
   }
 
   /* Desktop styles */
@@ -146,11 +148,12 @@
     }
 
     .fpo-text-overlay {
+      max-width: 800px;
       padding: 48px;
     }
 
     .fpo-overlay-text {
-      font-size: 24px;
+      font-size: 60px;
     }
   }
 
@@ -160,7 +163,7 @@
     }
 
     .fpo-overlay-text {
-      font-size: 2.75rem;
+      font-size: 60px;
     }
   }
 </style>
