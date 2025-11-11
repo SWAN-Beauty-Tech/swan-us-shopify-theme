@@ -34,14 +34,8 @@
       "type": "fpo-section",
       "name": "FPO Section",
       "settings": {
-        "title_line_1": "Intelligence in its",
-        "title_line_2": "best light",
-        "subtitle": "Smart never looked so good",
         "video": "https://cdn.shopify.com/videos/c/o/v/807f7ff1d31340919390551b550c57d7.mp4",
-        "show_video": false,
         "background_color": "#ec4899",
-        "overlay_title": "Introducing SWAN in Black and White — two timeless finishes, one transformative experience.",
-        "overlay_description": "Designed for creators. Built for beauty. Ready for every partnership ahead.",
         "overlay_text_color": "#ffffff"
       }
     },
@@ -160,7 +154,7 @@
       "settings": {
         "title_color": "#e7aeb1",
         "title": "SWAN + COS BAR",
-        "description_1": "SWAN and Cos Bar have come together to blend luxury retail with intelligent personalization. <br class=\"cosbar-section-br-desktop\"> Through our e-commerce partnership, Cos Bar's prestige beauty brands are featured in the SWAN <br class=\"cosbar-section-br-desktop\"> Marketplace — including Sisley, Augustinus Bader, Clé de Peau Beauté, Dr. Barbara Sturm, <br class=\"cosbar-section-br-desktop\"> 111SKIN, Chantecaille, La Prairie. Charlotte Tilbury and other modern luxury beauty.",
+        "description_1": "SWAN and Cos Bar have come together to blend luxury retail with intelligent personalization. <br class=\"cosbar-section-br-desktop\"> Through our e-commerce partnership, Cos Bar's prestige beauty brands are featured in the SWAN <br class=\"cosbar-section-br-desktop\"> Marketplace — including Sisley, Augustinus Bader, Clé de Peau Beauté, Dr. Barbara Sturm, <br class=\"cosbar-section-br-desktop\"> 111SKIN, Chantecaille, La Prairie, Charlotte Tilbury and other modern luxury beauty.",
         "description_2": "In-store, the SWAN Bar creates a one-of-a-kind experience, where the SWAN Skin Analyzer provides <br class=\"cosbar-section-br-desktop\"> personalized insights, transforming every Cos Bar visit into a tailored beauty consultation."
       }
     },
