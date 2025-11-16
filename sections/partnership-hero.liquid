@@ -33,18 +33,23 @@
 </section>
 
 <style>
+  /* Reescribiendo todos los estilos para que coincidan exactamente con las clases de Tailwind del React */
+  
+  /* Section: relative h-[150dvh] max-md:h-[120vh] overflow-hidden px-0 md:px-28 max-md:flex max-md:flex-col max-md:items-center max-md:justify-center max-md:pt-6 */
   .hero-partnership-wrapper {
     position: relative;
-    height: 150vh;
+    height: 150dvh;
     overflow: hidden;
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 
-  /* Desktop image: full height, covers entire section, hidden on mobile */
+  /* Desktop image: pointer-events-none absolute inset-y-0 right-0 h-full w-full object-cover max-md:hidden */
   .hero-image-desktop {
     pointer-events: none;
     position: absolute;
-    inset: 0;
+    top: 0;
+    bottom: 0;
     right: 0;
     height: 100%;
     width: 100%;
@@ -52,7 +57,7 @@
     display: block;
   }
 
-  /* Mobile image: 75% height from top, visible only on mobile, z-index 10 */
+  /* Mobile image: pointer-events-none absolute md:inset-y-0 right-0 w-full top-0 h-[75%] object-cover md:hidden z-10 */
   .hero-image-mobile {
     pointer-events: none;
     position: absolute;
@@ -65,12 +70,12 @@
     z-index: 10;
   }
 
-  /* Content: centered horizontally, top-36 on desktop */
+  /* Content div: absolute left-1/2 -translate-x-1/2 max-md:top-16 md:top-36 z-20 flex flex-col items-center justify-center max-md:px-3 max-md:mt-6 w-full */
   .hero-partnership-content {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 144px; /* top-36 = 9rem = 144px */
+    top: 144px; /* md:top-36 = 9rem = 144px */
     z-index: 20;
     display: flex;
     flex-direction: column;
@@ -79,8 +84,9 @@
     width: 100%;
   }
 
+  /* H1: font-thin text-white leading-[1.2] tracking-[-0.01em] text-[clamp(28px,4vw,96px)] text-center */
   .hero-partnership-content h1 {
-    font-weight: 100; /* font-thin */
+    font-weight: 100;
     color: #ffffff;
     line-height: 1.2;
     letter-spacing: -0.01em;
@@ -96,96 +102,120 @@
     transform: translateY(50px);
   }
 
+  /* P: mt-4 text-white leading-[1.2] !font-thin text-xs md:text-lg text-center */
   .hero-description {
-    margin-top: 16px; /* mt-4 */
+    margin-top: 16px; /* mt-4 = 1rem = 16px */
     color: #ffffff;
     line-height: 1.2;
-    font-weight: 100; /* font-thin */
-    font-size: 18px; /* md:text-lg */
+    font-weight: 100;
+    font-size: 12px; /* text-xs by default on mobile */
     text-align: center;
     opacity: 0;
     transform: translateY(50px);
     filter: blur(10px);
   }
 
+  /* br: max-md:hidden */
   .hero-description br {
-    display: block;
+    display: none;
   }
 
+  /* CTA wrapper: mt-6 max-md:mt-8 */
   .hero-cta-wrapper {
-    margin-top: 24px; /* mt-6 */
+    margin-top: 24px; /* mt-6 = 1.5rem = 24px */
     opacity: 0;
     transform: translateY(50px);
     filter: blur(10px);
   }
 
+  /* Button: py-4 px-7 rounded-full bg-primary-pink hover:bg-primary-pink/60 text-white text-sm !font-thin max-md:text-xs uppercase */
   .hero-cta {
     display: inline-block;
-    padding: 16px 28px; /* py-4 px-7 */
+    padding-top: 16px; /* py-4 = 1rem = 16px */
+    padding-bottom: 16px;
+    padding-left: 28px; /* px-7 = 1.75rem = 28px */
+    padding-right: 28px;
     border-radius: 9999px;
-    background: #e7aeb1; /* bg-primary-pink */
+    background: #e7aeb1;
     color: white;
-    font-size: 14px; /* text-sm */
-    font-weight: 100; /* font-thin */
+    font-size: 12px; /* max-md:text-xs by default */
+    font-weight: 100;
     text-transform: uppercase;
     text-decoration: none;
     transition: background 0.3s;
   }
 
   .hero-cta:hover {
-    background: rgba(231, 174, 177, 0.6); /* hover:bg-primary-pink/60 */
+    background: rgba(231, 174, 177, 0.6);
   }
 
-  /* Mobile styles: max-md breakpoint */
+  /* Mobile breakpoint: max-md (max-width: 768px) */
   @media screen and (max-width: 768px) {
+    /* Section: max-md:h-[120vh] max-md:flex max-md:flex-col max-md:items-center max-md:justify-center max-md:pt-6 */
     .hero-partnership-wrapper {
-      height: 120vh; /* max-md:h-[120vh] */
+      height: 120vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding-top: 24px; /* max-md:pt-6 */
+      padding-top: 24px; /* max-md:pt-6 = 1.5rem = 24px */
     }
 
-    /* Hide desktop image on mobile */
+    /* Desktop image: max-md:hidden */
     .hero-image-desktop {
       display: none;
     }
 
-    /* Show mobile image on mobile */
+    /* Mobile image: visible on mobile, md:hidden removed so it shows */
     .hero-image-mobile {
       display: block;
     }
 
+    /* Content: max-md:top-16 max-md:px-3 max-md:mt-6 */
     .hero-partnership-content {
-      position: static;
-      transform: none;
-      padding: 0 12px; /* max-md:px-3 */
-      margin-top: 24px; /* max-md:mt-6 */
-      top: 64px; /* max-md:top-16 */
+      top: 64px; /* max-md:top-16 = 4rem = 64px */
+      padding-left: 12px; /* max-md:px-3 = 0.75rem = 12px */
+      padding-right: 12px;
+      margin-top: 24px; /* max-md:mt-6 = 1.5rem = 24px */
     }
 
-    .hero-description {
-      font-size: 12px; /* max-md:text-xs */
-    }
+    /* Description: text-xs (already set, stays 12px) */
+    /* br: max-md:hidden (already hidden) */
 
-    .hero-description br {
-      display: none; /* max-md:hidden on br */
-    }
-
+    /* CTA wrapper: max-md:mt-8 */
     .hero-cta-wrapper {
-      margin-top: 32px; /* max-md:mt-8 */
+      margin-top: 32px; /* max-md:mt-8 = 2rem = 32px */
     }
 
-    .hero-cta {
-      font-size: 12px; /* max-md:text-xs */
-    }
+    /* Button: max-md:text-xs (already set to 12px) */
   }
 
-  /* Tablet styles for md breakpoint */
+  /* Desktop breakpoint: md (min-width: 769px) */
   @media screen and (min-width: 769px) {
+    /* Section: md:px-28 */
     .hero-partnership-wrapper {
-      padding: 0 112px; /* md:px-28 = 7rem = 112px */
+      padding-left: 112px; /* md:px-28 = 7rem = 112px */
+      padding-right: 112px;
+    }
+
+    /* Mobile image: md:hidden, md:inset-y-0 (not needed as it's hidden) */
+    .hero-image-mobile {
+      display: none;
+    }
+
+    /* Description: md:text-lg */
+    .hero-description {
+      font-size: 18px; /* md:text-lg = 1.125rem = 18px */
+    }
+
+    /* br: visible on desktop */
+    .hero-description br {
+      display: block;
+    }
+
+    /* Button: text-sm on desktop */
+    .hero-cta {
+      font-size: 14px; /* text-sm = 0.875rem = 14px */
     }
   }
 </style>
@@ -193,7 +223,6 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     if (typeof gsap !== 'undefined') {
-      // Animate heading lines with delays matching React (0.4s, 0.4s base + stagger)
       gsap.to(".hero-partnership-content h1 span.first-line", {
         opacity: 1,
         y: 0,
@@ -212,7 +241,6 @@
         delay: 0.4
       });
 
-      // Animate description (delay 0.6s in React)
       gsap.to(".hero-partnership-content .hero-description", {
         opacity: 1,
         y: 0,
@@ -222,7 +250,6 @@
         delay: 0.6
       });
 
-      // Animate CTA button (delay 1.0s in React)
       gsap.to(".hero-partnership-content .hero-cta-wrapper", {
         opacity: 1,
         y: 0,
@@ -232,7 +259,6 @@
         delay: 1.0
       });
     } else {
-      // Fallback if GSAP is not loaded
       const elements = document.querySelectorAll('.hero-partnership-content h1 span, .hero-description, .hero-cta-wrapper');
       elements.forEach(el => {
         el.style.opacity = '1';
