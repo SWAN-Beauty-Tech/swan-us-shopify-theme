@@ -1,257 +1,239 @@
 <link rel="preload" as="image" href="{{ section.settings.hero_image | image_url: width: 2000 }}">
-<div class="rel-mode">
-  <div class="hero-image-wrap">
-    {% if section.settings.hero_image != blank %}
-    <img 
-      class="hero-image" 
-      src="{{ section.settings.hero_image | image_url: width: 2000 }}" 
-      alt="{{ section.settings.image_alt | default: 'Hero Image' }}"
-      loading="eager"
-    >
-    {% endif %}
-  </div>
-  <section class="hero-partnership" id="heroPartnership">
-    <div class="hero-partnership-content">
-      <h1>
-        <span class="first-line">{{ section.settings.heading_line_1 }}</span>
-        <span class="second-line"><em>{{ section.settings.heading_line_2 }}</em></span>
-      </h1>
-      <p class="hero-description">{{ section.settings.description }}</p>
+<link rel="preload" as="image" href="{{ section.settings.hero_image_mobile | image_url: width: 1000 }}">
+
+<section class="hero-partnership-wrapper" id="heroPartnership">
+  {% if section.settings.hero_image != blank %}
+  <img 
+    class="hero-image-desktop" 
+    src="{{ section.settings.hero_image | image_url: width: 2000 }}" 
+    alt="{{ section.settings.image_alt | default: 'Hero Image' }}"
+    loading="eager"
+  >
+  {% endif %}
+  
+  {% if section.settings.hero_image_mobile != blank %}
+  <img 
+    class="hero-image-mobile" 
+    src="{{ section.settings.hero_image_mobile | image_url: width: 1000 }}" 
+    alt="{{ section.settings.image_alt | default: 'Hero Image' }}"
+    loading="eager"
+  >
+  {% endif %}
+
+  <div class="hero-partnership-content">
+    <h1>
+      <span class="first-line">{{ section.settings.heading_line_1 }}</span>
+      <span class="second-line">{{ section.settings.heading_line_2 }}</span>
+    </h1>
+    <p class="hero-description">{{ section.settings.description }}</p>
+    <div class="hero-cta-wrapper">
       <a href="{{ section.settings.cta_link }}" class="hero-cta">{{ section.settings.cta_text }}</a>
     </div>
-  </section>
-</div>
+  </div>
+</section>
 
 <style>
-  /* Updated container to match React code height and overflow */
-  .rel-mode {
+  .hero-partnership-wrapper {
     position: relative;
     height: 150vh;
     overflow: hidden;
     padding: 0;
   }
 
-  /* Image positioning to match React: absolute, full height, right side */
-  .hero-image-wrap {
+  /* Desktop image: full height, covers entire section, hidden on mobile */
+  .hero-image-desktop {
     pointer-events: none;
     position: absolute;
-    top: 0;
+    inset: 0;
     right: 0;
-    bottom: 0;
-    width: 100%;
     height: 100%;
-  }
-
-  .hero-image-wrap .hero-image {
     width: 100%;
-    height: 100%;
     object-fit: cover;
     display: block;
-    position: absolute;
+  }
+
+  /* Mobile image: 75% height from top, visible only on mobile, z-index 10 */
+  .hero-image-mobile {
     pointer-events: none;
-  }
-
-  /* Section positioning to allow absolute content positioning */
-  .hero-partnership {
-    position: relative;
+    position: absolute;
+    right: 0;
     width: 100%;
-    height: 100%;
-    padding: 0 112px;
+    top: 0;
+    height: 75%;
+    object-fit: cover;
+    display: none;
+    z-index: 10;
   }
 
-  /* Content positioning: absolute, centered horizontally, top-36 (144px) */
+  /* Content: centered horizontally, top-36 on desktop */
   .hero-partnership-content {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 144px;
+    top: 144px; /* top-36 = 9rem = 144px */
     z-index: 20;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
 
-  .hero-partnership h1 {
-    font-size: clamp(32px, 4vw, 96px);
-    font-weight: 300;
-    margin: 0 0 16px 0;
-    line-height: 1.2;
+  .hero-partnership-content h1 {
+    font-weight: 100; /* font-thin */
     color: #ffffff;
+    line-height: 1.2;
     letter-spacing: -0.01em;
-    max-width: 16ch;
+    font-size: clamp(28px, 4vw, 96px);
     text-align: center;
+    margin: 0;
   }
 
-  .hero-partnership h1 span {
+  .hero-partnership-content h1 span {
     display: block;
     opacity: 0;
     filter: blur(10px);
     transform: translateY(50px);
   }
 
-  .hero-partnership h1 span.second-line em {
-    font-style: italic;
-    font-weight: 400;
-  }
-
   .hero-description {
+    margin-top: 16px; /* mt-4 */
     color: #ffffff;
-    font-size: 18px;
-    margin-top: 16px;
-    margin-bottom: 24px;
-    line-height: 1.45;
+    line-height: 1.2;
+    font-weight: 100; /* font-thin */
+    font-size: 18px; /* md:text-lg */
+    text-align: center;
+    opacity: 0;
     transform: translateY(50px);
     filter: blur(10px);
-    opacity: 0;
-    text-align: center;
   }
 
   .hero-description br {
     display: block;
   }
 
-  .hero-cta {
-    display: inline-block;
-    background: #e7aeb1;
-    padding: 16px 28px;
-    border-radius: 9999px;
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    transition: background 0.3s;
+  .hero-cta-wrapper {
+    margin-top: 24px; /* mt-6 */
+    opacity: 0;
     transform: translateY(50px);
     filter: blur(10px);
-    opacity: 0;
-    margin-top: 24px;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 16px 28px; /* py-4 px-7 */
+    border-radius: 9999px;
+    background: #e7aeb1; /* bg-primary-pink */
+    color: white;
+    font-size: 14px; /* text-sm */
+    font-weight: 100; /* font-thin */
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
   }
 
   .hero-cta:hover {
-    background: rgba(231, 174, 177, 0.6);
+    background: rgba(231, 174, 177, 0.6); /* hover:bg-primary-pink/60 */
   }
 
-  /* Mobile styles: 80vh height, content at top-24 (96px), image at bottom 50% height */
+  /* Mobile styles: max-md breakpoint */
   @media screen and (max-width: 768px) {
-    .rel-mode {
-      height: 80vh;
+    .hero-partnership-wrapper {
+      height: 120vh; /* max-md:h-[120vh] */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding-top: 24px;
+      padding-top: 24px; /* max-md:pt-6 */
     }
 
-    .hero-partnership {
-      padding: 0 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-partnership-content {
-      position: relative;
-      left: auto;
-      transform: none;
-      top: 96px;
-      padding: 0 24px;
-      margin-top: 24px;
-    }
-
-    .hero-image-wrap {
-      bottom: 0;
-      top: auto;
-      height: 50%;
-    }
-
-    .hero-image-wrap .hero-image {
-      object-fit: cover;
-      height: 100%;
-    }
-
-    .hero-partnership h1 {
-      font-size: 32px;
-    }
-
-    .hero-description {
-      font-size: 12px;
-    }
-
-    .hero-description br {
+    /* Hide desktop image on mobile */
+    .hero-image-desktop {
       display: none;
     }
 
-    .hero-cta {
-      font-size: 12px;
-      padding: 14px 24px;
-    }
-  }
-
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    .hero-partnership {
-      padding: 0 64px;
+    /* Show mobile image on mobile */
+    .hero-image-mobile {
+      display: block;
     }
 
-    .hero-partnership h1 {
-      font-size: 64px;
+    .hero-partnership-content {
+      position: static;
+      transform: none;
+      padding: 0 12px; /* max-md:px-3 */
+      margin-top: 24px; /* max-md:mt-6 */
+      top: 64px; /* max-md:top-16 */
     }
 
     .hero-description {
-      font-size: 16px;
+      font-size: 12px; /* max-md:text-xs */
+    }
+
+    .hero-description br {
+      display: none; /* max-md:hidden on br */
+    }
+
+    .hero-cta-wrapper {
+      margin-top: 32px; /* max-md:mt-8 */
+    }
+
+    .hero-cta {
+      font-size: 12px; /* max-md:text-xs */
+    }
+  }
+
+  /* Tablet styles for md breakpoint */
+  @media screen and (min-width: 769px) {
+    .hero-partnership-wrapper {
+      padding: 0 112px; /* md:px-28 = 7rem = 112px */
     }
   }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const heroPartnership = document.getElementById('heroPartnership');
-    
     if (typeof gsap !== 'undefined') {
-      // Animate heading first line
+      // Animate heading lines with delays matching React (0.4s, 0.4s base + stagger)
       gsap.to(".hero-partnership-content h1 span.first-line", {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
         duration: 0.8,
-        ease: "power2.out",
-        delay: 0.3
+        ease: "power2.inOut",
+        delay: 0.4
       });
 
-      // Animate heading second line
       gsap.to(".hero-partnership-content h1 span.second-line", {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
         duration: 0.8,
-        ease: "power2.out",
-        delay: 0.5
+        ease: "power2.inOut",
+        delay: 0.4
       });
 
-      // Animate description
+      // Animate description (delay 0.6s in React)
       gsap.to(".hero-partnership-content .hero-description", {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
         duration: 0.8,
-        ease: "power2.out",
-        delay: 0.7
+        ease: "power2.inOut",
+        delay: 0.6
       });
 
-      // Animate CTA button
-      gsap.to(".hero-partnership-content .hero-cta", {
+      // Animate CTA button (delay 1.0s in React)
+      gsap.to(".hero-partnership-content .hero-cta-wrapper", {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
         duration: 0.8,
-        ease: "power2.out",
-        delay: 0.9
+        ease: "power2.inOut",
+        delay: 1.0
       });
     } else {
       // Fallback if GSAP is not loaded
-      const elements = document.querySelectorAll('.hero-partnership-content h1 span, .hero-description, .hero-cta');
+      const elements = document.querySelectorAll('.hero-partnership-content h1 span, .hero-description, .hero-cta-wrapper');
       elements.forEach(el => {
         el.style.opacity = '1';
         el.style.transform = 'translateY(0)';
@@ -270,8 +252,14 @@
     {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero Image",
-      "info": "Recommended size: 2000x2000px or larger"
+      "label": "Hero Image (Desktop)",
+      "info": "Recommended size: 2000x2000px or larger. Visible on desktop only."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Hero Image (Mobile)",
+      "info": "Recommended size: 1000x1500px. Visible on mobile only, covers top 75% of section."
     },
     {
       "type": "text",
@@ -288,7 +276,7 @@
     {
       "type": "text",
       "id": "heading_line_2",
-      "label": "Heading Line 2 (Italic)",
+      "label": "Heading Line 2",
       "default": "Beauty, Together."
     },
     {
