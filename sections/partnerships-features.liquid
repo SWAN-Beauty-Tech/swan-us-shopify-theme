@@ -14,15 +14,29 @@
           </div>
 
           {%- comment -%} Toggle Button - color #DCA1A1 {%- endcomment -%}
-          <button 
-            class="feature-toggle-btn" 
+          <button
+            class="feature-toggle-btn"
             aria-label="Toggle feature details"
             data-toggle-btn="{{ block.id }}"
           >
-            <svg class="toggle-icon toggle-icon-plus" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              class="toggle-icon toggle-icon-plus"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path d="M10 4V16M4 10H16" stroke="white" stroke-width="2" stroke-linecap="round"/>
             </svg>
-            <svg class="toggle-icon toggle-icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              class="toggle-icon toggle-icon-close"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path d="M6 6L14 14M6 14L14 6" stroke="white" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
@@ -30,7 +44,7 @@
           {%- comment -%} Image Content (default view) {%- endcomment -%}
           <div class="feature-image-content" data-image-content="{{ block.id }}">
             {% if block.settings.image != blank %}
-              <img 
+              <img
                 src="{{ block.settings.image | image_url: width: 800 }}"
                 alt="{{ block.settings.image.alt | default: block.settings.title }}"
                 loading="lazy"
@@ -44,7 +58,7 @@
                 </svg>
               </div>
             {% endif %}
-            
+
             {% if block.settings.image_caption != blank %}
               <div class="feature-image-caption">
                 {{ block.settings.image_caption }}
@@ -60,8 +74,8 @@
               {% endif %}
 
               {% if block.settings.button_text != blank %}
-                <a 
-                  href="{{ block.settings.button_link | default: '#' }}" 
+                <a
+                  href="{{ block.settings.button_link | default: '#' }}"
                   class="feature-cta-button"
                 >
                   {{ block.settings.button_text }}
@@ -79,6 +93,7 @@
   .partnerships-features-section {
     width: 100%;
     background-color: {{ section.settings.section_bg_color }};
+    padding: 24px 16px;
   }
 
   .partnerships-container {
@@ -289,10 +304,6 @@
 
   /* Mobile */
   @media (max-width: 640px) {
-    .partnerships-features-section {
-      padding: 0px 16px;
-    }
-
     .partnerships-grid {
       grid-template-columns: 1fr;
       gap: 16px;
@@ -313,22 +324,22 @@
 </style>
 
 <script>
-  (function() {
+  (function () {
     const sectionId = '{{ section.id }}';
     const section = document.querySelector(`[data-section-id="${sectionId}"]`);
-    
+
     if (!section) return;
 
     const cards = section.querySelectorAll('.feature-card');
-    
-    cards.forEach(card => {
+
+    cards.forEach((card) => {
       const toggleBtn = card.querySelector('[data-toggle-btn]');
-      
+
       if (toggleBtn) {
-        toggleBtn.addEventListener('click', function(e) {
+        toggleBtn.addEventListener('click', function (e) {
           e.preventDefault();
           e.stopPropagation();
-          
+
           // Toggle active state
           card.classList.toggle('active');
         });
