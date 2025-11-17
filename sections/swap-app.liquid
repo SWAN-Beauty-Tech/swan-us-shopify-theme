@@ -1,425 +1,431 @@
-  <section class="app-section">
-    <div class="sticky-features__wrap" data-sticky-feature-wrap>
-      <div class="sticky-features__scroll">
-        <div class="sticky-features__container">
-          
-          <!-- Images Column -->
-          <div class="sticky-features__col sticky-features__col--img">
-            <div class="phone-frame">
-              <div class="sticky-features__img-collection">
-                <div class="sticky-features__img-list">
-                  <div class="phone-inner">
-                    <img src="{{ 'phone-layout.png' | asset_url }}" class="phone-layout" />
-                     {% for block in section.blocks %}
+<section class="app-section">
+  <div class="sticky-features__wrap" data-sticky-feature-wrap>
+    <div class="sticky-features__scroll">
+      <div class="sticky-features__container">
+        <!-- Images Column -->
+        <div class="sticky-features__col sticky-features__col--img">
+          <div class="phone-frame">
+            <div class="sticky-features__img-collection">
+              <div class="sticky-features__img-list">
+                <div class="phone-inner">
+                  <img src="{{ 'phone-layout.png' | asset_url }}" class="phone-layout">
+                  {% for block in section.blocks %}
                     <!-- Frames -->
                     <div class="sticky-features__img-item" data-sticky-feature-visual-wrap>
-                      <img src="{{ block.settings.image |  img_url:'master' }}" alt="{{block.settings.title }}" class="sticky-features__img" />
+                      <img
+                        src="{{ block.settings.image |  img_url:'master' }}"
+                        alt="{{block.settings.title }}"
+                        class="sticky-features__img"
+                      >
                     </div>
                   {% endfor %}
-                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- Text Column -->
-          <div class="sticky-features__col sticky-features__col--text">
-            <div class="sticky-features__text-collection">
-              <h2 class="main-heading">
-                {{ section.settings.title }}
-              </h2>
-              <div class="sticky-features__text-list">
-                 {% for block in section.blocks %}
+        </div>
+        <!-- Text Column -->
+        <div class="sticky-features__col sticky-features__col--text">
+          <div class="sticky-features__text-collection">
+            <h2 class="main-heading">
+              {{ section.settings.title }}
+            </h2>
+            <div class="sticky-features__text-list">
+              {% for block in section.blocks %}
                 <div class="sticky-features__text-item" data-sticky-feature-item>
                   <h3 class="sticky-features__heading">{{ block.settings.title }}</h3>
-                 <div class="sticky-features__p">{{  block.settings.desc }}</div>
+                  <div class="sticky-features__p">{{ block.settings.desc }}</div>
                 </div>
-                {% endfor %}
-              </div>
+              {% endfor %}
             </div>
           </div>
-
-          <img src="{{ 'logo-s.png' | asset_url }}" alt="Background logo" class="background-logo" />
         </div>
-      </div>
 
-      <!-- Progress bar -->
-      <div class="sticky-features__progress-w">
-        <div class="sticky-features__progress-bar" data-sticky-feature-progress></div>
+        <img src="{{ 'logo-s.png' | asset_url }}" alt="Background logo" class="background-logo">
       </div>
     </div>
-  </section>
-  <style>
-    /* Layout */
-.app-section {
-  width: 100%;
-  padding: 0;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  min-height:100vh;
-}
-.sticky-features__wrap {
-  position: relative;
-  height: 95vh;
-  background: #000;
-  border-radius: 30px;
-  overflow: visible;
-  width:100%;
-}
 
-.sticky-features__container {
-  position: absolute;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-}
+    <!-- Progress bar -->
+    <div class="sticky-features__progress-w">
+      <div class="sticky-features__progress-bar" data-sticky-feature-progress></div>
+    </div>
+  </div>
+</section>
+<style>
+      /* Layout */
+  .app-section {
+    width: 100%;
+    padding: 0;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    min-height:100vh;
+  }
+  .sticky-features__wrap {
+    position: relative;
+    height: 95vh;
+    background: #000;
+    border-radius: 30px;
+    overflow: visible;
+    width:100%;
+  }
 
-.sticky-features__col {
-  z-index: 20;
-}
-
-.sticky-features__col--img {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sticky-features__col--text {
-  width: 50%;
-  display: flex;
-  margin-bottom:48px;
-}
-
-/* Phone frame */
-.phone-frame {
-  position: relative;
-  overflow: hidden;
-  border-radius: 47px;
-  height: 690px;
-}
-
-.phone-inner {
-  width: 315px;
-  height: 690px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  transform: scale(0.8)
-}
-
-.phone-layout {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  position: absolute;
-  z-index: 50;
-  pointer-events: none;
-}
-
-.sticky-features__img-item {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-
-.sticky-features__img {
- width: 98%;
-    height: 97%;
-    object-fit: contain;
+  .sticky-features__container {
     position: absolute;
-    inset: 0;
-    display: block;
-    top: 10px;
-    left: 2px;
-    border-radius: 47px;
-}
-
-/* Text side */
-.main-heading {
-  font-size: 60px;
-  font-weight: 300;
-  color: #fff;
-  line-height: 1.2;
-  margin-bottom: 2rem;
-  font-family: 'area_normalthin';
-  margin:0 0 20px 0;
-}
-.main-heading em{
-  font-style:normal;
-  color: #DCA1A1;
-}
-.highlight {
-  color: #DCA1A1;
-}
-
-.sticky-features__text-item {
-  margin-bottom: 1.5rem;
-  position:absolute;
-  max-width:500px;
-}
-
-.sticky-features__heading {
-  font-size: 30px;
-  color: #fff;
-  margin-bottom: 0;
-  margin-top:0;
-}
-
-.sticky-features__p {
-  max-width: 700px;
-  color: #ddd;
-  font-size: 16px;
-  line-height: 1.4;
-}
-
-/* Background logo */
-.background-logo {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  position: absolute;
-  right: 0;
-  top: 0;
-  opacity: 0.1;
-  z-index: 0;
-  object-position:right;
-}
-
-/* Progress bar */
-.sticky-features__progress-w {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  display:block;
-}
-
-.sticky-features__progress-bar {
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  transform: scaleX(0);
-  transform-origin: left center;
-  display:block !important;
-}
-@media screen and (max-width: 1440px) {
-.phone-frame {
-  
-  height: 560px;
-}
-
-.phone-inner {
-  width: 252px;
-  height: 560px;
-  
-}
-}
-@media screen and (max-width: 767px) {
-.sticky-features__container{
-  flex-direction: column;
-}
-.sticky-features__col--img {
+    display: flex;
     width: 100%;
-}
-.sticky-features__col--text {
-    width: 100%;
-    padding:35px 20px 20px 20px;
-}
-.phone-frame {
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sticky-features__col {
+    z-index: 20;
+  }
+
+  .sticky-features__col--img {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sticky-features__col--text {
+    width: 50%;
+    display: flex;
+    margin-bottom:48px;
+  }
+
+  /* Phone frame */
+  .phone-frame {
     position: relative;
     overflow: hidden;
-    border-radius: 25px;
+    border-radius: 47px;
+    height: 690px;
+  }
+
+  .phone-inner {
+    width: 315px;
+    height: 690px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform: scale(0.8)
+  }
+
+  .phone-layout {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .sticky-features__img-item {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  .sticky-features__img {
+   width: 98%;
+      height: 97%;
+      object-fit: contain;
+      position: absolute;
+      inset: 0;
+      display: block;
+      top: 10px;
+      left: 2px;
+      border-radius: 47px;
+  }
+
+  /* Text side */
+  .main-heading {
+    font-size: 60px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    font-family: 'area_normalthin';
+    margin:0 0 20px 0;
+  }
+  .main-heading em{
+    font-style:normal;
+    color: #DCA1A1;
+  }
+  .highlight {
+    color: #DCA1A1;
+  }
+
+  .sticky-features__text-item {
+    margin-bottom: 1.5rem;
+    position:absolute;
+    max-width:500px;
+  }
+
+  .sticky-features__heading {
+    font-size: 30px;
+    color: #fff;
+    margin-bottom: 0;
+    margin-top:0;
+  }
+
+  .sticky-features__p {
+    max-width: 700px;
+    color: #ddd;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  /* Background logo */
+  .background-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0.1;
+    z-index: 0;
+    object-position:right;
+  }
+
+  /* Progress bar */
+  .sticky-features__progress-w {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    display:block;
+  }
+
+  .sticky-features__progress-bar {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left center;
+    display:block !important;
+  }
+  @media screen and (max-width: 1440px) {
+    .phone-frame {
+      height: 560px;
+    }
+
+    .phone-inner {
+      width: 252px;
+      height: 560px;
+      transform: scale(0.9)
+    }
+  }
+  @media screen and (max-width: 767px) {
+  .sticky-features__container{
+    flex-direction: column;
+  }
+  .sticky-features__col--img {
+      width: 100%;
+  }
+  .sticky-features__col--text {
+      width: 100%;
+      padding:35px 20px 20px 20px;
+  }
+  .phone-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 25px;
+      height: 319px;
+  }
+  .phone-inner {
+    width: 152px;
     height: 319px;
-}
-.phone-inner {
-  width: 152px;
-  height: 319px;
- 
-}
-.sticky-features__wrap{
-  height:95vh
-}
-.main-heading{
-  font-size:24px;
-  margin-bottom:10px;
-}
-.sticky-features__heading{
-  font-size:18px;
-}
-.sticky-features__p{
-  font-size:12px;
-  line-height:120%;
-}
-.sticky-features__text-item{
-  padding-right:25px;
-}
-.sticky-features__img{
-  top: 2px;
-    left: 2px;
-    border-radius: 28px;
-}
-.sticky-features__wrap{
-  height:90vh;
-}
-}
-  </style>
+
+  }
+  .sticky-features__wrap{
+    height:95vh
+  }
+  .main-heading{
+    font-size:24px;
+    margin-bottom:10px;
+  }
+  .sticky-features__heading{
+    font-size:18px;
+  }
+  .sticky-features__p{
+    font-size:12px;
+    line-height:120%;
+  }
+  .sticky-features__text-item{
+    padding-right:25px;
+  }
+  .sticky-features__img{
+    top: 2px;
+      left: 2px;
+      border-radius: 28px;
+  }
+  .sticky-features__wrap{
+    height:90vh;
+  }
+  }
+</style>
 <script>
+  gsap.registerPlugin(ScrollTrigger);
 
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrap = document.querySelector('[data-sticky-feature-wrap]');
+    if (!wrap) return;
 
-gsap.registerPlugin(ScrollTrigger);
+    const visualWraps = Array.from(
+      wrap.querySelectorAll('[data-sticky-feature-visual-wrap], .sticky-features__img-item')
+    );
+    const items = Array.from(wrap.querySelectorAll('[data-sticky-feature-item], .sticky-features__text-item'));
+    const progressBar = wrap.querySelector('[data-sticky-feature-progress], .sticky-features__progress-bar');
 
-document.addEventListener("DOMContentLoaded", () => {
-  const wrap = document.querySelector("[data-sticky-feature-wrap]");
-  if (!wrap) return;
+    if (!visualWraps.length || !items.length) return;
 
-  const visualWraps = Array.from(
-    wrap.querySelectorAll("[data-sticky-feature-visual-wrap], .sticky-features__img-item")
-  );
-  const items = Array.from(
-    wrap.querySelectorAll("[data-sticky-feature-item], .sticky-features__text-item")
-  );
-  const progressBar = wrap.querySelector("[data-sticky-feature-progress], .sticky-features__progress-bar");
+    const count = Math.min(visualWraps.length, items.length);
+    const DURATION = 0.75;
+    const EASE = 'power4.inOut';
+    const SCROLL_AMOUNT = 0.9;
 
-  if (!visualWraps.length || !items.length) return;
-
-  const count = Math.min(visualWraps.length, items.length);
-  const DURATION = 0.75;
-  const EASE = "power4.inOut";
-  const SCROLL_AMOUNT = 0.9;
-
-  // Initial state
-  gsap.set(visualWraps, {
-    position: "absolute",
-    inset: 0,
-    display: "block",
-    WebkitClipPath: "inset(100% 0 0 0)",
-    clipPath: "inset(100% 0 0 0)"
-  });
-  gsap.set(visualWraps[0], {
-    WebkitClipPath: "inset(0% 0 0 0)",
-    clipPath: "inset(0% 0 0 0)"
-  });
-
-  gsap.set(items, { autoAlpha: 0 });
-  gsap.set(items[0], { autoAlpha: 1 });
-
-  const getTexts = (el) =>
-    Array.from(el.querySelectorAll(".sticky-features__heading, .sticky-features__p"));
-
-  function animateOut(itemEl) {
-    const texts = getTexts(itemEl);
-    gsap.to(texts, {
-      autoAlpha: 0,
-      y: -30,
-      ease: "power4.out",
-      duration: 0.4,
-      onComplete: () => gsap.set(itemEl, { autoAlpha: 0 }),
+    // Initial state
+    gsap.set(visualWraps, {
+      position: 'absolute',
+      inset: 0,
+      display: 'block',
+      WebkitClipPath: 'inset(100% 0 0 0)',
+      clipPath: 'inset(100% 0 0 0)',
     });
-  }
-
-  function animateIn(itemEl) {
-    const texts = getTexts(itemEl);
-    gsap.set(itemEl, { autoAlpha: 1 });
-    gsap.fromTo(texts, { autoAlpha: 0, y: 30 }, {
-      autoAlpha: 1,
-      y: 0,
-      ease: "power4.out",
-      duration: DURATION,
-      stagger: 0.1
+    gsap.set(visualWraps[0], {
+      WebkitClipPath: 'inset(0% 0 0 0)',
+      clipPath: 'inset(0% 0 0 0)',
     });
-  }
 
-  let currentIndex = 0;
-  function transition(fromIndex, toIndex) {
-    if (fromIndex === toIndex) return;
-    const tl = gsap.timeline({ defaults: { overwrite: "auto" } });
+    gsap.set(items, { autoAlpha: 0 });
+    gsap.set(items[0], { autoAlpha: 1 });
 
-    if (fromIndex < toIndex) {
-      tl.to(visualWraps[toIndex], {
-        WebkitClipPath: "inset(0% 0 0 0)",
-        clipPath: "inset(0% 0 0 0)",
-        duration: DURATION,
-        ease: EASE
-      }, 0);
-    } else {
-      tl.to(visualWraps[fromIndex], {
-        WebkitClipPath: "inset(100% 0 0 0)",
-        clipPath: "inset(100% 0 0 0)",
-        duration: DURATION,
-        ease: EASE
-      }, 0);
+    const getTexts = (el) => Array.from(el.querySelectorAll('.sticky-features__heading, .sticky-features__p'));
+
+    function animateOut(itemEl) {
+      const texts = getTexts(itemEl);
+      gsap.to(texts, {
+        autoAlpha: 0,
+        y: -30,
+        ease: 'power4.out',
+        duration: 0.4,
+        onComplete: () => gsap.set(itemEl, { autoAlpha: 0 }),
+      });
     }
 
-    animateOut(items[fromIndex]);
-    animateIn(items[toIndex]);
-  }
-
-  const steps = Math.max(1, count - 1);
-
-ScrollTrigger.create({
-  trigger: '.app-section',
-  start: "top top",
-  end: `+=${steps * 50}%`,
-  pin: true,
-  pinSpacing: true,
-  scrub: true,
-  anticipatePin: 1, // smooth start
-  onUpdate: (self) => {
-    const p = Math.min(self.progress, SCROLL_AMOUNT) / SCROLL_AMOUNT;
-    let idx = Math.floor(p * steps + 1e-6);
-    idx = Math.max(0, Math.min(steps, idx));
-
-    if (progressBar) {
-      gsap.to(progressBar, { scaleX: p, ease: "none", transformOrigin: "0 50%" });
+    function animateIn(itemEl) {
+      const texts = getTexts(itemEl);
+      gsap.set(itemEl, { autoAlpha: 1 });
+      gsap.fromTo(
+        texts,
+        { autoAlpha: 0, y: 30 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          ease: 'power4.out',
+          duration: DURATION,
+          stagger: 0.1,
+        }
+      );
     }
 
-    if (idx !== currentIndex) {
-      transition(currentIndex, idx);
-      currentIndex = idx;
+    let currentIndex = 0;
+    function transition(fromIndex, toIndex) {
+      if (fromIndex === toIndex) return;
+      const tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
+
+      if (fromIndex < toIndex) {
+        tl.to(
+          visualWraps[toIndex],
+          {
+            WebkitClipPath: 'inset(0% 0 0 0)',
+            clipPath: 'inset(0% 0 0 0)',
+            duration: DURATION,
+            ease: EASE,
+          },
+          0
+        );
+      } else {
+        tl.to(
+          visualWraps[fromIndex],
+          {
+            WebkitClipPath: 'inset(100% 0 0 0)',
+            clipPath: 'inset(100% 0 0 0)',
+            duration: DURATION,
+            ease: EASE,
+          },
+          0
+        );
+      }
+
+      animateOut(items[fromIndex]);
+      animateIn(items[toIndex]);
     }
-  }
-});
 
-  
-});
-window.addEventListener("load", () => ScrollTrigger.refresh());
-    </script>
+    const steps = Math.max(1, count - 1);
 
-    
-             {% schema %}
+    ScrollTrigger.create({
+      trigger: '.app-section',
+      start: 'top top',
+      end: `+=${steps * 50}%`,
+      pin: true,
+      pinSpacing: true,
+      scrub: true,
+      anticipatePin: 1, // smooth start
+      onUpdate: (self) => {
+        const p = Math.min(self.progress, SCROLL_AMOUNT) / SCROLL_AMOUNT;
+        let idx = Math.floor(p * steps + 1e-6);
+        idx = Math.max(0, Math.min(steps, idx));
+
+        if (progressBar) {
+          gsap.to(progressBar, { scaleX: p, ease: 'none', transformOrigin: '0 50%' });
+        }
+
+        if (idx !== currentIndex) {
+          transition(currentIndex, idx);
+          currentIndex = idx;
+        }
+      },
+    });
+  });
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+</script>
+
+{% schema %}
 {
   "name": "Swan App",
   "class": "value-proposition",
   "tag": "section",
- "settings": [
-     {
-          "type": "inline_richtext",
-          "id": "title",
-          "label": "Title"
-        }
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title"
+    }
   ],
-      "blocks": [
+  "blocks": [
     {
       "type": "appfeature",
       "name": "App Features",
       "settings": [
-         {
+        {
           "type": "text",
           "id": "title",
           "label": "Title"
         },
-         {
+        {
           "type": "richtext",
           "id": "desc",
           "label": "Description"
         },
-         {
+        {
           "type": "image_picker",
           "id": "image",
           "label": "Image"
