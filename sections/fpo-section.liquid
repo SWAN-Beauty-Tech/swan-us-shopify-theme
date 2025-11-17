@@ -4,7 +4,7 @@
     <div class="fpo-content">
       <div class="fpo-image-wrapper">
         {% if section.settings.video != blank %}
-          <video 
+          <video
             src="{{ section.settings.video }}"
             class="fpo-image fpo-video"
             muted
@@ -13,7 +13,7 @@
           ></video>
         {% endif %}
       </div>
-      
+
       <!-- Added console log for debugging and improved text rendering -->
       <div class="fpo-text-overlay">
         {% if section.blocks.size > 0 %}
@@ -40,7 +40,7 @@
 <style>
   .fpo-section-wrapper {
     width: 100%;
-    height: 100dvh;
+    min-height: 50dvh;
     padding: 0 24px;
     margin: 24px 0;
   }
@@ -100,7 +100,7 @@
 
   @media (min-width: 768px) {
     .fpo-section-wrapper {
-      min-height: 50dvh;
+    min-height: 100dvh;
       padding-bottom: 24px;
     }
 
@@ -121,37 +121,40 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const videos = document.querySelectorAll('.fpo-video');
-    
+
     console.log('[v0] FPO section loaded, found videos:', videos.length);
-    
-    videos.forEach(video => {
+
+    videos.forEach((video) => {
       video.loop = false;
-      
-      video.addEventListener('ended', function() {
+
+      video.addEventListener('ended', function () {
         this.pause();
       });
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            console.log('[v0] Video is visible, attempting to play');
-            video.play().catch(err => {
-              console.log('[v0] Video autoplay blocked by browser:', err);
-              document.addEventListener('click', () => video.play(), { once: true });
-            });
-          } else {
-            video.pause();
-          }
-        });
-      }, {
-        threshold: 0.3
-      });
-      
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              console.log('[v0] Video is visible, attempting to play');
+              video.play().catch((err) => {
+                console.log('[v0] Video autoplay blocked by browser:', err);
+                document.addEventListener('click', () => video.play(), { once: true });
+              });
+            } else {
+              video.pause();
+            }
+          });
+        },
+        {
+          threshold: 0.3,
+        }
+      );
+
       observer.observe(video);
     });
-    
+
     const textOverlay = document.querySelector('.fpo-text-overlay');
     const textLines = document.querySelectorAll('.fpo-overlay-text');
     console.log('[v0] Text overlay found:', !!textOverlay);
