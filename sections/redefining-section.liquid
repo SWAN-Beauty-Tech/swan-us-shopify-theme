@@ -100,6 +100,11 @@
       padding-top: 0;
     }
 
+    .redefining-description {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
     .redefining-description br {
       display: none;
     }
@@ -107,7 +112,7 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
 
@@ -120,18 +125,18 @@
         scrollTrigger: {
           trigger: title,
           scrub: 1,
-          start: "top 100%",
-          end: "bottom 70%",
+          start: 'top 100%',
+          end: 'bottom 70%',
         },
-        filter: "blur(0px)",
+        filter: 'blur(0px)',
         opacity: 1,
         duration: 1,
-        ease: "none"
+        ease: 'none',
       });
     } else {
       // Fallback if GSAP is not loaded
       const elements = document.querySelectorAll('.redefining-title, .redefining-description, .redefining-cta-wrap');
-      elements.forEach(el => {
+      elements.forEach((el) => {
         el.style.opacity = '1';
         el.style.filter = 'blur(0)';
       });
