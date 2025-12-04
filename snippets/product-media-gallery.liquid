@@ -61,6 +61,13 @@
   {%- endfor -%}
 {%- endcapture -%}
 
+{%- comment -%} Crear mapeo de títulos de variantes a IDs para el selector {%- endcomment -%}
+{%- capture variant_title_to_id_data -%}
+  {%- for variant in product.variants -%}
+    {{ variant.title }}|{{ variant.id }}{%- unless forloop.last -%}||{%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
 <media-gallery
   id="MediaGallery-{{ section.id }}"
   role="region"
@@ -70,6 +77,7 @@
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
   data-variant-videos="{{ variant_video_data | strip_newlines | strip }}"
+  data-variant-title-to-id="{{ variant_title_to_id_data | strip_newlines | strip }}"
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
   
