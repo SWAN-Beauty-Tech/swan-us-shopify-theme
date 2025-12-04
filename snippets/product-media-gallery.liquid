@@ -110,7 +110,6 @@
           class="product__variant-video"
           autoplay 
           muted 
-          loop 
           playsinline
         >
           <source src="{{ variant_video_url }}" type="video/mp4">
@@ -121,7 +120,6 @@
           class="product__variant-video"
           autoplay 
           muted 
-          loop 
           playsinline
           style="display: none;"
         >
@@ -464,22 +462,18 @@
     const variantVideosData = mediaGallery.dataset.variantVideos || '';
     const variantVideos = {};
     
-    console.log('[v0] Raw variant videos data:', variantVideosData);
-    
     if (variantVideosData) {
       variantVideosData.split('||').forEach(function(pair) {
         const parts = pair.split('|');
         if (parts.length >= 2) {
           const variantId = parts[0].trim();
-          const videoUrl = parts.slice(1).join('|').trim(); // Rejoin en caso de que la URL tenga |
+          const videoUrl = parts.slice(1).join('|').trim();
           if (variantId && videoUrl) {
             variantVideos[variantId] = videoUrl;
           }
         }
       });
     }
-    
-    console.log('[v0] Parsed variant videos:', variantVideos);
     
     const variantTitleToIdData = mediaGallery.dataset.variantTitleToId || '';
     const variantTitleToId = {};
@@ -497,36 +491,23 @@
       });
     }
     
-    console.log('[v0] Variant title to ID mapping:', variantTitleToId);
-    
     const videoWrapper = document.getElementById('VariantVideo-{{ section.id }}');
     const galleryViewer = document.getElementById('GalleryViewer-{{ section.id }}');
     const videoPlayer = document.getElementById('VariantVideoPlayer-{{ section.id }}');
     const videoPoster = videoWrapper ? videoWrapper.querySelector('.product__video-poster') : null;
     
-    console.log('[v0] Elements found:', {
-      videoWrapper: !!videoWrapper,
-      galleryViewer: !!galleryViewer,
-      videoPlayer: !!videoPlayer
-    });
-    
     function handleVariantChange(variant) {
       if (!variant || !videoWrapper || !galleryViewer || !videoPlayer) {
-        console.log('[v0] Missing required elements or variant');
         return;
       }
       
       let variantId = variant.id?.toString();
       
       if (variantId && isNaN(variantId)) {
-        console.log('[v0] Variant ID is a title, converting:', variantId);
         variantId = variantTitleToId[variantId];
-        console.log('[v0] Converted to ID:', variantId);
       }
       
       const videoUrl = variantVideos[variantId];
-      
-      console.log('[v0] Handling variant change:', { variantId, videoUrl });
       
       if (videoUrl) {
         const source = videoPlayer.querySelector('source');
@@ -535,47 +516,30 @@
           const newUrl = new URL(videoUrl, window.location.href).href;
           
           if (currentUrl !== newUrl) {
-            console.log('[v0] Updating video source from', currentUrl, 'to', newUrl);
-            
-            // Pausar y limpiar el video actual
             videoPlayer.pause();
             videoPlayer.currentTime = 0;
             
-            // Cambiar source
             source.src = videoUrl;
-            
-            // Cargar nuevo video
             videoPlayer.load();
             
-            // Intentar reproducir inmediatamente después de que esté listo
             const playWhenReady = () => {
-              console.log('[v0] Video ready, attempting autoplay');
-              videoPlayer.play().then(() => {
-                console.log('[v0] Video playing successfully');
-              }).catch((err) => {
-                console.log('[v0] Video play error:', err);
-                // Reintentar después de un breve delay
+              videoPlayer.play().catch((err) => {
                 setTimeout(() => {
-                  videoPlayer.play().catch(e => console.log('[v0] Retry failed:', e));
+                  videoPlayer.play().catch(e => {});
                 }, 100);
               });
             };
             
-            // Usar canplaythrough en lugar de loadeddata para asegurar que el video está completamente listo
             videoPlayer.addEventListener('canplaythrough', playWhenReady, { once: true });
             
-            // Backup: intentar reproducir después de un delay si el evento no se dispara
             setTimeout(() => {
               if (videoPlayer.paused) {
-                console.log('[v0] Backup play attempt');
-                videoPlayer.play().catch(e => console.log('[v0] Backup play failed:', e));
+                videoPlayer.play().catch(e => {});
               }
             }, 300);
           } else {
-            console.log('[v0] Same video, ensuring playback');
-            // Si es el mismo video, solo asegurarse de que se esté reproduciendo
             if (videoPlayer.paused) {
-              videoPlayer.play().catch(err => console.log('[v0] Resume play error:', err));
+              videoPlayer.play().catch(err => {});
             }
           }
         }
@@ -584,7 +548,6 @@
         galleryViewer.classList.add('hidden');
         
       } else {
-        console.log('[v0] No video for this variant, showing gallery');
         videoPlayer.pause();
         videoWrapper.classList.add('hidden');
         galleryViewer.classList.remove('hidden');
@@ -593,12 +556,10 @@
     
     const initialVariantId = videoWrapper ? videoWrapper.dataset.variantId : null;
     if (initialVariantId) {
-      console.log('[v0] Initial variant ID:', initialVariantId);
       handleVariantChange({ id: initialVariantId });
     }
     
     document.addEventListener('variant:change', function(event) {
-      console.log('[v0] Variant change event:', event.detail);
       handleVariantChange(event.detail?.variant);
     });
     
@@ -607,7 +568,6 @@
       if (selector) {
         setTimeout(function() {
           const selectedVariantId = selector.querySelector('input:checked, select')?.value;
-          console.log('[v0] Selector change, variant ID:', selectedVariantId);
           if (selectedVariantId) {
             handleVariantChange({ id: selectedVariantId });
           }
