@@ -11,6 +11,9 @@
   {% render 'product-media-gallery' %}
 {% endcomment %}
 
+<!-- DEBUG: Variant ID: {{ product.selected_or_first_available_variant.id }} -->
+<!-- DEBUG: Video URL: {{ product.selected_or_first_available_variant.metafields.custom.video_url }} -->
+
 {%- liquid
   if section.settings.hide_variants and variant_images.size == product.media.size
     assign single_media_visible = true
