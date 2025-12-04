@@ -42,6 +42,32 @@
   endif
 -%}
 
+{%- comment -%} Detectar videos de variantes via metafield {%- endcomment -%}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign variant_video_url = current_variant.metafields.custom.video_url | default: blank
+  assign has_variant_video = false
+  if variant_video_url != blank
+    assign has_variant_video = true
+  endif
+-%}
+
+{%- comment -%} Recopilar URLs de video para todas las variantes (para JS) {%- endcomment -%}
+{%- capture variant_video_data -%}
+  {%- for variant in product.variants -%}
+    {%- if variant.metafields.custom.video_url != blank -%}
+      {{ variant.id }}|{{ variant.metafields.custom.video_url }}{%- unless forloop.last -%}||{%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- comment -%} Crear mapeo de títulos de variantes a IDs para el selector {%- endcomment -%}
+{%- capture variant_title_to_id_data -%}
+  {%- for variant in product.variants -%}
+    {{ variant.title }}|{{ variant.id }}{%- unless forloop.last -%}||{%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
 <media-gallery
   id="MediaGallery-{{ section.id }}"
   role="region"
@@ -50,9 +76,62 @@
   {% endif %}
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
+  data-variant-videos="{{ variant_video_data | strip_newlines | strip }}"
+  data-variant-title-to-id="{{ variant_title_to_id_data | strip_newlines | strip }}"
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
-  <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
+
+  {%- comment -%} Contenedor de video que se muestra/oculta según la variante {%- endcomment -%}
+  <div
+    id="VariantVideo-{{ section.id }}"
+    class="product__variant-video-wrapper{% unless has_variant_video %} hidden{% endunless %}"
+    data-variant-id="{{ current_variant.id }}"
+  >
+    <div class="product__video-container">
+      {%- if current_variant.featured_image -%}
+        <img
+          class="product__video-poster"
+          src="{{ current_variant.featured_image | image_url: width: 800 }}"
+          alt="{{ current_variant.featured_image.alt | escape }}"
+          loading="eager"
+        >
+      {%- elsif product.featured_image -%}
+        <img
+          class="product__video-poster"
+          src="{{ product.featured_image | image_url: width: 800 }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          loading="eager"
+        >
+      {%- endif -%}
+
+      {%- if has_variant_video -%}
+        <video
+          id="VariantVideoPlayer-{{ section.id }}"
+          class="product__variant-video"
+          autoplay
+          muted
+          playsinline
+        >
+          <source src="{{ variant_video_url }}" type="video/mp4">
+        </video>
+      {%- else -%}
+        <video
+          id="VariantVideoPlayer-{{ section.id }}"
+          class="product__variant-video"
+          autoplay
+          muted
+          playsinline
+          style="display: none;"
+        ></video>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} Galería normal que se oculta cuando hay video {%- endcomment -%}
+  <slider-component
+    id="GalleryViewer-{{ section.id }}"
+    class="slider-mobile-gutter{% if has_variant_video %} hidden{% endif %}"
+  >
     <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
       {{ 'accessibility.skip_to_product_info' | t }}
     </a>
@@ -97,7 +176,7 @@
         {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
           <li
             id="Slide-{{ section.id }}-{{ media.id }}"
-            class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if product.selected_or_first_available_variant.featured_media == nil and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+            class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
             data-media-id="{{ section.id }}-{{ media.id }}"
           >
             {%- liquid
@@ -330,3 +409,176 @@
     </slider-component>
   {%- endif -%}
 </media-gallery>
+
+{%- comment -%} Estilos y JavaScript para el video de variante {%- endcomment -%}
+<style>
+  .product__variant-video-wrapper {
+    width: 100%;
+  }
+
+  .product__variant-video-wrapper.hidden {
+    display: none;
+  }
+
+  .product__video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: var(--media-radius, 0);
+    background-color: rgb(var(--color-background));
+  }
+
+  .product__video-poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .product__variant-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+  }
+
+  #GalleryViewer-{{ section.id }}.hidden {
+    display: none;
+  }
+
+    @media (max-width: 768px) {
+    .product__video-container {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    height: 100%;
+  }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const mediaGallery = document.getElementById('MediaGallery-{{ section.id }}');
+    if (!mediaGallery) return;
+
+    const variantVideosData = mediaGallery.dataset.variantVideos || '';
+    const variantVideos = {};
+
+    if (variantVideosData) {
+      variantVideosData.split('||').forEach(function (pair) {
+        const parts = pair.split('|');
+        if (parts.length >= 2) {
+          const variantId = parts[0].trim();
+          const videoUrl = parts.slice(1).join('|').trim();
+          if (variantId && videoUrl) {
+            variantVideos[variantId] = videoUrl;
+          }
+        }
+      });
+    }
+
+    const variantTitleToIdData = mediaGallery.dataset.variantTitleToId || '';
+    const variantTitleToId = {};
+
+    if (variantTitleToIdData) {
+      variantTitleToIdData.split('||').forEach(function (pair) {
+        const parts = pair.split('|');
+        if (parts.length === 2) {
+          const title = parts[0].trim();
+          const id = parts[1].trim();
+          if (title && id) {
+            variantTitleToId[title] = id;
+          }
+        }
+      });
+    }
+
+    const videoWrapper = document.getElementById('VariantVideo-{{ section.id }}');
+    const galleryViewer = document.getElementById('GalleryViewer-{{ section.id }}');
+    const videoPlayer = document.getElementById('VariantVideoPlayer-{{ section.id }}');
+    const videoPoster = videoWrapper ? videoWrapper.querySelector('.product__video-poster') : null;
+
+    function handleVariantChange(variant) {
+      if (!variant || !videoWrapper || !galleryViewer || !videoPlayer) {
+        return;
+      }
+
+      let variantId = variant.id?.toString();
+
+      if (variantId && isNaN(variantId)) {
+        variantId = variantTitleToId[variantId];
+      }
+
+      const videoUrl = variantVideos[variantId];
+
+      if (videoUrl) {
+        const source = videoPlayer.querySelector('source');
+        if (source) {
+          const currentUrl = new URL(source.src, window.location.href).href;
+          const newUrl = new URL(videoUrl, window.location.href).href;
+
+          if (currentUrl !== newUrl) {
+            videoPlayer.pause();
+            videoPlayer.currentTime = 0;
+
+            source.src = videoUrl;
+            videoPlayer.load();
+
+            const playWhenReady = () => {
+              videoPlayer.play().catch((err) => {
+                setTimeout(() => {
+                  videoPlayer.play().catch((e) => {});
+                }, 100);
+              });
+            };
+
+            videoPlayer.addEventListener('canplaythrough', playWhenReady, { once: true });
+
+            setTimeout(() => {
+              if (videoPlayer.paused) {
+                videoPlayer.play().catch((e) => {});
+              }
+            }, 300);
+          } else {
+            if (videoPlayer.paused) {
+              videoPlayer.play().catch((err) => {});
+            }
+          }
+        }
+
+        videoWrapper.classList.remove('hidden');
+        galleryViewer.classList.add('hidden');
+      } else {
+        videoPlayer.pause();
+        videoWrapper.classList.add('hidden');
+        galleryViewer.classList.remove('hidden');
+      }
+    }
+
+    const initialVariantId = videoWrapper ? videoWrapper.dataset.variantId : null;
+    if (initialVariantId) {
+      handleVariantChange({ id: initialVariantId });
+    }
+
+    document.addEventListener('variant:change', function (event) {
+      handleVariantChange(event.detail?.variant);
+    });
+
+    document.body.addEventListener('change', function (e) {
+      const selector = e.target.closest('variant-selects, variant-radios');
+      if (selector) {
+        setTimeout(function () {
+          const selectedVariantId = selector.querySelector('input:checked, select')?.value;
+          if (selectedVariantId) {
+            handleVariantChange({ id: selectedVariantId });
+          }
+        }, 50);
+      }
+    });
+  });
+</script>
