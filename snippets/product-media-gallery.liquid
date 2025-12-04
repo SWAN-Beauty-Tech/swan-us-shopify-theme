@@ -106,8 +106,7 @@
           playsinline
           onloadeddata="if(this.previousElementSibling) this.previousElementSibling.style.opacity='0';"
         >
-          <source src="{{ variant_video_url }}" type="video/mp4">
-        </video>
+<source src="{{ variant_video_url.sources[1].url }}" type="video/mp4">        </video>
       {%- else -%}
         <video 
           id="VariantVideoPlayer-{{ section.id }}"
