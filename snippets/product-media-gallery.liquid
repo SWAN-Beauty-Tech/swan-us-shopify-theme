@@ -112,7 +112,6 @@
           muted 
           loop 
           playsinline
-          onloadeddata="if(this.previousElementSibling) this.previousElementSibling.style.opacity='0';"
         >
           <source src="{{ variant_video_url }}" type="video/mp4">
         </video>
@@ -530,8 +529,6 @@
       console.log('[v0] Handling variant change:', { variantId, videoUrl });
       
       if (videoUrl) {
-        videoPlayer.pause();
-        
         const source = videoPlayer.querySelector('source');
         if (source) {
           const currentUrl = new URL(source.src, window.location.href).href;
@@ -539,26 +536,56 @@
           
           if (currentUrl !== newUrl) {
             console.log('[v0] Updating video source from', currentUrl, 'to', newUrl);
+            
+            // Pausar y limpiar el video actual
+            videoPlayer.pause();
+            videoPlayer.currentTime = 0;
+            
+            // Cambiar source
             source.src = videoUrl;
+            
+            // Cargar nuevo video
             videoPlayer.load();
+            
+            // Intentar reproducir inmediatamente después de que esté listo
+            const playWhenReady = () => {
+              console.log('[v0] Video ready, attempting autoplay');
+              videoPlayer.play().then(() => {
+                console.log('[v0] Video playing successfully');
+              }).catch((err) => {
+                console.log('[v0] Video play error:', err);
+                // Reintentar después de un breve delay
+                setTimeout(() => {
+                  videoPlayer.play().catch(e => console.log('[v0] Retry failed:', e));
+                }, 100);
+              });
+            };
+            
+            // Usar canplaythrough en lugar de loadeddata para asegurar que el video está completamente listo
+            videoPlayer.addEventListener('canplaythrough', playWhenReady, { once: true });
+            
+            // Backup: intentar reproducir después de un delay si el evento no se dispara
+            setTimeout(() => {
+              if (videoPlayer.paused) {
+                console.log('[v0] Backup play attempt');
+                videoPlayer.play().catch(e => console.log('[v0] Backup play failed:', e));
+              }
+            }, 300);
+          } else {
+            console.log('[v0] Same video, ensuring playback');
+            // Si es el mismo video, solo asegurarse de que se esté reproduciendo
+            if (videoPlayer.paused) {
+              videoPlayer.play().catch(err => console.log('[v0] Resume play error:', err));
+            }
           }
         }
         
         videoWrapper.classList.remove('hidden');
         galleryViewer.classList.add('hidden');
         
-        videoPlayer.addEventListener('loadeddata', function onLoaded() {
-          videoPlayer.removeEventListener('loadeddata', onLoaded);
-          videoPlayer.play().catch(function(err) {
-            console.log('[v0] Video play error:', err);
-          });
-        }, { once: true });
-        
       } else {
         console.log('[v0] No video for this variant, showing gallery');
-        if (videoPlayer) {
-          videoPlayer.pause();
-        }
+        videoPlayer.pause();
         videoWrapper.classList.add('hidden');
         galleryViewer.classList.remove('hidden');
       }
