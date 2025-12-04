@@ -42,82 +42,6 @@
   endif
 -%}
 
-{%- comment -%} Lógica para detectar video de variante via metafield {%- endcomment -%}
-{%- liquid
-  assign current_variant = product.selected_or_first_available_variant
-  assign variant_video_url = current_variant.metafields.custom.video_url | default: blank
-  assign has_variant_video = false
-  if variant_video_url != blank
-    assign has_variant_video = true
-  endif
--%}
-
-{%- comment -%} Si hay video de variante, mostrar video; sino mostrar galería normal {%- endcomment -%}
-{%- if has_variant_video -%}
-  <media-gallery
-    id="MediaGallery-{{ section.id }}"
-    role="region"
-    {% if section.settings.enable_sticky_info %}
-      class="product__column-sticky"
-    {% endif %}
-    aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
-    data-desktop-layout="{{ section.settings.gallery_layout }}"
-  >
-    <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
-    <div class="product__media-wrapper">
-      <div 
-        class="product__video-container"
-        data-variant-id="{{ current_variant.id }}"
-        data-video-url="{{ variant_video_url }}"
-      >
-        {%- comment -%} Poster image mientras carga el video {%- endcomment -%}
-        {%- if current_variant.featured_image -%}
-          <img 
-            class="product__video-poster"
-            src="{{ current_variant.featured_image | image_url: width: 800 }}"
-            alt="{{ current_variant.featured_image.alt | escape }}"
-            loading="eager"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"
-          >
-        {%- elsif product.featured_image -%}
-          <img 
-            class="product__video-poster"
-            src="{{ product.featured_image | image_url: width: 800 }}"
-            alt="{{ product.featured_image.alt | escape }}"
-            loading="eager"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"
-          >
-        {%- endif -%}
-        
-        <video 
-          class="product__variant-video"
-          autoplay 
-          muted 
-          loop 
-          playsinline
-          onloadeddata="this.previousElementSibling.style.display='none';"
-          style="width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2;"
-        >
-          <source src="{{ variant_video_url.sources[1].url }}" type="video/mp4">
-          Tu navegador no soporta videos.
-        </video>
-      </div>
-    </div>
-  </media-gallery>
-
-  <style>
-    .product__video-container {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      border-radius: var(--media-radius);
-      background-color: var(--color-background);
-    }
-  </style>
-
-{%- else -%}
-{%- comment -%} Galería normal cuando no hay video {%- endcomment -%}
 <media-gallery
   id="MediaGallery-{{ section.id }}"
   role="region"
@@ -173,7 +97,7 @@
         {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
           <li
             id="Slide-{{ section.id }}-{{ media.id }}"
-            class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+            class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if product.selected_or_first_available_variant.featured_media == nil and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
             data-media-id="{{ section.id }}-{{ media.id }}"
           >
             {%- liquid
@@ -406,4 +330,3 @@
     </slider-component>
   {%- endif -%}
 </media-gallery>
-{%- endif -%}
