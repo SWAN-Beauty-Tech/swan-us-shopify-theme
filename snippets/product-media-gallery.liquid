@@ -42,6 +42,25 @@
   endif
 -%}
 
+{%- comment -%} Detectar videos de variantes via metafield {%- endcomment -%}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign variant_video_url = current_variant.metafields.custom.video_url | default: blank
+  assign has_variant_video = false
+  if variant_video_url != blank
+    assign has_variant_video = true
+  endif
+-%}
+
+{%- comment -%} Recopilar URLs de video para todas las variantes (para JS) {%- endcomment -%}
+{%- capture variant_video_data -%}
+  {%- for variant in product.variants -%}
+    {%- if variant.metafields.custom.video_url != blank -%}
+      {{ variant.id }}:{{ variant.metafields.custom.video_url }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
 <media-gallery
   id="MediaGallery-{{ section.id }}"
   role="region"
@@ -50,9 +69,65 @@
   {% endif %}
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
+  data-variant-videos="{{ variant_video_data | strip_newlines | strip }}"
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
-  <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
+  
+  {%- comment -%} Contenedor de video que se muestra/oculta según la variante {%- endcomment -%}
+  <div 
+    id="VariantVideo-{{ section.id }}"
+    class="product__variant-video-wrapper{% unless has_variant_video %} hidden{% endunless %}"
+    data-variant-id="{{ current_variant.id }}"
+  >
+    <div class="product__video-container">
+      {%- if current_variant.featured_image -%}
+        <img 
+          class="product__video-poster"
+          src="{{ current_variant.featured_image | image_url: width: 800 }}"
+          alt="{{ current_variant.featured_image.alt | escape }}"
+          loading="eager"
+        >
+      {%- elsif product.featured_image -%}
+        <img 
+          class="product__video-poster"
+          src="{{ product.featured_image | image_url: width: 800 }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          loading="eager"
+        >
+      {%- endif -%}
+      
+      {%- if has_variant_video -%}
+        <video 
+          id="VariantVideoPlayer-{{ section.id }}"
+          class="product__variant-video"
+          autoplay 
+          muted 
+          loop 
+          playsinline
+          onloadeddata="if(this.previousElementSibling) this.previousElementSibling.style.opacity='0';"
+        >
+          <source src="{{ variant_video_url }}" type="video/mp4">
+        </video>
+      {%- else -%}
+        <video 
+          id="VariantVideoPlayer-{{ section.id }}"
+          class="product__variant-video"
+          autoplay 
+          muted 
+          loop 
+          playsinline
+          style="display: none;"
+        >
+        </video>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} Galería normal que se oculta cuando hay video {%- endcomment -%}
+  <slider-component 
+    id="GalleryViewer-{{ section.id }}" 
+    class="slider-mobile-gutter{% if has_variant_video %} hidden{% endif %}"
+  >
     <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
       {{ 'accessibility.skip_to_product_info' | t }}
     </a>
@@ -97,7 +172,7 @@
         {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
           <li
             id="Slide-{{ section.id }}-{{ media.id }}"
-            class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if product.selected_or_first_available_variant.featured_media == nil and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+            class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
             data-media-id="{{ section.id }}-{{ media.id }}"
           >
             {%- liquid
@@ -330,3 +405,121 @@
     </slider-component>
   {%- endif -%}
 </media-gallery>
+
+{%- comment -%} Estilos y JavaScript para el video de variante {%- endcomment -%}
+<style>
+  .product__variant-video-wrapper {
+    width: 100%;
+  }
+  
+  .product__variant-video-wrapper.hidden {
+    display: none;
+  }
+  
+  .product__video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: var(--media-radius, 0);
+    background-color: rgb(var(--color-background));
+  }
+  
+  .product__video-poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .product__variant-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+  }
+  
+  #GalleryViewer-{{ section.id }}.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mediaGallery = document.getElementById('MediaGallery-{{ section.id }}');
+    if (!mediaGallery) return;
+    
+    const variantVideosData = mediaGallery.dataset.variantVideos || '';
+    const variantVideos = {};
+    
+    // Parsear datos de videos de variantes
+    if (variantVideosData) {
+      variantVideosData.split(',').forEach(function(pair) {
+        const [variantId, videoUrl] = pair.split(':');
+        if (variantId && videoUrl) {
+          variantVideos[variantId.trim()] = videoUrl.trim();
+        }
+      });
+    }
+    
+    const videoWrapper = document.getElementById('VariantVideo-{{ section.id }}');
+    const galleryViewer = document.getElementById('GalleryViewer-{{ section.id }}');
+    const videoPlayer = document.getElementById('VariantVideoPlayer-{{ section.id }}');
+    const videoPoster = videoWrapper ? videoWrapper.querySelector('.product__video-poster') : null;
+    
+    // Escuchar cambios de variante
+    document.addEventListener('variant:change', function(event) {
+      handleVariantChange(event.detail?.variant);
+    });
+    
+    // También escuchar el evento estándar de Shopify
+    document.querySelectorAll('variant-selects, variant-radios').forEach(function(selector) {
+      selector.addEventListener('change', function() {
+        setTimeout(function() {
+          const selectedVariantId = selector.querySelector('input:checked, select')?.value;
+          if (selectedVariantId) {
+            handleVariantChange({ id: selectedVariantId });
+          }
+        }, 100);
+      });
+    });
+    
+    function handleVariantChange(variant) {
+      if (!variant || !videoWrapper || !galleryViewer) return;
+      
+      const variantId = variant.id?.toString();
+      const videoUrl = variantVideos[variantId];
+      
+      if (videoUrl) {
+        // Mostrar video, ocultar galería
+        videoWrapper.classList.remove('hidden');
+        galleryViewer.classList.add('hidden');
+        
+        // Actualizar source del video
+        if (videoPlayer) {
+          const source = videoPlayer.querySelector('source');
+          if (source && source.src !== videoUrl) {
+            source.src = videoUrl;
+            videoPlayer.load();
+            videoPlayer.style.display = 'block';
+            if (videoPoster) videoPoster.style.opacity = '1';
+          }
+          videoPlayer.play().catch(function() {});
+        }
+      } else {
+        // Ocultar video, mostrar galería
+        videoWrapper.classList.add('hidden');
+        galleryViewer.classList.remove('hidden');
+        
+        if (videoPlayer) {
+          videoPlayer.pause();
+        }
+      }
+    }
+  });
+</script>
