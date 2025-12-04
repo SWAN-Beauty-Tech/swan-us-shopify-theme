@@ -11,9 +11,6 @@
   {% render 'product-media-gallery' %}
 {% endcomment %}
 
-<!-- DEBUG: Variant ID: {{ product.selected_or_first_available_variant.id }} -->
-<!-- DEBUG: Video URL: {{ product.selected_or_first_available_variant.metafields.custom.video_url }} -->
-
 {%- liquid
   if section.settings.hide_variants and variant_images.size == product.media.size
     assign single_media_visible = true
@@ -59,7 +56,7 @@
 {%- capture variant_video_data -%}
   {%- for variant in product.variants -%}
     {%- if variant.metafields.custom.video_url != blank -%}
-      {{ variant.id }}:{{ variant.metafields.custom.video_url }}{%- unless forloop.last -%},{%- endunless -%}
+      {{ variant.id }}|{{ variant.metafields.custom.video_url }}{%- unless forloop.last -%}||{%- endunless -%}
     {%- endif -%}
   {%- endfor -%}
 {%- endcapture -%}
@@ -109,7 +106,8 @@
           playsinline
           onloadeddata="if(this.previousElementSibling) this.previousElementSibling.style.opacity='0';"
         >
-<source src="{{ variant_video_url.sources[1].url }}" type="video/mp4">        </video>
+          <source src="{{ variant_video_url }}" type="video/mp4">
+        </video>
       {%- else -%}
         <video 
           id="VariantVideoPlayer-{{ section.id }}"
@@ -459,23 +457,43 @@
     const variantVideosData = mediaGallery.dataset.variantVideos || '';
     const variantVideos = {};
     
-    // Parsear datos de videos de variantes
+    console.log('[v0] Raw variant videos data:', variantVideosData);
+    
     if (variantVideosData) {
-      variantVideosData.split(',').forEach(function(pair) {
-        const [variantId, videoUrl] = pair.split(':');
-        if (variantId && videoUrl) {
-          variantVideos[variantId.trim()] = videoUrl.trim();
+      variantVideosData.split('||').forEach(function(pair) {
+        const parts = pair.split('|');
+        if (parts.length >= 2) {
+          const variantId = parts[0].trim();
+          const videoUrl = parts.slice(1).join('|').trim(); // Rejoin en caso de que la URL tenga |
+          if (variantId && videoUrl) {
+            variantVideos[variantId] = videoUrl;
+          }
         }
       });
     }
+    
+    console.log('[v0] Parsed variant videos:', variantVideos);
     
     const videoWrapper = document.getElementById('VariantVideo-{{ section.id }}');
     const galleryViewer = document.getElementById('GalleryViewer-{{ section.id }}');
     const videoPlayer = document.getElementById('VariantVideoPlayer-{{ section.id }}');
     const videoPoster = videoWrapper ? videoWrapper.querySelector('.product__video-poster') : null;
     
+    console.log('[v0] Elements found:', {
+      videoWrapper: !!videoWrapper,
+      galleryViewer: !!galleryViewer,
+      videoPlayer: !!videoPlayer
+    });
+    
+    const initialVariantId = videoWrapper ? videoWrapper.dataset.variantId : null;
+    if (initialVariantId) {
+      console.log('[v0] Initial variant ID:', initialVariantId);
+      handleVariantChange({ id: initialVariantId });
+    }
+    
     // Escuchar cambios de variante
     document.addEventListener('variant:change', function(event) {
+      console.log('[v0] Variant change event:', event.detail);
       handleVariantChange(event.detail?.variant);
     });
     
@@ -484,6 +502,7 @@
       selector.addEventListener('change', function() {
         setTimeout(function() {
           const selectedVariantId = selector.querySelector('input:checked, select')?.value;
+          console.log('[v0] Selector change, variant ID:', selectedVariantId);
           if (selectedVariantId) {
             handleVariantChange({ id: selectedVariantId });
           }
@@ -492,10 +511,15 @@
     });
     
     function handleVariantChange(variant) {
-      if (!variant || !videoWrapper || !galleryViewer) return;
+      if (!variant || !videoWrapper || !galleryViewer) {
+        console.log('[v0] Missing required elements or variant');
+        return;
+      }
       
       const variantId = variant.id?.toString();
       const videoUrl = variantVideos[variantId];
+      
+      console.log('[v0] Handling variant change:', { variantId, videoUrl });
       
       if (videoUrl) {
         // Mostrar video, ocultar galería
@@ -506,14 +530,18 @@
         if (videoPlayer) {
           const source = videoPlayer.querySelector('source');
           if (source && source.src !== videoUrl) {
+            console.log('[v0] Updating video source to:', videoUrl);
             source.src = videoUrl;
             videoPlayer.load();
             videoPlayer.style.display = 'block';
             if (videoPoster) videoPoster.style.opacity = '1';
           }
-          videoPlayer.play().catch(function() {});
+          videoPlayer.play().catch(function(err) {
+            console.log('[v0] Video play error:', err);
+          });
         }
       } else {
+        console.log('[v0] No video for this variant, showing gallery');
         // Ocultar video, mostrar galería
         videoWrapper.classList.add('hidden');
         galleryViewer.classList.remove('hidden');
