@@ -66,10 +66,17 @@
             "color": "#ffffff"
           }
         },
+        "statement_HQ4t8B": {
+          "type": "statement",
+          "settings": {
+            "title": "",
+            "color": "#ffffff"
+          }
+        },
         "statement_8bRbUw": {
           "type": "statement",
           "settings": {
-            "title": "See yourself, reimagined.",
+            "title": "See yourself.",
             "color": "#dca1a1"
           }
         }
@@ -81,6 +88,7 @@
         "statement_hxdcNM",
         "statement_JQUhQR",
         "statement_a4KFDt",
+        "statement_HQ4t8B",
         "statement_8bRbUw"
       ],
       "name": "Statement Section",
