@@ -377,78 +377,91 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-      const lenis = new Lenis();
-        function raf(time) {
-          lenis.raf(time);
+        const isHelpCenter = window.location.pathname.includes('/pages/faq');
+        let lenis;
+        if (!isHelpCenter) {
+          const lenis = new Lenis();
+          function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
           requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-        function debounce(fn, wait = 120) {
-          let t;
-          return function (...args) {
-            clearTimeout(t);
-            t = setTimeout(() => fn.apply(this, args), wait);
-          };
-        }
-        const smartRefresh = debounce(() => {
-          try {
-            if (window.ScrollTrigger && typeof ScrollTrigger.refresh === 'function') {
-              ScrollTrigger.refresh();
+          function debounce(fn, wait = 120) {
+            let t;
+            return function (...args) {
+              clearTimeout(t);
+              t = setTimeout(() => fn.apply(this, args), wait);
+            };
+          }
+          const smartRefresh = debounce(() => {
+            try {
+              if (window.ScrollTrigger && typeof ScrollTrigger.refresh === 'function') {
+                ScrollTrigger.refresh();
+              }
+            } catch (e) {
+              console.warn('ScrollTrigger.refresh failed:', e);
             }
-          } catch (e) {
-            console.warn('ScrollTrigger.refresh failed:', e);
-          }
-          try {
-            lenis.raf(performance.now());
-          } catch (e) {
-            console.warn('lenis.raf refresh failed:', e);
-          }
-        }, 160);
-        const resizeObserver = new ResizeObserver(() => {
-          smartRefresh();
-        });
-        const panelSelector = '.panel, .accordion__panel, .collapsible, [data-panel]';
-        const panels = Array.from(document.querySelectorAll(panelSelector));
-        panels.forEach((el) => resizeObserver.observe(el));
-        const mutationObserver = new MutationObserver((mutations) => {
-          let shouldRefresh = false;
-          for (const m of mutations) {
-            if (m.type === 'attributes') {
-              // attribute toggles that commonly indicate open/close
-              const attr = m.attributeName;
-              if (attr === 'class' || attr === 'style' || attr === 'aria-expanded' || attr === 'open') {
+            try {
+              lenis.raf(performance.now());
+            } catch (e) {
+              console.warn('lenis.raf refresh failed:', e);
+            }
+          }, 160);
+          const resizeObserver = new ResizeObserver(() => {
+            smartRefresh();
+          });
+          const panelSelector = '.panel, .accordion__panel, .collapsible, [data-panel]';
+          const panels = Array.from(document.querySelectorAll(panelSelector));
+          panels.forEach((el) => resizeObserver.observe(el));
+          const mutationObserver = new MutationObserver((mutations) => {
+            let shouldRefresh = false;
+            for (const m of mutations) {
+              if (m.type === 'attributes') {
+                // attribute toggles that commonly indicate open/close
+                const attr = m.attributeName;
+                if (attr === 'class' || attr === 'style' || attr === 'aria-expanded' || attr === 'open') {
+                  shouldRefresh = true;
+                  break;
+                }
+              } else if (m.type === 'childList') {
                 shouldRefresh = true;
                 break;
               }
-            } else if (m.type === 'childList') {
-              shouldRefresh = true;
-              break;
             }
-          }
-          if (shouldRefresh) smartRefresh();
-        });
-        const containersToWatch = document.querySelectorAll('.accordion, .faq, .panels, body');
-        containersToWatch.forEach((c) =>
-          mutationObserver.observe(c, { attributes: true, childList: true, subtree: true })
-        );
-        document.addEventListener(
-          'transitionend',
-          (e) => {
-            if (e.propertyName === 'height' || e.propertyName === 'max-height' || e.propertyName === 'transform') {
-              smartRefresh();
+            if (shouldRefresh) smartRefresh();
+          });
+          const containersToWatch = document.querySelectorAll('.accordion, .faq, .panels, body');
+          containersToWatch.forEach((c) =>
+            mutationObserver.observe(c, { attributes: true, childList: true, subtree: true })
+          );
+          document.addEventListener(
+            'transitionend',
+            (e) => {
+              if (e.propertyName === 'height' || e.propertyName === 'max-height' || e.propertyName === 'transform') {
+                smartRefresh();
+              }
+            },
+            { passive: true }
+          );
+          document.addEventListener('click', (e) => {
+            const toggle = e.target.closest('.feature-card');
+            if (toggle) {
+              setTimeout(() => smartRefresh(), 150);
             }
-          },
-          { passive: true }
-        );
-        document.addEventListener('click', (e) => {
-          const toggle = e.target.closest('.feature-card');
-          if (toggle) {
-            setTimeout(() => smartRefresh(), 150);
-          }
-        });
-        window.addEventListener('load', () => {
-          setTimeout(() => smartRefresh(), 200);
-        });
+          });
+          window.addEventListener('load', () => {
+            setTimeout(() => smartRefresh(), 200);
+          });
+        } else {
+          // --- ESTO OCURRE SOLO EN EL HELP CENTER ---
+          console.log('Lenis desactivado para el Help Center para evitar conflictos');
+
+          // Forzamos al navegador a usar el scroll nativo y limpiamos estilos que puedan estorbar
+          document.documentElement.style.scrollBehavior = 'auto';
+          document.body.style.overflow = 'auto';
+          document.documentElement.style.overflow = 'auto';
+          document.body.style.height = 'auto';
+        }
       });
     </script>
     <script>
