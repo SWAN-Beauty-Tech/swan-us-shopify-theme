@@ -376,85 +376,127 @@
     {%- endif -%}
 
     <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // 1. Detección de ruta
-    const isHelpCenter = window.location.pathname.includes('/pages/faq');
-    
-    // --- CONFIGURACIÓN DEL NAVBAR ---
-    // IMPORTANTE: Ajusta este selector al de tu header real
-    const header = document.querySelector('.header, header, #shopify-section-header'); 
-    // IMPORTANTE: Ajusta esta clase a la que tu CSS usa para ocultar el header
-    const hiddenClass = 'header--hidden'; 
-    
-    let lastScroll = 0;
+      document.addEventListener('DOMContentLoaded', function () {
+        // 1. Detección de la ruta conflictiva
+        const isHelpCenter = window.location.pathname.includes('/pages/faq');
+        let lenis; // Declaramos la variable afuera para que sea accesible si se necesita
 
-    // Función lógica del Navbar (Reutilizable)
-    function handleNavbar(currentScroll) {
-      if (!header) return;
-      
-      // Umbral para evitar parpadeos arriba del todo
-      if (currentScroll <= 0) {
-        header.classList.remove(hiddenClass);
-        return;
-      }
+        if (!isHelpCenter) {
+          // --- A: INICIALIZACIÓN DE LENIS (SOLO SI NO ES HELP CENTER) ---
 
-      // Lógica: Si bajas ocultas, si subes muestras
-      if (currentScroll > lastScroll && currentScroll > 50) {
-        // Scrolling Down
-        header.classList.add(hiddenClass);
-      } else {
-        // Scrolling Up
-        header.classList.remove(hiddenClass);
-      }
-      lastScroll = currentScroll;
-    }
+          // Asegúrate de poner aquí tu configuración preferida (duration, easing, etc.)
+          lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            smoothWheel: true,
+          });
 
+          // Loop de animación (RAF)
+          function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
+          requestAnimationFrame(raf);
 
-    if (!isHelpCenter) {
-      // ==========================================
-      // ESCENARIO A: SITIO NORMAL (CON LENIS)
-      // ==========================================
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        smoothWheel: true,
+          // --- B: LÓGICA DE ACTUALIZACIÓN INTELIGENTE (OBSERVERS) ---
+
+          function debounce(fn, wait = 120) {
+            let t;
+            return function (...args) {
+              clearTimeout(t);
+              t = setTimeout(() => fn.apply(this, args), wait);
+            };
+          }
+
+          const smartRefresh = debounce(() => {
+            // Refrescar ScrollTrigger si existe
+            try {
+              if (window.ScrollTrigger && typeof ScrollTrigger.refresh === 'function') {
+                ScrollTrigger.refresh();
+              }
+            } catch (e) {
+              console.warn('ScrollTrigger.refresh failed:', e);
+            }
+            // Refrescar Lenis
+            try {
+              // Usamos 'lenis' variable externa
+              if (lenis) lenis.resize();
+            } catch (e) {
+              console.warn('lenis resize failed:', e);
+            }
+          }, 160);
+
+          // 1. ResizeObserver para el body y paneles
+          const resizeObserver = new ResizeObserver(() => {
+            smartRefresh();
+          });
+
+          const panelSelector = '.panel, .accordion__panel, .collapsible, [data-panel]';
+          const panels = Array.from(document.querySelectorAll(panelSelector));
+          panels.forEach((el) => resizeObserver.observe(el));
+          // Observamos el body también por si cambia el layout general
+          resizeObserver.observe(document.body);
+
+          // 2. MutationObserver para cambios en atributos (clases open/close)
+          const mutationObserver = new MutationObserver((mutations) => {
+            let shouldRefresh = false;
+            for (const m of mutations) {
+              if (m.type === 'attributes') {
+                const attr = m.attributeName;
+                if (attr === 'class' || attr === 'style' || attr === 'aria-expanded' || attr === 'open') {
+                  shouldRefresh = true;
+                  break;
+                }
+              } else if (m.type === 'childList') {
+                shouldRefresh = true;
+                break;
+              }
+            }
+            if (shouldRefresh) smartRefresh();
+          });
+
+          const containersToWatch = document.querySelectorAll('.accordion, .faq, .panels, body');
+          containersToWatch.forEach((c) =>
+            mutationObserver.observe(c, { attributes: true, childList: true, subtree: true })
+          );
+
+          // 3. Listeners extra
+          document.addEventListener(
+            'transitionend',
+            (e) => {
+              if (e.propertyName === 'height' || e.propertyName === 'max-height' || e.propertyName === 'transform') {
+                smartRefresh();
+              }
+            },
+            { passive: true }
+          );
+
+          document.addEventListener('click', (e) => {
+            const toggle = e.target.closest('.feature-card');
+            if (toggle) {
+              setTimeout(() => smartRefresh(), 150);
+            }
+          });
+
+          window.addEventListener('load', () => {
+            setTimeout(() => smartRefresh(), 200);
+          });
+        } else {
+          // --- C: MODO SEGURO (SOLO EN HELP CENTER) ---
+          console.log('Lenis desactivado en Help Center: Modo Nativo Activado');
+
+          // Forzamos al navegador a usar el scroll nativo y limpiamos estilos
+          document.documentElement.style.scrollBehavior = 'auto';
+          document.body.style.overflow = 'auto';
+          document.documentElement.style.overflow = 'auto';
+          document.body.style.height = 'auto';
+
+          // Opcional: Asegurar que el body tenga el height correcto
+          document.body.style.minHeight = '100vh';
+        }
       });
-
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-
-      // Usamos el evento de Lenis para mover el Navbar
-      lenis.on('scroll', ({ scroll }) => {
-        handleNavbar(scroll);
-      });
-      
-      // (Aquí irían tus observers smartRefresh de antes si los necesitas para el resto del sitio)
-
-    } else {
-      // ==========================================
-      // ESCENARIO B: HELP CENTER (NATIVO)
-      // ==========================================
-      console.log('Modo Nativo: Lenis desactivado, activando Navbar nativo.');
-
-      // 1. Limpieza de estilos para asegurar scroll nativo
-      document.documentElement.style.scrollBehavior = 'auto';
-      document.body.style.overflow = 'auto';
-      document.documentElement.style.overflow = 'auto';
-      document.body.style.height = 'auto';
-
-      // 2. Event Listener Nativo para el Navbar
-      window.addEventListener('scroll', () => {
-        // Obtenemos la posición de scroll nativa
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-        handleNavbar(currentScroll);
-      });
-    }
-  });
-</script>
+    </script>
     <script>
       gsap.registerPlugin(ScrollTrigger);
 
