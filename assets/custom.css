@@ -38,6 +38,7 @@ body.index .shopify-section-group-header-group{
 }
 .header-wrapper{
     transform:none !important;
+     z-index:999;
 }
 .header__inline-menu{
     position:relative;
