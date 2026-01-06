@@ -58,6 +58,7 @@ body.index .shopify-section-group-header-group{
 }
 .header-wrapper .header{
     display:flex;
+         z-index:999;
 }
 .header__inline-menu.right-menu{
     margin-left:auto;
