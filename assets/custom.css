@@ -1,26 +1,4 @@
 
-@font-face {
-    font-family: 'area_normalregular';
-    src: url('https://cdn.shopify.com/s/files/1/0913/3732/6911/files/area_normal_regular-webfont.woff2?v=1759129738') format('woff2'),
-         url('https://cdn.shopify.com/s/files/1/0913/3732/6911/files/area_normal_regular-webfont.woff?v=1759129739') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'area_normalthin';
-    src: url('https://cdn.shopify.com/s/files/1/0913/3732/6911/files/area_normal_thin-webfont.woff2?v=1759129738') format('woff2'),
-         url('https://cdn.shopify.com/s/files/1/0913/3732/6911/files/area_normal_thin-webfont.woff?v=1759129739') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'area_normalthin_italic';
-    src: url('https://cdn.shopify.com/s/files/1/0913/3732/6911/files/area_normal_thin_italic-webfont.woff2?v=1759129738') format('woff2'),
-         url('https://cdn.shopify.com/s/files/1/0913/3732/6911/files/area_normal_thin_italic-webfont.woff?v=1759129739') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
 body.index .shopify-section-group-header-group{
       position:fixed !important;
      
@@ -125,7 +103,8 @@ body.index .shopify-section-group-header-group{
     left:32px;
     bottom:0;
     max-width:311px;
-    font-family: 'area_normalthin';
+    font-family: "area-normal-light";
+    font-weight: 300;
     padding:0;
 }
 .footer-top{
@@ -363,14 +342,16 @@ body.index .shopify-section-group-header-group{
    margin: 0 !important;
   }
   .product__title h1{
-    font-family: 'area_normalthin';
+    font-family: "area-normal-light";
+    font-weight: 300;
     color:rgba(74, 74, 74, 1);
     font-size:54px;
   }
   .price{
     margin-top:10px !important;
     font-size:30px !important;
-    font-family: 'area_normalthin';
+    font-family: "area-normal-light";
+    font-weight: 300;
   }
   .product-overview-outer{
     max-width:1280px;
@@ -403,12 +384,14 @@ body.index .shopify-section-group-header-group{
     border:0;
   }
   .product-overview-outer h2{
-     font-family: 'area_normalthin';
+    font-family: "area-normal-light";
+    font-weight: 300;
      font-size:30px;
      margin-bottom:60px;
   }
   .title-wrapper-with-link .title{
-    font-family: 'area_normalthin';
+    font-family: "area-normal-light";
+    font-weight: 300;
   }
   .cart-drawer__empty-content .button{
     background-color: #dca1a1;
