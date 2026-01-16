@@ -574,5 +574,12 @@
         if (e.key === 'Escape' && tl.progress() > 0) closeMenu();
       });
     </script>
+      <script>
+    (function() {
+      if (navigator.userAgent.includes('SWAN_MIRROR')) {
+        document.querySelectorAll('header, footer').forEach(el => el.remove());
+      }
+    })();
+  </script>
   </body>
 </html>
