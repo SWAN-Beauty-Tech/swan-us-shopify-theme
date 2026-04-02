@@ -55,6 +55,10 @@
         "buy_buttons",
         "custom_liquid_6gz8dJ"
       ],
+      "custom_css": [
+        ".variant-selection {gap: 8px !important; max-width: 100% !important;}",
+        ".swatch-input__label {flex: 1 1 0 !important; min-width: 0 !important;}"
+      ],
       "settings": {
         "enable_sticky_info": false,
         "color_scheme": "scheme-1",
